@@ -19,6 +19,8 @@ export function ContactForm() {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
       phone: String(formData.get("phone") ?? ""),
+      companyName: String(formData.get("companyName") ?? ""),
+      industry: String(formData.get("industry") ?? ""),
       message: String(formData.get("message") ?? "")
     };
 
@@ -37,7 +39,7 @@ export function ContactForm() {
 
       form.reset();
       setState("success");
-      setMessage("Dziękujemy. Skontaktujemy się najszybciej, jak to możliwe.");
+      setMessage("Dziękujemy. Przygotujemy propozycję demo i wrócimy z kontaktem.");
     } catch (error) {
       setState("error");
       setMessage(
@@ -51,7 +53,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-lg border border-slate-200 bg-white p-6 shadow-soft"
+      className="rounded-3xl border border-white/10 bg-white p-6 text-slate-950 shadow-2xl shadow-cyan-950/20 sm:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-ink">
@@ -59,7 +61,7 @@ export function ContactForm() {
           <input
             name="name"
             required
-            className="mt-2 w-full rounded-md border border-slate-300 px-4 py-3 outline-none transition focus:border-rosewood focus:ring-2 focus:ring-rosewood/20"
+            className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
             placeholder="Anna"
           />
         </label>
@@ -69,40 +71,61 @@ export function ContactForm() {
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-md border border-slate-300 px-4 py-3 outline-none transition focus:border-rosewood focus:ring-2 focus:ring-rosewood/20"
+            className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
             placeholder="anna@example.com"
           />
         </label>
       </div>
 
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <label className="block text-sm font-medium text-ink">
+          Telefon
+          <input
+            name="phone"
+            type="tel"
+            required
+            className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
+            placeholder="+48 500 000 000"
+          />
+        </label>
+        <label className="block text-sm font-medium text-ink">
+          Nazwa firmy
+          <input
+            name="companyName"
+            required
+            className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
+            placeholder="Twoja firma"
+          />
+        </label>
+      </div>
+
       <label className="mt-4 block text-sm font-medium text-ink">
-        Telefon
+        Branża
         <input
-          name="phone"
-          type="tel"
+          name="industry"
           required
-          className="mt-2 w-full rounded-md border border-slate-300 px-4 py-3 outline-none transition focus:border-rosewood focus:ring-2 focus:ring-rosewood/20"
-          placeholder="+48 500 000 000"
+          className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
+          placeholder="np. restauracja, usługi, e-commerce"
         />
       </label>
 
       <label className="mt-4 block text-sm font-medium text-ink">
-          Wiadomość
+        Wiadomość
         <textarea
           name="message"
           rows={5}
           required
-          className="mt-2 w-full resize-none rounded-md border border-slate-300 px-4 py-3 outline-none transition focus:border-rosewood focus:ring-2 focus:ring-rosewood/20"
-          placeholder="Chcę umówić manicure hybrydowy w przyszłym tygodniu."
+          className="mt-2 w-full resize-none rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
+          placeholder="Opisz, co chcesz zautomatyzować albo jakie pytania najczęściej zadają Twoi klienci."
         />
       </label>
 
       <button
         type="submit"
         disabled={state === "loading"}
-        className="mt-5 w-full rounded-md bg-sage px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#587866] disabled:cursor-not-allowed disabled:bg-slate-300"
+        className="mt-6 w-full rounded-md bg-ink px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
       >
-        {state === "loading" ? "Wysyłanie..." : "Wyślij zapytanie"}
+        {state === "loading" ? "Wysyłanie..." : "Chcę darmową propozycję AI"}
       </button>
 
       {message ? (

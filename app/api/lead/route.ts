@@ -4,16 +4,18 @@ type LeadPayload = {
   name?: string;
   email?: string;
   phone?: string;
+  companyName?: string;
+  industry?: string;
   message?: string;
 };
 
 async function saveLead(lead: Required<LeadPayload>) {
-  console.log("New Beauty Lux lead:", {
+  console.log("New AI Growth Partners lead:", {
     ...lead,
     createdAt: new Date().toISOString()
   });
 
-  // Later you can send this payload to Make or Google Sheets here.
+  // Later you can send this payload to Make, Zapier or Google Sheets here.
   // Example:
   // if (process.env.MAKE_WEBHOOK_URL) {
   //   await fetch(process.env.MAKE_WEBHOOK_URL, {
@@ -31,10 +33,19 @@ export async function POST(request: Request) {
       name: body.name?.trim() ?? "",
       email: body.email?.trim() ?? "",
       phone: body.phone?.trim() ?? "",
+      companyName: body.companyName?.trim() ?? "",
+      industry: body.industry?.trim() ?? "",
       message: body.message?.trim() ?? ""
     };
 
-    if (!lead.name || !lead.email || !lead.phone || !lead.message) {
+    if (
+      !lead.name ||
+      !lead.email ||
+      !lead.phone ||
+      !lead.companyName ||
+      !lead.industry ||
+      !lead.message
+    ) {
       return NextResponse.json(
         { error: "Wypełnij wszystkie pola formularza." },
         { status: 400 }
