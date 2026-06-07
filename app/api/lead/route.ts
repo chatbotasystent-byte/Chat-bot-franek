@@ -1,0 +1,55 @@
+import { NextResponse } from "next/server";
+
+type LeadPayload = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+};
+
+async function saveLead(lead: Required<LeadPayload>) {
+  console.log("New Beauty Lux lead:", {
+    ...lead,
+    createdAt: new Date().toISOString()
+  });
+
+  // Later you can send this payload to Make or Google Sheets here.
+  // Example:
+  // if (process.env.MAKE_WEBHOOK_URL) {
+  //   await fetch(process.env.MAKE_WEBHOOK_URL, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(lead)
+  //   });
+  // }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = (await request.json()) as LeadPayload;
+    const lead = {
+      name: body.name?.trim() ?? "",
+      email: body.email?.trim() ?? "",
+      phone: body.phone?.trim() ?? "",
+      message: body.message?.trim() ?? ""
+    };
+
+    if (!lead.name || !lead.email || !lead.phone || !lead.message) {
+      return NextResponse.json(
+        { error: "Wypełnij wszystkie pola formularza." },
+        { status: 400 }
+      );
+    }
+
+    await saveLead(lead);
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Lead API error:", error);
+
+    return NextResponse.json(
+      { error: "Nie udało się zapisać leada." },
+      { status: 500 }
+    );
+  }
+}
