@@ -57,7 +57,7 @@ export function SolutionSection() {
           {solutions.map((solution) => (
             <article
               key={solution.title}
-              className="group rounded-3xl border border-white/10 bg-white/[0.055] p-6 shadow-xl shadow-slate-950/20 transition hover:-translate-y-1 hover:border-cyan-300/35 hover:bg-white/[0.08] hover:shadow-cyan-950/30"
+              className="group rounded-3xl border border-white/10 bg-white/[0.055] p-6 shadow-xl shadow-slate-950/20 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35 hover:bg-white/[0.08] hover:shadow-[0_0_36px_rgba(34,211,238,0.15)]"
             >
               <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 to-violet-400 text-slate-950 shadow-[0_0_26px_rgba(34,211,238,0.22)]">
                 <SolutionIcon icon={solution.icon} />

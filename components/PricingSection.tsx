@@ -38,10 +38,10 @@ export function PricingSection() {
           {plans.map((plan) => (
             <article
               key={plan.title}
-              className={`relative rounded-3xl border p-6 shadow-xl ${
+              className={`relative rounded-3xl border p-6 shadow-xl transition duration-300 hover:-translate-y-1 ${
                 plan.featured
-                  ? "border-cyan-300/45 bg-cyan-300/[0.08] shadow-cyan-950/30"
-                  : "border-white/10 bg-white/[0.055] shadow-slate-950/20"
+                  ? "border-cyan-300/45 bg-cyan-300/[0.08] shadow-cyan-950/30 hover:shadow-[0_0_42px_rgba(34,211,238,0.22)]"
+                  : "border-white/10 bg-white/[0.055] shadow-slate-950/20 hover:border-cyan-300/30 hover:shadow-[0_0_34px_rgba(34,211,238,0.14)]"
               }`}
             >
               {plan.featured ? (
@@ -52,7 +52,7 @@ export function PricingSection() {
               <h3 className="text-xl font-semibold text-white">{plan.title}</h3>
               <p className="mt-4 text-2xl font-semibold text-cyan-200">{plan.price}</p>
               <p className="mt-4 leading-7 text-slate-300">{plan.description}</p>
-              <a href="#kontakt" className="mt-6 inline-flex rounded-full border border-white/12 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-300/50">
+              <a href="#kontakt" className="cta-shine mt-6 inline-flex rounded-full border border-white/12 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-300/50 hover:bg-white/[0.06]">
                 {plan.cta}
               </a>
             </article>

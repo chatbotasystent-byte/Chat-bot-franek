@@ -1,7 +1,7 @@
 export function AIDashboardIllustration() {
   return (
-    <div className="relative">
-      <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-violet-500/20 to-emerald-400/10 blur-2xl" />
+    <div className="animate-fade-up animation-delay-450 relative">
+      <div className="animate-pulse-glow absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-violet-500/20 to-emerald-400/10 blur-2xl" />
       <div className="relative rounded-[2rem] border border-white/14 bg-white/[0.08] p-4 shadow-2xl shadow-cyan-950/40 backdrop-blur-xl">
         <svg
           className="h-auto w-full"
@@ -59,15 +59,19 @@ export function AIDashboardIllustration() {
           <path d="M262 175c22-12 35-12 57 0M378 240c0 24-3 32 0 56M270 308c20 0 35 0 52 0" stroke="url(#dashAccent)" strokeWidth="4" strokeLinecap="round" strokeDasharray="8 10" />
           <path d="M315 166l14 9-14 9M371 292l7 14 7-14M318 300l14 8-14 8" stroke="#67e8f9" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
 
-          <g transform="translate(24 286)">
-            <rect width="150" height="62" rx="18" fill="#0f172a" stroke="#67e8f9" strokeOpacity="0.35" />
-            <text x="18" y="27" fill="#67e8f9" fontSize="12" fontWeight="700">Lead automation</text>
-            <text x="18" y="45" fill="#cbd5e1" fontSize="11">Chatbot → Arkusz</text>
+          <g className="animate-float-slow">
+            <g transform="translate(24 286)">
+              <rect width="150" height="62" rx="18" fill="#0f172a" stroke="#67e8f9" strokeOpacity="0.35" />
+              <text x="18" y="27" fill="#67e8f9" fontSize="12" fontWeight="700">Lead automation</text>
+              <text x="18" y="45" fill="#cbd5e1" fontSize="11">Chatbot → Arkusz</text>
+            </g>
           </g>
-          <g transform="translate(360 40)">
-            <rect width="154" height="58" rx="18" fill="#0f172a" stroke="#a78bfa" strokeOpacity="0.4" />
-            <text x="18" y="26" fill="#c4b5fd" fontSize="12" fontWeight="700">Google Sheets ready</text>
-            <text x="18" y="43" fill="#cbd5e1" fontSize="11">jeden panel leadów</text>
+          <g className="animate-float-delay">
+            <g transform="translate(360 40)">
+              <rect width="154" height="58" rx="18" fill="#0f172a" stroke="#a78bfa" strokeOpacity="0.4" />
+              <text x="18" y="26" fill="#c4b5fd" fontSize="12" fontWeight="700">Google Sheets ready</text>
+              <text x="18" y="43" fill="#cbd5e1" fontSize="11">jeden panel leadów</text>
+            </g>
           </g>
         </svg>
       </div>

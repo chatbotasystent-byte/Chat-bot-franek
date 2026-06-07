@@ -42,7 +42,7 @@ export function IndustryUseCases() {
           {industries.map((industry) => (
             <article
               key={industry.title}
-              className="group rounded-3xl border border-white/10 bg-white/[0.055] p-6 transition hover:-translate-y-1 hover:border-violet-300/35 hover:bg-white/[0.08]"
+              className="group rounded-3xl border border-white/10 bg-white/[0.055] p-6 transition duration-300 hover:-translate-y-1 hover:border-violet-300/35 hover:bg-white/[0.08] hover:shadow-[0_0_34px_rgba(168,85,247,0.16)]"
             >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-400/14 text-violet-200">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-6 w-6">

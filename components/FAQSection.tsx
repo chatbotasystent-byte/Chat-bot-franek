@@ -20,7 +20,7 @@ export function FAQSection() {
         </h2>
         <div className="mt-10 space-y-4">
           {faqs.map(([question, answer]) => (
-            <details key={question} className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5">
+            <details key={question} className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition duration-300 hover:-translate-y-1 hover:border-violet-300/30 hover:bg-white/[0.08]">
               <summary className="cursor-pointer list-none font-semibold text-white">
                 {question}
               </summary>

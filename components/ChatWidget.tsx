@@ -182,7 +182,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Napisz, czym zajmuje się Twoja firma..."
-          className="min-w-0 flex-1 rounded-md border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
+          className="min-w-0 flex-1 rounded-md border border-slate-300 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-500 focus:border-cyan-400 focus:bg-white focus:ring-2 focus:ring-cyan-400/45"
           disabled={isLoading}
         />
         <button

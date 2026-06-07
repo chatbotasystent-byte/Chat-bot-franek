@@ -33,7 +33,7 @@ export function Navbar() {
 
         <a
           href="#kontakt"
-          className="rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.28)] transition hover:scale-[1.02]"
+          className="cta-shine rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.28)] transition hover:scale-[1.02] hover:shadow-[0_0_42px_rgba(34,211,238,0.38)]"
         >
           Zamów demo AI
         </a>
