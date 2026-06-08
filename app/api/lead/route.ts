@@ -8,6 +8,7 @@ type LeadPayload = {
   website?: string;
   industry?: string;
   message?: string;
+  source?: string;
 };
 
 async function saveLead(lead: LeadPayload) {
@@ -37,16 +38,22 @@ export async function POST(request: Request) {
       companyName: body.companyName?.trim() ?? "",
       website: body.website?.trim() ?? "",
       industry: body.industry?.trim() ?? "",
-      message: body.message?.trim() ?? ""
+      message: body.message?.trim() ?? "",
+      source: body.source?.trim() ?? ""
     };
 
-    if (
+    const isPopupLead = lead.source === "newsletter-popup";
+    const isInvalidPopupLead =
+      isPopupLead && (!lead.email || !lead.industry || !lead.message);
+    const isInvalidAuditLead = !isPopupLead && (
       !lead.name ||
       !lead.email ||
       !lead.website ||
       !lead.industry ||
       !lead.message
-    ) {
+    );
+
+    if (isInvalidPopupLead || isInvalidAuditLead) {
       return NextResponse.json(
         { error: "Wypełnij wszystkie pola formularza." },
         { status: 400 }

@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
+
+const manrope = Manrope({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-manrope"
+});
 
 export const metadata: Metadata = {
   title: "AI Growth Partners - wdrożenia AI dla firm",
@@ -14,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body>{children}</body>
+      <body className={manrope.className}>{children}</body>
     </html>
   );
 }

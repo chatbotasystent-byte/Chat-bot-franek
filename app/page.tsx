@@ -1,5 +1,5 @@
 import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
-import { ChatWidget } from "@/components/ChatWidget";
+import { ChatModal } from "@/components/ChatModal";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
@@ -7,27 +7,27 @@ import { Navbar } from "@/components/Navbar";
 const problems = [
   {
     title: "Pytania po godzinach",
-    description: "Klienci piszą wieczorem, w weekendy albo wtedy, gdy nikt nie odbiera telefonu."
+    description: "Klienci piszą wtedy, gdy zespół już nie pracuje."
   },
   {
     title: "Rozproszone wiadomości",
-    description: "Zapytania giną w mailach, formularzach, czatach i wiadomościach z social mediów."
+    description: "Mail, formularz i social media nie tworzą jednego widoku."
   },
   {
     title: "Utracone leady",
-    description: "Jeśli odpowiedź przychodzi za późno, klient często wybiera inną firmę."
+    description: "Zbyt późna odpowiedź często oznacza utracony kontakt."
   },
   {
     title: "Brak jednego miejsca",
-    description: "Właściciel nie widzi szybko, kto pytał, o co pytał i do kogo trzeba oddzwonić."
+    description: "Trudno szybko sprawdzić, komu trzeba oddzwonić."
   }
 ];
 
 const benefits = [
-  "Bot odpowiada klientom 24/7.",
-  "Zbiera imię, telefon, email i temat zapytania.",
-  "Zapisuje dane do Google Sheets.",
-  "Pomaga firmie szybciej odpowiadać klientom."
+  "AI odpowiada na najczęstsze pytania.",
+  "Bot zbiera dane kontaktowe klienta.",
+  "Lead trafia do arkusza Google Sheets.",
+  "Firma widzi, do kogo warto oddzwonić."
 ];
 
 const suggestions = [
@@ -38,14 +38,14 @@ const suggestions = [
 ];
 
 const industries = [
-  ["Firmy usługowe", "kwalifikacja zapytań", "oddzwonienia"],
-  ["Salony beauty", "cennik i terminy", "zapisy klientów"],
-  ["Warsztaty samochodowe", "dane auta", "formularz wyceny"],
-  ["Firmy remontowe", "zakres prac", "lokalizacja i termin"],
-  ["Gabinety i kliniki", "pytania o usługi", "umówienie kontaktu"],
-  ["Szkoły językowe", "poziom kursu", "zapytania o grupy"],
-  ["Biura nieruchomości", "preferencje klienta", "kontakt do agenta"],
-  ["Lokalne biznesy", "FAQ klientów", "zbieranie leadów"]
+  ["Firmy usługowe", "kwalifikacja zapytań", "kontakt zwrotny"],
+  ["Salony beauty", "cennik i terminy", "zapisy"],
+  ["Warsztaty samochodowe", "dane auta", "wycena"],
+  ["Firmy remontowe", "zakres prac", "lokalizacja"],
+  ["Gabinety i kliniki", "pytania o usługi", "kontakt"],
+  ["Szkoły językowe", "poziom kursu", "grupy"],
+  ["Biura nieruchomości", "preferencje", "kontakt do agenta"],
+  ["Lokalne biznesy", "FAQ klientów", "leady"]
 ];
 
 const included = [
@@ -136,17 +136,17 @@ function DemoConversation() {
 
 function SheetsMockup() {
   const columns = ["Data", "Imię", "Email", "Telefon", "Branża", "Wiadomość", "Status"];
-  const row = ["08.06", "Anna", "kontakt@example.pl", "+48...", "usługi", "prośba o wycenę", "Nowy"];
+  const row = ["08.06", "Anna", "kontakt@example.pl", "+48...", "usługi", "prośba o kontakt", "Nowy lead"];
 
   return (
     <div className="glass-card rounded-3xl p-5 sm:p-6">
       <p className="text-sm font-semibold text-emerald-200">Mockup Google Sheets</p>
       <div className="mt-5 overflow-x-auto rounded-2xl border border-white/10">
-        <table className="min-w-[720px] w-full border-collapse text-left text-sm">
-          <thead className="bg-emerald-300/10 text-emerald-100">
+        <table className="min-w-[760px] w-full border-collapse text-left text-sm">
+          <thead className="bg-emerald-300/12 text-emerald-100">
             <tr>
               {columns.map((column) => (
-                <th key={column} className="border-b border-white/10 px-4 py-3 font-semibold">
+                <th key={column} className="border-b border-white/10 px-5 py-4 font-semibold">
                   {column}
                 </th>
               ))}
@@ -155,7 +155,7 @@ function SheetsMockup() {
           <tbody className="text-slate-200">
             <tr>
               {row.map((cell) => (
-                <td key={cell} className="border-b border-white/5 px-4 py-3">
+                <td key={cell} className="border-b border-white/5 px-5 py-5">
                   {cell}
                 </td>
               ))}
@@ -190,6 +190,9 @@ export default function Home() {
               klientów 24/7, zbiera dane kontaktowe i zapisuje zapytania w
               Google Sheets.
             </p>
+            <p className="mt-5 inline-flex rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-200">
+              Bez wiedzy technicznej po stronie firmy
+            </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a href="#demo" className="cta-shine inline-flex min-h-12 items-center justify-center rounded-full bg-gradient-to-r from-cyan-300 to-blue-400 px-7 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_36px_rgba(34,211,238,0.28)] transition hover:scale-[1.02] hover:shadow-[0_0_46px_rgba(34,211,238,0.4)]">
                 Zobacz demo
@@ -204,7 +207,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="problem" className="px-5 py-16 sm:px-8 lg:px-12">
+      <section id="problem" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Problem"
@@ -213,7 +216,7 @@ export default function Home() {
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {problems.map((item) => (
-              <article key={item.title} className="glass-card min-h-52 rounded-2xl p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35">
+              <article key={item.title} className="glass-card min-h-48 rounded-2xl p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30">
                 <IconMark />
                 <h3 className="mt-6 text-lg font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-300">{item.description}</p>
@@ -223,7 +226,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="rozwiazanie" className="px-5 py-16 sm:px-8 lg:px-12">
+      <section id="rozwiazanie" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="animate-fade-up">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
@@ -240,7 +243,7 @@ export default function Home() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {benefits.map((benefit) => (
-              <div key={benefit} className="glass-card rounded-2xl p-5 text-sm font-semibold leading-6 text-slate-100 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30">
+              <div key={benefit} className="glass-card min-h-24 rounded-2xl p-5 text-sm font-semibold leading-6 text-slate-100 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/28">
                 {benefit}
               </div>
             ))}
@@ -248,21 +251,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="demo" className="relative px-5 py-16 sm:px-8 lg:px-12">
+      <section id="demo" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Demo działania"
             title="Zobacz, jak działa chatbot AI"
-            description="Poniżej masz przykład rozmowy, wizualny zapis leada w arkuszu oraz działający ChatWidget, który możesz przetestować."
+            description="Poniżej masz przykład rozmowy, wizualny zapis leada w arkuszu oraz kafelek, który otwiera działające demo chatu."
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
             <DemoConversation />
             <SheetsMockup />
           </div>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
-            <div>
-              <ChatWidget suggestions={suggestions} />
-            </div>
+            <ChatModal suggestions={suggestions} />
             <aside className="glass-card gradient-border rounded-3xl p-6 sm:p-8">
               <p className="text-base font-semibold text-cyan-100">Co testujesz?</p>
               <div className="mt-6 space-y-4 text-sm leading-6 text-slate-300">
@@ -275,7 +276,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="branze" className="px-5 py-16 sm:px-8 lg:px-12">
+      <section id="branze" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Branże"
@@ -284,7 +285,7 @@ export default function Home() {
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {industries.map(([name, first, second]) => (
-              <article key={name} className="glass-card min-h-44 rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35">
+              <article key={name} className="glass-card min-h-40 rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30">
                 <h3 className="text-base font-semibold text-white">{name}</h3>
                 <p className="mt-4 text-sm leading-6 text-slate-300">{first}</p>
                 <p className="mt-1 text-sm leading-6 text-slate-400">{second}</p>
@@ -294,7 +295,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="wdrozenie" className="px-5 py-16 sm:px-8 lg:px-12">
+      <section id="wdrozenie" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
@@ -319,7 +320,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="proces" className="px-5 py-16 sm:px-8 lg:px-12">
+      <section id="proces" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Proces"
@@ -328,7 +329,7 @@ export default function Home() {
           />
           <div className="mt-10 grid gap-4 lg:grid-cols-5">
             {process.map(([title, description], index) => (
-              <article key={title} className="glass-card relative min-h-44 rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35">
+              <article key={title} className="glass-card relative min-h-44 rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30">
                 {index < process.length - 1 ? (
                   <span className="absolute -right-4 top-1/2 z-10 hidden h-px w-8 bg-gradient-to-r from-cyan-300/70 to-transparent lg:block" />
                 ) : null}
@@ -343,7 +344,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="kontakt" className="relative px-5 py-16 sm:px-8 lg:px-12">
+      <section id="kontakt" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="glass-card gradient-border rounded-3xl p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
@@ -365,7 +366,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="faq" className="px-5 py-16 sm:px-8 lg:px-12">
+      <section id="faq" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-5xl">
           <SectionHeader
             eyebrow="FAQ"

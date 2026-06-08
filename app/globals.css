@@ -13,6 +13,7 @@ html {
 
 body {
   min-height: 100vh;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   background:
     linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
@@ -28,13 +29,19 @@ textarea {
   font: inherit;
 }
 
+h1,
+h2,
+h3 {
+  line-height: 1.08;
+}
+
 @keyframes float {
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -14px, 0);
+    transform: translate3d(0, -6px, 0);
   }
 }
 
@@ -65,20 +72,41 @@ textarea {
   0%,
   100% {
     opacity: 0.56;
-    transform: scale(0.98);
+    transform: scale(0.99);
   }
   50% {
     opacity: 0.88;
-    transform: scale(1.02);
+    transform: scale(1.01);
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes floatSubtle {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0);
   }
 }
 
 .animate-float-slow {
-  animation: float 7s ease-in-out infinite;
+  animation: float 8.5s ease-in-out infinite;
 }
 
 .animate-float-delay {
-  animation: float 8s ease-in-out 1.2s infinite;
+  animation: float 9.5s ease-in-out 1.2s infinite;
 }
 
 .animate-fade-up {
@@ -91,6 +119,14 @@ textarea {
 
 .animate-soft-pulse {
   animation: softPulse 6.5s ease-in-out infinite;
+}
+
+.animate-modal-in {
+  animation: modalIn 0.28s ease-out both;
+}
+
+.animate-float-subtle {
+  animation: floatSubtle 5.5s ease-in-out infinite;
 }
 
 .animation-delay-150 {

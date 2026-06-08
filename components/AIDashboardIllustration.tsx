@@ -1,8 +1,8 @@
 export function AIDashboardIllustration() {
   return (
     <div className="animate-fade-up animation-delay-450 relative">
-      <div className="animate-soft-pulse absolute -inset-8 rounded-[2rem] bg-[radial-gradient(circle,rgba(34,211,238,0.28),transparent_58%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.2),transparent_42%)] blur-2xl" />
-      <div className="glass-card relative overflow-hidden rounded-[2rem] p-4 shadow-2xl shadow-cyan-950/40">
+      <div className="animate-soft-pulse absolute -inset-6 rounded-[2rem] bg-[radial-gradient(circle,rgba(34,211,238,0.2),transparent_58%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.14),transparent_42%)] blur-2xl" />
+      <div className="glass-card relative overflow-hidden rounded-[2rem] p-5 shadow-2xl shadow-cyan-950/30 sm:p-6">
         <svg
           className="h-auto w-full"
           viewBox="0 0 560 430"
@@ -25,47 +25,47 @@ export function AIDashboardIllustration() {
             </filter>
           </defs>
 
-          <rect x="34" y="30" width="492" height="360" rx="34" fill="url(#panelBg)" stroke="white" strokeOpacity="0.12" filter="url(#softGlow)" />
+          <rect x="42" y="34" width="476" height="354" rx="34" fill="url(#panelBg)" stroke="white" strokeOpacity="0.12" filter="url(#softGlow)" />
           <circle cx="78" cy="68" r="6" fill="#67e8f9" />
           <circle cx="100" cy="68" r="6" fill="#818cf8" />
           <circle cx="122" cy="68" r="6" fill="#34d399" />
-          <text x="70" y="112" fill="#f8fafc" fontSize="24" fontWeight="700">System obsługi zapytań</text>
-          <text x="70" y="140" fill="#94a3b8" fontSize="14">Rozmowa, kwalifikacja i lead w jednym przepływie</text>
+          <text x="280" y="112" textAnchor="middle" fill="#f8fafc" fontSize="24" fontWeight="700">System obsługi zapytań</text>
+          <text x="280" y="140" textAnchor="middle" fill="#94a3b8" fontSize="14">Rozmowa, kwalifikacja i lead w jednym przepływie</text>
 
-          <path d="M164 230H270" stroke="url(#cardAccent)" strokeWidth="4" strokeLinecap="round" strokeOpacity="0.65" />
-          <path d="M356 230H462" stroke="url(#cardAccent)" strokeWidth="4" strokeLinecap="round" strokeOpacity="0.65" />
+          <path d="M192 236H222" stroke="url(#cardAccent)" strokeWidth="4" strokeLinecap="round" strokeOpacity="0.36" />
+          <path d="M338 236H368" stroke="url(#cardAccent)" strokeWidth="4" strokeLinecap="round" strokeOpacity="0.36" />
 
           <g className="animate-float-slow">
-            <rect x="64" y="176" width="140" height="122" rx="24" fill="white" fillOpacity="0.08" stroke="#67e8f9" strokeOpacity="0.28" />
-            <circle cx="96" cy="214" r="18" fill="#67e8f9" fillOpacity="0.18" />
-            <path d="M88 213h24M96 205v20" stroke="#67e8f9" strokeWidth="3" strokeLinecap="round" />
-            <text x="88" y="252" fill="#f8fafc" fontSize="17" fontWeight="700">AI Chatbot</text>
-            <text x="88" y="276" fill="#cbd5e1" fontSize="12">odpowiada 24/7</text>
+            <rect x="76" y="180" width="116" height="116" rx="20" fill="white" fillOpacity="0.08" stroke="#67e8f9" strokeOpacity="0.26" />
+            <circle cx="134" cy="212" r="15" fill="#67e8f9" fillOpacity="0.18" />
+            <path d="M127 211h14M134 204v14" stroke="#67e8f9" strokeWidth="3" strokeLinecap="round" />
+            <text x="134" y="253" textAnchor="middle" fill="#f8fafc" fontSize="15" fontWeight="700">AI Chatbot</text>
+            <text x="134" y="276" textAnchor="middle" fill="#cbd5e1" fontSize="11">odpowiada 24/7</text>
           </g>
 
           <g className="animate-float-delay">
-            <rect x="230" y="162" width="132" height="150" rx="24" fill="white" fillOpacity="0.1" stroke="#818cf8" strokeOpacity="0.32" />
-            <text x="260" y="206" fill="#f8fafc" fontSize="17" fontWeight="700">Nowy lead</text>
-            <rect x="260" y="226" width="72" height="8" rx="4" fill="#c4b5fd" fillOpacity="0.72" />
-            <rect x="260" y="246" width="92" height="8" rx="4" fill="white" fillOpacity="0.22" />
-            <rect x="260" y="266" width="62" height="8" rx="4" fill="white" fillOpacity="0.18" />
-            <circle cx="296" cy="294" r="5" fill="#34d399" />
+            <rect x="222" y="180" width="116" height="116" rx="20" fill="white" fillOpacity="0.1" stroke="#818cf8" strokeOpacity="0.3" />
+            <text x="280" y="218" textAnchor="middle" fill="#f8fafc" fontSize="15" fontWeight="700">Nowy lead</text>
+            <rect x="250" y="238" width="60" height="8" rx="4" fill="#c4b5fd" fillOpacity="0.72" />
+            <rect x="240" y="258" width="80" height="8" rx="4" fill="white" fillOpacity="0.22" />
+            <rect x="256" y="278" width="48" height="8" rx="4" fill="white" fillOpacity="0.18" />
+            <circle cx="280" cy="202" r="5" fill="#34d399" />
           </g>
 
           <g className="animate-float-slow">
-            <rect x="392" y="176" width="142" height="122" rx="24" fill="white" fillOpacity="0.08" stroke="#34d399" strokeOpacity="0.32" />
-            <text x="422" y="222" fill="#f8fafc" fontSize="16" fontWeight="700">Google Sheets</text>
-            <text x="422" y="244" fill="#f8fafc" fontSize="16" fontWeight="700">/ CRM</text>
-            <path d="M424 270h74M424 286h52" stroke="#34d399" strokeWidth="7" strokeLinecap="round" strokeOpacity="0.68" />
+            <rect x="368" y="180" width="116" height="116" rx="20" fill="white" fillOpacity="0.08" stroke="#34d399" strokeOpacity="0.3" />
+            <text x="426" y="219" textAnchor="middle" fill="#f8fafc" fontSize="13" fontWeight="700">Google Sheets</text>
+            <text x="426" y="240" textAnchor="middle" fill="#f8fafc" fontSize="13" fontWeight="700">/ CRM</text>
+            <path d="M398 267h56M408 283h36" stroke="#34d399" strokeWidth="7" strokeLinecap="round" strokeOpacity="0.64" />
           </g>
 
-          <rect x="88" y="332" width="386" height="34" rx="17" fill="white" fillOpacity="0.06" stroke="white" strokeOpacity="0.1" />
-          <circle cx="118" cy="349" r="3" fill="#67e8f9" fillOpacity="0.75" />
-          <circle cx="234" cy="349" r="3" fill="#818cf8" fillOpacity="0.75" />
-          <circle cx="350" cy="349" r="3" fill="#34d399" fillOpacity="0.75" />
-          <text x="130" y="354" fill="#cbd5e1" fontSize="13">Klient pyta</text>
-          <text x="246" y="354" fill="#cbd5e1" fontSize="13">AI odpowiada</text>
-          <text x="362" y="354" fill="#cbd5e1" fontSize="13">lead trafia do zespołu</text>
+          <rect x="72" y="330" width="416" height="42" rx="21" fill="white" fillOpacity="0.06" stroke="white" strokeOpacity="0.1" />
+          <circle cx="104" cy="351" r="3" fill="#67e8f9" fillOpacity="0.75" />
+          <circle cx="230" cy="351" r="3" fill="#818cf8" fillOpacity="0.75" />
+          <circle cx="356" cy="351" r="3" fill="#34d399" fillOpacity="0.75" />
+          <text x="116" y="356" fill="#cbd5e1" fontSize="11.5">Klient pyta</text>
+          <text x="242" y="356" fill="#cbd5e1" fontSize="11.5">AI odpowiada</text>
+          <text x="368" y="356" fill="#cbd5e1" fontSize="11.5">lead do zespołu</text>
         </svg>
       </div>
     </div>
