@@ -18,8 +18,7 @@ export function ContactForm() {
     const payload = {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
-      phone: String(formData.get("phone") ?? ""),
-      companyName: String(formData.get("companyName") ?? ""),
+      website: String(formData.get("website") ?? ""),
       industry: String(formData.get("industry") ?? ""),
       message: String(formData.get("message") ?? "")
     };
@@ -39,7 +38,7 @@ export function ContactForm() {
 
       form.reset();
       setState("success");
-      setMessage("Dziękujemy. Przygotujemy propozycję demo i wrócimy z kontaktem.");
+      setMessage("Dziękujemy. Przygotujemy krótką propozycję i wrócimy z kontaktem.");
     } catch (error) {
       setState("error");
       setMessage(
@@ -79,35 +78,24 @@ export function ContactForm() {
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-ink">
-          Telefon
+          Strona firmy
           <input
-            name="phone"
-            type="tel"
+            name="website"
             required
             className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
-            placeholder="+48 500 000 000"
+            placeholder="https://twojafirma.pl"
           />
         </label>
         <label className="block text-sm font-medium text-ink">
-          Nazwa firmy
+          Branża
           <input
-            name="companyName"
+            name="industry"
             required
             className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
-            placeholder="Twoja firma"
+            placeholder="np. salon beauty, usługi, klinika"
           />
         </label>
       </div>
-
-      <label className="mt-4 block text-sm font-medium text-ink">
-        Branża
-        <input
-          name="industry"
-          required
-          className="mt-2 w-full rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
-          placeholder="np. restauracja, usługi, e-commerce"
-        />
-      </label>
 
       <label className="mt-4 block text-sm font-medium text-ink">
         Wiadomość
@@ -116,16 +104,16 @@ export function ContactForm() {
           rows={5}
           required
           className="mt-2 w-full resize-none rounded-md border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-teal-600 focus:bg-white focus:ring-2 focus:ring-teal-600/20"
-          placeholder="Opisz, co chcesz zautomatyzować albo jakie pytania najczęściej zadają Twoi klienci."
+          placeholder="Opisz krótko firmę i pytania, które najczęściej zadają klienci."
         />
       </label>
 
       <button
         type="submit"
         disabled={state === "loading"}
-        className="mt-6 w-full rounded-md bg-ink px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+          className="mt-6 w-full rounded-md bg-ink px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
       >
-        {state === "loading" ? "Wysyłanie..." : "Chcę darmową propozycję AI"}
+        {state === "loading" ? "Wysyłanie..." : "Wyślij zgłoszenie"}
       </button>
 
       {message ? (

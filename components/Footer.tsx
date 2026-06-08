@@ -5,12 +5,12 @@ export function Footer() {
         <div>
           <p className="text-lg font-semibold text-white">AI Growth Partners</p>
           <p className="mt-2 max-w-xl text-sm leading-6 text-slate-400">
-            Wdrażamy praktyczne AI dla firm, które chcą oszczędzać czas i
-            lepiej obsługiwać klientów.
+            Wdrażamy chatboty AI dla firm usługowych, które chcą szybciej
+            odpowiadać klientom i porządkować zapytania.
           </p>
         </div>
         <div className="flex flex-wrap gap-4 text-sm text-slate-400">
-          <a href="#uslugi" className="transition hover:text-white">Usługi</a>
+          <a href="#problem" className="transition hover:text-white">Problem</a>
           <a href="#demo" className="transition hover:text-white">Demo</a>
           <a href="#kontakt" className="transition hover:text-white">Kontakt</a>
           <span>Polityka prywatności</span>

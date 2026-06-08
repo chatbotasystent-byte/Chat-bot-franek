@@ -5,11 +5,12 @@ type LeadPayload = {
   email?: string;
   phone?: string;
   companyName?: string;
+  website?: string;
   industry?: string;
   message?: string;
 };
 
-async function saveLead(lead: Required<LeadPayload>) {
+async function saveLead(lead: LeadPayload) {
   console.log("New AI Growth Partners lead:", {
     ...lead,
     createdAt: new Date().toISOString()
@@ -34,6 +35,7 @@ export async function POST(request: Request) {
       email: body.email?.trim() ?? "",
       phone: body.phone?.trim() ?? "",
       companyName: body.companyName?.trim() ?? "",
+      website: body.website?.trim() ?? "",
       industry: body.industry?.trim() ?? "",
       message: body.message?.trim() ?? ""
     };
@@ -41,8 +43,7 @@ export async function POST(request: Request) {
     if (
       !lead.name ||
       !lead.email ||
-      !lead.phone ||
-      !lead.companyName ||
+      !lead.website ||
       !lead.industry ||
       !lead.message
     ) {

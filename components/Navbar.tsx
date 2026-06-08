@@ -1,8 +1,7 @@
 const navItems = [
-  { label: "Usługi", href: "#uslugi" },
-  { label: "Jak działamy", href: "#jak-dzialamy" },
-  { label: "Branże", href: "#branze" },
+  { label: "Problem", href: "#problem" },
   { label: "Demo", href: "#demo" },
+  { label: "Branże", href: "#branze" },
   { label: "Kontakt", href: "#kontakt" }
 ];
 
@@ -35,7 +34,7 @@ export function Navbar() {
           href="#kontakt"
           className="cta-shine rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.28)] transition hover:scale-[1.02] hover:shadow-[0_0_42px_rgba(34,211,238,0.38)]"
         >
-          Zamów demo AI
+          Darmowy audyt
         </a>
       </nav>
     </header>
