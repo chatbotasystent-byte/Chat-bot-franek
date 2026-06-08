@@ -1,7 +1,10 @@
 import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
 import { ChatModal } from "@/components/ChatModal";
 import { ContactForm } from "@/components/ContactForm";
+import { DemoGuide } from "@/components/DemoGuide";
 import { Footer } from "@/components/Footer";
+import { IndustryDemoSwitcher } from "@/components/IndustryDemoSwitcher";
+import { LeadPreview } from "@/components/LeadPreview";
 import { Navbar } from "@/components/Navbar";
 
 const problems = [
@@ -276,6 +279,8 @@ export default function Home() {
         </div>
       </section>
 
+      <IndustryDemoSwitcher />
+
       <section id="branze" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeader
@@ -294,6 +299,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <LeadPreview />
 
       <section id="wdrozenie" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
@@ -387,6 +394,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <DemoGuide />
     </main>
   );
 }

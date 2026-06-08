@@ -9,12 +9,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050816]/78 px-5 py-4 backdrop-blur-xl sm:px-8 lg:px-12">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-5">
-        <a href="#" className="flex items-center gap-3" aria-label="AI Growth Partners - strona główna">
+        <a href="#" className="flex items-center gap-3" aria-label="AI Automatyzacja - strona główna">
           <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/30 bg-cyan-300/10 text-sm font-bold text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.22)]">
             AI
           </span>
           <span className="text-sm font-semibold text-white sm:text-base">
-            AI Growth Partners
+            AI Automatyzacja
           </span>
         </a>
 

@@ -11,6 +11,18 @@ export function ChatModal({ suggestions }: ChatModalProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    function handleOpenChatModal() {
+      setIsOpen(true);
+    }
+
+    window.addEventListener("open-chat-modal", handleOpenChatModal);
+
+    return () => {
+      window.removeEventListener("open-chat-modal", handleOpenChatModal);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!isOpen) {
       return;
     }
@@ -58,7 +70,7 @@ export function ChatModal({ suggestions }: ChatModalProps) {
         className="animate-float-subtle fixed bottom-4 right-4 z-40 inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_26px_rgba(34,211,238,0.26)] transition hover:-translate-y-0.5 hover:shadow-[0_0_34px_rgba(34,211,238,0.34)] sm:bottom-6 sm:right-6 sm:min-h-12 sm:px-5 sm:py-3"
         aria-label="Otwórz demo chatu AI"
       >
-        <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.9)]" />
+        <span className="h-2 w-2 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.75)]" />
         Chat AI
       </button>
 
