@@ -94,20 +94,20 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
   }
 
   return (
-    <section className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-[0_24px_80px_rgba(8,47,73,0.22)] ring-1 ring-cyan-100/70">
-      <div className="flex items-start justify-between gap-4 border-b border-slate-200 bg-gradient-to-r from-white to-cyan-50/70 px-5 py-4 sm:px-6">
+    <section className="overflow-hidden rounded-3xl border border-[#E8D7B9]/80 bg-white shadow-[0_24px_80px_rgba(14,42,36,0.18)] ring-1 ring-[#E8D7B9]/60">
+      <div className="flex items-start justify-between gap-4 border-b border-[#E8D7B9]/60 bg-gradient-to-r from-white to-[#F7F2E8] px-5 py-4 sm:px-6">
         <div>
-          <p className="mb-2 inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700 ring-1 ring-cyan-100">
+          <p className="mb-2 inline-flex rounded-full bg-[#0F8A6C]/10 px-3 py-1 text-xs font-semibold text-[#0F8A6C] ring-1 ring-[#0F8A6C]/15">
             Demo AI konsultanta
           </p>
-          <h2 className="text-xl font-semibold text-slate-950">
+          <h2 className="text-xl font-semibold text-[#171717]">
             Chat AI Growth Partners
           </h2>
           <p className="mt-1 text-sm leading-6 text-slate-600">
             Demo konsultanta AI dla małych i średnich firm
           </p>
         </div>
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-[0_12px_30px_rgba(15,23,42,0.22)]">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#171717] text-white shadow-[0_12px_30px_rgba(14,42,36,0.18)]">
           <svg
             aria-hidden="true"
             className="h-5 w-5"
@@ -125,7 +125,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         </div>
       </div>
 
-      <div className="h-[430px] space-y-4 overflow-y-auto bg-gradient-to-b from-slate-50 via-white to-cyan-50/40 px-4 py-5 sm:px-6">
+      <div className="h-[430px] space-y-4 overflow-y-auto bg-gradient-to-b from-[#F7F2E8] via-white to-[#F7F2E8]/70 px-4 py-5 sm:px-6">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -136,8 +136,8 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
             <div
               className={`max-w-[84%] rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm ${
                 message.role === "user"
-                  ? "bg-slate-950 text-white shadow-[0_10px_28px_rgba(15,23,42,0.18)]"
-                  : "border border-slate-200 bg-white text-slate-950"
+                  ? "bg-[#171717] text-white shadow-[0_10px_28px_rgba(14,42,36,0.18)]"
+                  : "border border-slate-200 bg-white text-[#171717]"
               }`}
             >
               {message.content}
@@ -146,7 +146,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         ))}
         {isLoading ? (
           <div className="flex justify-start">
-            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 shadow-sm">
+            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-[#171717] shadow-sm">
               Piszę odpowiedź...
             </div>
           </div>
@@ -164,7 +164,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
                 key={suggestion}
                 type="button"
                 onClick={() => setInput(suggestion)}
-                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-cyan-400 hover:text-cyan-700"
+                className="rounded-full border border-[#E8D7B9]/70 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0F8A6C] hover:text-[#0F8A6C]"
               >
                 {suggestion}
               </button>
@@ -182,13 +182,13 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Napisz, czym zajmuje się Twoja firma..."
-          className="min-h-12 min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-500 focus:border-cyan-400 focus:bg-white focus:ring-2 focus:ring-cyan-400/45"
+          className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#E8D7B9]/80 bg-white px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:bg-white focus:ring-2 focus:ring-[#0F8A6C]/35"
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="min-h-12 rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(15,23,42,0.18)] transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300 sm:w-auto"
+          className="min-h-12 rounded-xl bg-[#171717] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(14,42,36,0.18)] transition hover:bg-[#0E2A24] disabled:cursor-not-allowed disabled:bg-slate-300 sm:w-auto"
         >
           Wyślij
         </button>

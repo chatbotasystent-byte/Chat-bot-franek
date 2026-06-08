@@ -45,7 +45,7 @@ export function SolutionSection() {
     <section id="uslugi" className="px-5 py-20 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
             Rozwiązanie
           </p>
           <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
@@ -57,13 +57,13 @@ export function SolutionSection() {
           {solutions.map((solution) => (
             <article
               key={solution.title}
-              className="group rounded-3xl border border-white/10 bg-white/[0.055] p-6 shadow-xl shadow-slate-950/20 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35 hover:bg-white/[0.08] hover:shadow-[0_0_36px_rgba(34,211,238,0.15)]"
+              className="group rounded-3xl border border-[#E8D7B9]/14 bg-white/[0.055] p-6 shadow-xl shadow-slate-950/20 transition duration-300 hover:-translate-y-1 hover:border-[#E8D7B9]/35 hover:bg-white/[0.08] hover:shadow-[0_0_36px_rgba(15,138,108,0.15)]"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 to-violet-400 text-slate-950 shadow-[0_0_26px_rgba(34,211,238,0.22)]">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0F8A6C] to-[#E8D7B9] text-[#171717] shadow-[0_0_26px_rgba(15,138,108,0.22)]">
                 <SolutionIcon icon={solution.icon} />
               </div>
               <h3 className="text-xl font-semibold text-white">{solution.title}</h3>
-              <p className="mt-3 leading-7 text-slate-300">{solution.description}</p>
+              <p className="mt-3 leading-7 text-[#D6D3D1]">{solution.description}</p>
             </article>
           ))}
         </div>

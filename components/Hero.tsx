@@ -3,13 +3,13 @@ import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
 export function Hero() {
   return (
     <section className="relative px-5 pb-16 pt-16 sm:px-8 lg:px-12 lg:pb-24 lg:pt-20">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_16%,rgba(34,211,238,0.18),transparent_34rem),radial-gradient(circle_at_82%_12%,rgba(168,85,247,0.22),transparent_32rem),radial-gradient(circle_at_50%_100%,rgba(16,185,129,0.12),transparent_26rem)]" />
-      <div className="animate-float-slow animate-pulse-glow absolute left-[-8rem] top-20 -z-10 h-80 w-80 rounded-full bg-cyan-400/16 blur-3xl" />
-      <div className="animate-float-delay animate-pulse-glow absolute right-[-6rem] top-10 -z-10 h-96 w-96 rounded-full bg-violet-500/18 blur-3xl" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_16%_16%,rgba(15,138,108,0.22),transparent_34rem),radial-gradient(circle_at_82%_12%,rgba(232,215,185,0.14),transparent_32rem),radial-gradient(circle_at_50%_100%,rgba(14,42,36,0.24),transparent_26rem)]" />
+      <div className="animate-float-slow animate-pulse-glow absolute left-[-8rem] top-20 -z-10 h-80 w-80 rounded-full bg-[#0F8A6C]/16 blur-3xl" />
+      <div className="animate-float-delay animate-pulse-glow absolute right-[-6rem] top-10 -z-10 h-96 w-96 rounded-full bg-[#E8D7B9]/14 blur-3xl" />
 
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_560px] lg:items-center">
         <div>
-          <div className="animate-fade-up inline-flex rounded-full border border-cyan-300/25 bg-white/[0.06] px-4 py-2 text-sm font-semibold text-cyan-200 shadow-[0_0_28px_rgba(34,211,238,0.16)] backdrop-blur">
+          <div className="animate-fade-up inline-flex rounded-full border border-[#E8D7B9]/25 bg-white/[0.06] px-4 py-2 text-sm font-semibold text-[#E8D7B9] shadow-[0_0_28px_rgba(232,215,185,0.14)] backdrop-blur">
             AI dla firm, które chcą działać szybciej
           </div>
 
@@ -18,7 +18,7 @@ export function Hero() {
             odwiedzających w klientów
           </h1>
 
-          <p className="animate-fade-up animation-delay-300 mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+          <p className="animate-fade-up animation-delay-300 mt-6 max-w-2xl text-lg leading-8 text-[#D6D3D1]">
             Tworzymy spersonalizowane chatboty, formularze i automatyzacje,
             które odpowiadają klientom 24/7, zbierają leady i przekazują dane
             do Google Sheets, CRM lub Make.
@@ -27,28 +27,24 @@ export function Hero() {
           <div className="animate-fade-up animation-delay-450 mt-8 flex flex-wrap gap-3">
             <a
               href="#kontakt"
-              className="cta-shine rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_36px_rgba(34,211,238,0.32)] transition hover:scale-[1.02] hover:shadow-[0_0_46px_rgba(34,211,238,0.44)]"
+              className="cta-shine rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-6 py-3 text-sm font-semibold text-[#171717] shadow-[0_0_36px_rgba(15,138,108,0.28)] transition hover:scale-[1.02] hover:shadow-[0_0_46px_rgba(201,168,106,0.26)]"
             >
               Zamów demo AI
             </a>
             <a
               href="#jak-dzialamy"
-              className="rounded-full border border-white/14 bg-white/[0.06] px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-cyan-300/45 hover:bg-white/[0.1]"
+              className="rounded-full border border-[#E8D7B9]/18 bg-white/[0.06] px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-[#E8D7B9]/45 hover:bg-white/[0.1]"
             >
               Zobacz jak to działa
             </a>
           </div>
 
-          <div className="mt-7 flex flex-wrap gap-2 text-sm text-slate-300">
-            <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1">
-              Demo w 24-72h
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1">
-              Bez kodowania po stronie klienta
-            </span>
-            <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1">
-              Integracje z Google Sheets
-            </span>
+          <div className="mt-7 flex flex-wrap gap-2 text-sm text-[#D6D3D1]">
+            {["Demo w 24-72h", "Bez kodowania po stronie klienta", "Integracje z Google Sheets"].map((item) => (
+              <span key={item} className="rounded-full border border-[#E8D7B9]/12 bg-white/[0.05] px-3 py-1">
+                {item}
+              </span>
+            ))}
           </div>
         </div>
 

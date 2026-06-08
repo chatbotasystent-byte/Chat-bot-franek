@@ -1,71 +1,88 @@
 export function AIDashboardIllustration() {
   return (
     <div className="animate-fade-up animation-delay-450 relative">
-      <div className="animate-soft-pulse absolute -inset-6 rounded-[2rem] bg-[radial-gradient(circle,rgba(34,211,238,0.2),transparent_58%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.14),transparent_42%)] blur-2xl" />
-      <div className="glass-card relative overflow-hidden rounded-[2rem] p-5 shadow-2xl shadow-cyan-950/30 sm:p-6">
+      <div className="animate-soft-pulse absolute -inset-8 rounded-[2.4rem] bg-[radial-gradient(circle_at_28%_34%,rgba(15,138,108,0.24),transparent_44%),radial-gradient(circle_at_76%_18%,rgba(232,215,185,0.16),transparent_40%),radial-gradient(circle_at_78%_82%,rgba(201,168,106,0.12),transparent_38%)] blur-2xl" />
+      <div className="glass-card relative overflow-hidden rounded-[2rem] p-4 shadow-2xl shadow-emerald-950/30 sm:p-6">
         <svg
           className="h-auto w-full"
-          viewBox="0 0 560 430"
+          viewBox="0 0 620 460"
           fill="none"
           role="img"
-          aria-label="Mockup procesu: AI Chatbot zbiera lead i przekazuje go do Google Sheets lub CRM"
+          aria-label="Mockup produktu: chatbot AI, panel leadow i Google Sheets"
         >
           <defs>
-            <linearGradient id="panelBg" x1="42" y1="34" x2="516" y2="398">
-              <stop stopColor="#0f172a" />
-              <stop offset="1" stopColor="#020617" />
+            <linearGradient id="heroShell" x1="40" y1="28" x2="582" y2="430">
+              <stop stopColor="#0E2A24" />
+              <stop offset="0.55" stopColor="#1C1917" />
+              <stop offset="1" stopColor="#171717" />
             </linearGradient>
-            <linearGradient id="cardAccent" x1="92" y1="88" x2="438" y2="324">
-              <stop stopColor="#67e8f9" />
-              <stop offset="0.52" stopColor="#818cf8" />
-              <stop offset="1" stopColor="#34d399" />
+            <linearGradient id="heroPanel" x1="78" y1="70" x2="546" y2="402">
+              <stop stopColor="#0E2A24" />
+              <stop offset="1" stopColor="#171717" />
             </linearGradient>
-            <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="20" stdDeviation="18" floodColor="#22d3ee" floodOpacity="0.16" />
+            <linearGradient id="heroAccent" x1="90" y1="78" x2="532" y2="392">
+              <stop stopColor="#E8D7B9" />
+              <stop offset="0.5" stopColor="#0F8A6C" />
+              <stop offset="1" stopColor="#C9A86A" />
+            </linearGradient>
+            <filter id="heroGlow" x="-18%" y="-18%" width="136%" height="136%">
+              <feDropShadow dx="0" dy="22" stdDeviation="20" floodColor="#0F8A6C" floodOpacity="0.18" />
             </filter>
+            <pattern id="heroGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+              <path d="M24 0H0V24" stroke="#E8D7B9" strokeOpacity="0.045" />
+            </pattern>
           </defs>
 
-          <rect x="42" y="34" width="476" height="354" rx="34" fill="url(#panelBg)" stroke="white" strokeOpacity="0.12" filter="url(#softGlow)" />
-          <circle cx="78" cy="68" r="6" fill="#67e8f9" />
-          <circle cx="100" cy="68" r="6" fill="#818cf8" />
-          <circle cx="122" cy="68" r="6" fill="#34d399" />
-          <text x="280" y="112" textAnchor="middle" fill="#f8fafc" fontSize="24" fontWeight="700">System obsługi zapytań</text>
-          <text x="280" y="140" textAnchor="middle" fill="#94a3b8" fontSize="14">Rozmowa, kwalifikacja i lead w jednym przepływie</text>
+          <rect x="38" y="28" width="544" height="404" rx="34" fill="url(#heroShell)" stroke="#E8D7B9" strokeOpacity="0.12" />
+          <rect x="38" y="28" width="544" height="404" rx="34" fill="url(#heroGrid)" opacity="0.75" />
+          <rect x="76" y="68" width="468" height="326" rx="30" fill="url(#heroPanel)" stroke="url(#heroAccent)" strokeOpacity="0.36" filter="url(#heroGlow)" />
 
-          <path d="M192 236H222" stroke="url(#cardAccent)" strokeWidth="4" strokeLinecap="round" strokeOpacity="0.36" />
-          <path d="M338 236H368" stroke="url(#cardAccent)" strokeWidth="4" strokeLinecap="round" strokeOpacity="0.36" />
+          <circle cx="112" cy="104" r="6.5" fill="#E8D7B9" />
+          <circle cx="136" cy="104" r="6.5" fill="#C9A86A" />
+          <circle cx="160" cy="104" r="6.5" fill="#0F8A6C" />
+          <text x="310" y="112" textAnchor="middle" fill="#F7F2E8" fontSize="21" fontWeight="700">System obsługi zapytań</text>
+          <text x="310" y="138" textAnchor="middle" fill="#7FA99B" fontSize="12.5">Chat, kwalifikacja i arkusz w jednym przepływie</text>
 
           <g className="animate-float-slow">
-            <rect x="76" y="180" width="116" height="116" rx="20" fill="white" fillOpacity="0.08" stroke="#67e8f9" strokeOpacity="0.26" />
-            <circle cx="134" cy="212" r="15" fill="#67e8f9" fillOpacity="0.18" />
-            <path d="M127 211h14M134 204v14" stroke="#67e8f9" strokeWidth="3" strokeLinecap="round" />
-            <text x="134" y="253" textAnchor="middle" fill="#f8fafc" fontSize="15" fontWeight="700">AI Chatbot</text>
-            <text x="134" y="276" textAnchor="middle" fill="#cbd5e1" fontSize="11">odpowiada 24/7</text>
+            <rect x="104" y="160" width="204" height="174" rx="24" fill="#0F8A6C" fillOpacity="0.09" stroke="#E8D7B9" strokeOpacity="0.24" />
+            <rect x="122" y="180" width="154" height="24" rx="12" fill="#0F8A6C" fillOpacity="0.2" />
+            <circle cx="136" cy="192" r="4" fill="#E8D7B9" />
+            <text x="150" y="196" fill="#E8D7B9" fontSize="11.5" fontWeight="700">AI konsultant online</text>
+
+            <rect x="122" y="220" width="156" height="40" rx="14" fill="#171717" fillOpacity="0.72" stroke="#0F8A6C" strokeOpacity="0.22" />
+            <text x="138" y="237" fill="#F7F2E8" fontSize="10.8">Dzień dobry, czy są</text>
+            <text x="138" y="251" fill="#D6D3D1" fontSize="10.8">wolne terminy?</text>
+
+            <rect x="144" y="278" width="146" height="46" rx="16" fill="#E8D7B9" fillOpacity="0.96" />
+            <text x="160" y="298" fill="#171717" fontSize="10.8" fontWeight="700">Mogę zebrać dane</text>
+            <text x="160" y="313" fill="#171717" fontSize="10.8" fontWeight="700">i przekazać lead.</text>
           </g>
 
           <g className="animate-float-delay">
-            <rect x="222" y="180" width="116" height="116" rx="20" fill="white" fillOpacity="0.1" stroke="#818cf8" strokeOpacity="0.3" />
-            <text x="280" y="218" textAnchor="middle" fill="#f8fafc" fontSize="15" fontWeight="700">Nowy lead</text>
-            <rect x="250" y="238" width="60" height="8" rx="4" fill="#c4b5fd" fillOpacity="0.72" />
-            <rect x="240" y="258" width="80" height="8" rx="4" fill="white" fillOpacity="0.22" />
-            <rect x="256" y="278" width="48" height="8" rx="4" fill="white" fillOpacity="0.18" />
-            <circle cx="280" cy="202" r="5" fill="#34d399" />
+            <rect x="334" y="160" width="178" height="98" rx="22" fill="#0E2A24" fillOpacity="0.72" stroke="#C9A86A" strokeOpacity="0.3" />
+            <text x="354" y="190" fill="#F7F2E8" fontSize="13.5" fontWeight="700">Nowe zapytanie</text>
+            <rect x="354" y="208" width="56" height="8" rx="4" fill="#0F8A6C" fillOpacity="0.88" />
+            <rect x="354" y="228" width="104" height="8" rx="4" fill="#7FA99B" fillOpacity="0.42" />
+            <rect x="354" y="246" width="78" height="8" rx="4" fill="#C9A86A" fillOpacity="0.52" />
+            <circle cx="488" cy="192" r="14.5" fill="#E8D7B9" fillOpacity="0.16" />
+            <path d="M481 192h14M488 185v14" stroke="#E8D7B9" strokeWidth="2.8" strokeLinecap="round" />
           </g>
 
-          <g className="animate-float-slow">
-            <rect x="368" y="180" width="116" height="116" rx="20" fill="white" fillOpacity="0.08" stroke="#34d399" strokeOpacity="0.3" />
-            <text x="426" y="219" textAnchor="middle" fill="#f8fafc" fontSize="13" fontWeight="700">Google Sheets</text>
-            <text x="426" y="240" textAnchor="middle" fill="#f8fafc" fontSize="13" fontWeight="700">/ CRM</text>
-            <path d="M398 267h56M408 283h36" stroke="#34d399" strokeWidth="7" strokeLinecap="round" strokeOpacity="0.64" />
+          <g className="animate-float-subtle">
+            <rect x="334" y="276" width="178" height="56" rx="18" fill="#F7F2E8" fillOpacity="0.96" />
+            <text x="354" y="300" fill="#0E2A24" fontSize="11.5" fontWeight="800">Google Sheets / CRM</text>
+            <rect x="354" y="316" width="38" height="6" rx="3" fill="#0F8A6C" fillOpacity="0.95" />
+            <rect x="402" y="316" width="52" height="6" rx="3" fill="#7FA99B" fillOpacity="0.55" />
+            <rect x="464" y="316" width="30" height="6" rx="3" fill="#C9A86A" fillOpacity="0.9" />
           </g>
 
-          <rect x="72" y="330" width="416" height="42" rx="21" fill="white" fillOpacity="0.06" stroke="white" strokeOpacity="0.1" />
-          <circle cx="104" cy="351" r="3" fill="#67e8f9" fillOpacity="0.75" />
-          <circle cx="230" cy="351" r="3" fill="#818cf8" fillOpacity="0.75" />
-          <circle cx="356" cy="351" r="3" fill="#34d399" fillOpacity="0.75" />
-          <text x="116" y="356" fill="#cbd5e1" fontSize="11.5">Klient pyta</text>
-          <text x="242" y="356" fill="#cbd5e1" fontSize="11.5">AI odpowiada</text>
-          <text x="368" y="356" fill="#cbd5e1" fontSize="11.5">lead do zespołu</text>
+          <rect x="104" y="350" width="412" height="36" rx="18" fill="#171717" fillOpacity="0.5" stroke="#E8D7B9" strokeOpacity="0.1" />
+          <circle cx="132" cy="368" r="3.2" fill="#E8D7B9" />
+          <text x="146" y="373" fill="#D6D3D1" fontSize="10.5">klient pyta</text>
+          <circle cx="266" cy="368" r="3.2" fill="#C9A86A" />
+          <text x="280" y="373" fill="#D6D3D1" fontSize="10.5">AI kwalifikuje</text>
+          <circle cx="406" cy="368" r="3.2" fill="#0F8A6C" />
+          <text x="420" y="373" fill="#D6D3D1" fontSize="10.5">zespół oddzwania</text>
         </svg>
       </div>
     </div>

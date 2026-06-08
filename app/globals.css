@@ -4,7 +4,7 @@
 
 :root {
   color: #ffffff;
-  background: #050816;
+  background: #171717;
 }
 
 html {
@@ -15,11 +15,11 @@ body {
   min-height: 100vh;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 34rem),
-    radial-gradient(circle at top right, rgba(129, 140, 248, 0.14), transparent 34rem),
-    linear-gradient(135deg, #030712 0%, #08111f 46%, #020617 100%);
+    linear-gradient(rgba(232, 215, 185, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 215, 185, 0.024) 1px, transparent 1px),
+    radial-gradient(circle at top left, rgba(15, 138, 108, 0.2), transparent 34rem),
+    radial-gradient(circle at top right, rgba(201, 168, 106, 0.14), transparent 34rem),
+    linear-gradient(135deg, #171717 0%, #0e2a24 48%, #171717 100%);
   background-size: 36px 36px, 36px 36px, auto;
 }
 
@@ -165,11 +165,11 @@ h3 {
 }
 
 .glass-card {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(232, 215, 185, 0.16);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.045)),
-    rgba(15, 23, 42, 0.58);
-  box-shadow: 0 24px 80px rgba(8, 47, 73, 0.22);
+    linear-gradient(145deg, rgba(232, 215, 185, 0.105), rgba(247, 242, 232, 0.035)),
+    rgba(14, 42, 36, 0.74);
+  box-shadow: 0 24px 80px rgba(14, 42, 36, 0.28);
   backdrop-filter: blur(18px);
 }
 
@@ -183,7 +183,7 @@ h3 {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(103, 232, 249, 0.46), rgba(129, 140, 248, 0.22), rgba(52, 211, 153, 0.28));
+  background: linear-gradient(135deg, rgba(232, 215, 185, 0.5), rgba(15, 138, 108, 0.34), rgba(201, 168, 106, 0.3));
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);

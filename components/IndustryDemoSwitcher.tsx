@@ -81,7 +81,7 @@ export function IndustryDemoSwitcher() {
     <section id="branzo-demo" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
             Branżowe demo
           </p>
           <h2 className="mt-4 text-3xl font-semibold tracking-normal text-white sm:text-4xl">
@@ -101,8 +101,8 @@ export function IndustryDemoSwitcher() {
               onClick={() => setActiveIndex(index)}
               className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
                 activeIndex === index
-                  ? "border-cyan-300 bg-cyan-300/12 text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.22)]"
-                  : "border-white/10 bg-white/[0.045] text-slate-300 hover:border-cyan-300/35 hover:text-white"
+                  ? "border-[#E8D7B9] bg-[#0F8A6C]/18 text-[#F7F2E8] shadow-[0_0_24px_rgba(15,138,108,0.22)]"
+                  : "border-white/10 bg-white/[0.045] text-slate-300 hover:border-[#E8D7B9]/35 hover:text-white"
               }`}
             >
               {demo.name}
@@ -112,7 +112,7 @@ export function IndustryDemoSwitcher() {
 
         <div className="glass-card gradient-border mt-8 grid gap-6 rounded-3xl p-5 sm:p-7 lg:grid-cols-[0.92fr_1.08fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E8D7B9]">
               {active.name}
             </p>
             <h3 className="mt-4 text-2xl font-semibold text-white">
@@ -124,13 +124,13 @@ export function IndustryDemoSwitcher() {
               <button
                 type="button"
                 onClick={openChatModal}
-                className="cta-shine inline-flex min-h-11 items-center justify-center rounded-full bg-gradient-to-r from-cyan-300 to-blue-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_26px_rgba(34,211,238,0.24)] transition hover:-translate-y-0.5"
+                className="cta-shine inline-flex min-h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-2.5 text-sm font-semibold text-[#171717] shadow-[0_0_26px_rgba(15,138,108,0.24)] transition hover:-translate-y-0.5"
               >
                 Otwórz demo chatu
               </button>
               <a
                 href="#kontakt"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/[0.05] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-cyan-300/35 hover:bg-white/[0.08]"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#E8D7B9]/18 bg-white/[0.05] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-[#E8D7B9]/40 hover:bg-white/[0.08]"
               >
                 Zamów audyt
               </a>
@@ -138,7 +138,7 @@ export function IndustryDemoSwitcher() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border border-white/10 bg-slate-950/42 p-5">
+            <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
               <h4 className="text-sm font-semibold text-white">Typowe pytania</h4>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
                 {active.questions.map((item) => (
@@ -146,17 +146,17 @@ export function IndustryDemoSwitcher() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-slate-950/42 p-5">
+            <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
               <h4 className="text-sm font-semibold text-white">Dane do zebrania</h4>
               <div className="mt-4 flex flex-wrap gap-2">
                 {active.data.map((item) => (
-                  <span key={item} className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-semibold text-emerald-200">
+                  <span key={item} className="rounded-full border border-[#0F8A6C]/25 bg-[#0F8A6C]/12 px-3 py-1 text-xs font-semibold text-[#A7F3D0]">
                     {item}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-cyan-300/18 bg-cyan-300/[0.06] p-5">
+            <div className="rounded-2xl border border-[#E8D7B9]/18 bg-[#E8D7B9]/[0.06] p-5">
               <h4 className="text-sm font-semibold text-white">Przykład odpowiedzi</h4>
               <p key={active.name} className="animate-fade-up mt-4 text-sm leading-6 text-slate-200">
                 {active.botMessage}

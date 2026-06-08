@@ -8,13 +8,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#1f2933",
-        rosewood: "#8f3f54",
-        blush: "#fff1f4",
-        sage: "#6f8f7d"
+        ink: "#171717",
+        rosewood: "#0E2A24",
+        blush: "#F7F2E8",
+        sage: "#7FA99B",
+        emeraldPremium: "#0F8A6C",
+        champagne: "#E8D7B9"
       },
       boxShadow: {
-        soft: "0 18px 60px rgba(31, 41, 51, 0.12)"
+        soft: "0 18px 60px rgba(14, 42, 36, 0.14)"
       }
     }
   },
