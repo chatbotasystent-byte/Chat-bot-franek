@@ -29,7 +29,7 @@ export function Hero() {
               href="#kontakt"
               className="cta-shine rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_36px_rgba(34,211,238,0.32)] transition hover:scale-[1.02] hover:shadow-[0_0_46px_rgba(34,211,238,0.44)]"
             >
-              Zamów darmowe demo
+              Zamów demo AI
             </a>
             <a
               href="#jak-dzialamy"
