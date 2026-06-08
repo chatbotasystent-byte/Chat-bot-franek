@@ -9,9 +9,17 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "AI Growth Partners - wdrożenia AI dla firm",
+  title: "AI Growth Partners | Chatbot AI dla firm",
   description:
-    "Demo strony dla firmy wdrażającej chatboty AI, automatyzację leadów i procesy AI w małych oraz średnich firmach."
+    "Demo chatbota AI dla firm usługowych. Bot odpowiada klientom 24/7, zbiera leady i może zapisywać zapytania do Google Sheets.",
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" }
+    ],
+    shortcut: "/favicon.png",
+    apple: "/apple-icon.png"
+  }
 };
 
 export default function RootLayout({
