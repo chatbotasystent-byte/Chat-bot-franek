@@ -24,13 +24,13 @@ export async function POST(request: Request) {
       website: body.website?.trim() ?? "",
       companyName: body.companyName?.trim() ?? "",
       industry: body.industry?.trim() ?? "",
-      message: body.message?.trim() ?? "",
+      message: body.message?.trim().slice(0, 1000) ?? "",
       source: body.source?.trim() ?? ""
     };
 
-    if (!lead.email) {
+    if (!lead.email && !lead.phone) {
       return NextResponse.json(
-        { error: "Email jest wymagany" },
+        { error: "Email albo telefon jest wymagany" },
         { status: 400 }
       );
     }

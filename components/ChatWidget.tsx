@@ -21,6 +21,17 @@ type ChatWidgetProps = {
   suggestions?: string[];
 };
 
+type ChatLeadPayload = {
+  name: string;
+  email: string;
+  phone: string;
+  website: string;
+  companyName: string;
+  industry: string;
+  message: string;
+  source: "chatbot";
+};
+
 type IndustryKey =
   | "automotiveWorkshop"
   | "carDealer"
@@ -74,6 +85,30 @@ const industryQuestionSuggestions: Record<IndustryKey, string[]> = {
   ]
 };
 
+const industryLabels: Record<IndustryKey, string> = {
+  automotiveWorkshop: "warsztat samochodowy",
+  carDealer: "komis samochodowy",
+  beauty: "salon beauty",
+  services: "firma usługowa",
+  ecommerce: "e-commerce",
+  clinic: "klinika / gabinet",
+  restaurant: "restauracja"
+};
+
+function isContactIntent(text: string) {
+  const normalizedText = text.toLowerCase();
+
+  return (
+    normalizedText.includes("chcę zostawić kontakt") ||
+    normalizedText.includes("chce zostawic kontakt") ||
+    normalizedText.includes("zostawiam kontakt") ||
+    normalizedText.includes("proszę o kontakt") ||
+    normalizedText.includes("prosze o kontakt") ||
+    normalizedText.includes("chcę darmowy audyt") ||
+    normalizedText.includes("chce darmowy audyt")
+  );
+}
+
 function detectIndustry(text: string): IndustryKey | null {
   const normalizedText = text.toLowerCase();
 
@@ -117,10 +152,83 @@ function detectIndustry(text: string): IndustryKey | null {
   return null;
 }
 
+function getPhone(text: string) {
+  const matches = text.match(/(?:\+?\d[\d\s-]{5,}\d)/g) ?? [];
+
+  return matches.find((match) => match.replace(/\D/g, "").length >= 7)?.trim() ?? "";
+}
+
+function getWebsite(text: string) {
+  const instagram = text.match(/(?:instagram\.com\/[^\s,;]+|@[a-zA-Z0-9._]+)/i)?.[0];
+
+  if (instagram) {
+    return instagram.trim();
+  }
+
+  return text.match(/(?:https?:\/\/[^\s,;]+|www\.[^\s,;]+|[a-zA-Z0-9-]+\.[a-zA-Z]{2,}[^\s,;]*)/)?.[0]?.trim() ?? "";
+}
+
+function getName(text: string, email: string, phone: string, website: string, industry: string) {
+  const cleanedText = text
+    .replace(email, " ")
+    .replace(phone, " ")
+    .replace(website, " ")
+    .replace(industry, " ")
+    .replace(/[,;|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const blockedWords = new Set([
+    "warsztat",
+    "samochodowy",
+    "komis",
+    "salon",
+    "beauty",
+    "firma",
+    "usługowa",
+    "uslugowa",
+    "klinika",
+    "gabinet",
+    "restauracja",
+    "ecommerce",
+    "e-commerce"
+  ]);
+
+  return cleanedText
+    .split(" ")
+    .filter((word) => !blockedWords.has(word.toLowerCase()) && !/\d/.test(word))
+    .slice(0, 3)
+    .join(" ");
+}
+
+function parseContactLead(text: string): ChatLeadPayload {
+  const email = text.match(/[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+/)?.[0]?.trim() ?? "";
+  const phone = getPhone(text);
+  const textWithoutEmail = email ? text.replace(email, " ") : text;
+  const website = getWebsite(textWithoutEmail);
+  const industryKey = detectIndustry(text);
+  const industry = industryKey ? industryLabels[industryKey] : "";
+  const name = getName(text, email, phone, website, industry);
+
+  return {
+    name,
+    email,
+    phone,
+    website,
+    companyName: "",
+    industry,
+    message: text.slice(0, 1000),
+    source: "chatbot"
+  };
+}
+
 export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSavingLead, setIsSavingLead] = useState(false);
+  const [isContactMode, setIsContactMode] = useState(false);
+  const [hasSubmittedChatLead, setHasSubmittedChatLead] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const userMessages = messages.filter((message) => message.role === "user");
   const lastUserMessage = userMessages.at(-1)?.content ?? "";
@@ -154,6 +262,64 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
     setIsLoading(true);
 
     try {
+      if (isContactIntent(trimmedText) && !hasSubmittedChatLead) {
+        setIsContactMode(true);
+        setMessages([
+          ...nextMessages,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content:
+              "Jasne — podaj proszę imię oraz email lub telefon. Możesz też dopisać branżę albo stronę/Instagram."
+          }
+        ]);
+        return;
+      }
+
+      if (isContactMode && !hasSubmittedChatLead) {
+        const leadPayload = parseContactLead(trimmedText);
+
+        if (!leadPayload.email && !leadPayload.phone) {
+          setMessages([
+            ...nextMessages,
+            {
+              id: crypto.randomUUID(),
+              role: "assistant",
+              content:
+                "Podaj proszę email albo numer telefonu, żebym mógł przekazać kontakt."
+            }
+          ]);
+          return;
+        }
+
+        setIsSavingLead(true);
+
+        const leadResponse = await fetch("/api/lead", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(leadPayload)
+        });
+
+        if (!leadResponse.ok) {
+          throw new Error("Nie udało się przekazać kontaktu. Spróbuj jeszcze raz albo użyj formularza na stronie.");
+        }
+
+        setHasSubmittedChatLead(true);
+        setIsContactMode(false);
+        setMessages([
+          ...nextMessages,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content:
+              "Dziękuję! Przekazałem kontakt — odezwiemy się z propozycją automatyzacji AI."
+          }
+        ]);
+        return;
+      }
+
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -195,6 +361,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         }
       ]);
     } finally {
+      setIsSavingLead(false);
       setIsLoading(false);
       inputRef.current?.focus();
     }
@@ -259,7 +426,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         {isLoading ? (
           <div className="flex justify-start">
             <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-[#171717] shadow-sm">
-              Piszę odpowiedź...
+              {isSavingLead ? "Przekazuję kontakt..." : "Piszę odpowiedź..."}
             </div>
           </div>
         ) : null}

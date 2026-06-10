@@ -452,11 +452,11 @@ export default function Home() {
               Zamów darmowy audyt AI
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-slate-300">
-              Zostaw dane, a przygotujemy krótką propozycję, jak chatbot AI
+              Zostaw kontakt, a przygotujemy krótką propozycję, jak chatbot AI
               może działać w Twojej firmie.
             </p>
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">
-              Zostaw kontakt, a przygotujemy propozycję po krótkim audycie.
+              Nie musisz znać szczegółów — wystarczy krótki opis firmy albo link do strony/Instagrama.
             </p>
           </div>
 

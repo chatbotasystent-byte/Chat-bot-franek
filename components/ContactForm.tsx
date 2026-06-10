@@ -19,20 +19,44 @@ export function ContactForm() {
     }
 
     const form = event.currentTarget;
-    setState("loading");
-    setMessage("");
-
     const formData = new FormData(form);
     const payload = {
-      name: String(formData.get("name") ?? ""),
-      email: String(formData.get("email") ?? ""),
-      phone: String(formData.get("phone") ?? ""),
-      website: String(formData.get("website") ?? ""),
-      companyName: String(formData.get("companyName") ?? ""),
-      industry: String(formData.get("industry") ?? ""),
-      message: String(formData.get("message") ?? ""),
+      name: String(formData.get("name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
+      website: String(formData.get("website") ?? "").trim(),
+      companyName: String(formData.get("companyName") ?? "").trim(),
+      industry: String(formData.get("industry") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
       source: "contact-form"
     };
+
+    if (!payload.name) {
+      setState("error");
+      setMessage("Podaj imię i nazwisko.");
+      return;
+    }
+
+    if (!payload.email) {
+      setState("error");
+      setMessage("Podaj adres email.");
+      return;
+    }
+
+    if (!payload.website) {
+      setState("error");
+      setMessage("Podaj stronę firmy lub Instagram.");
+      return;
+    }
+
+    if (!payload.message) {
+      setState("error");
+      setMessage("Napisz krótko, czego dotyczy zgłoszenie.");
+      return;
+    }
+
+    setState("loading");
+    setMessage("");
 
     try {
       const response = await fetch("/api/lead", {
@@ -59,82 +83,77 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      noValidate
       className="rounded-3xl border border-[#E8D7B9]/70 bg-white p-6 text-[#171717] shadow-2xl shadow-emerald-950/15 sm:p-8"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-[#171717]">
-          Imię i nazwisko
+          Imię i nazwisko *
           <input
             name="name"
             autoComplete="name"
             className={fieldClass}
-            placeholder="Jan Kowalski"
           />
         </label>
         <label className="block text-sm font-medium text-[#171717]">
-          Email
+          Email *
           <input
             name="email"
             type="email"
             autoComplete="email"
-            required
             className={fieldClass}
-            placeholder="jan@firma.pl"
           />
         </label>
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-[#171717]">
-          Telefon
+          Telefon (opcjonalnie)
           <input
             name="phone"
             type="tel"
             autoComplete="tel"
             className={fieldClass}
-            placeholder="500 000 000"
           />
         </label>
         <label className="block text-sm font-medium text-[#171717]">
-          Nazwa firmy
+          Nazwa firmy (opcjonalnie)
           <input
             name="companyName"
             autoComplete="organization"
             className={fieldClass}
-            placeholder="Auto Serwis Kowalski"
           />
         </label>
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-[#171717]">
-          Strona firmy
+          Strona firmy lub Instagram *
           <input
             name="website"
-            type="url"
+            type="text"
             autoComplete="url"
             className={fieldClass}
-            placeholder="https://twojafirma.pl"
+            placeholder="twojafirma.pl lub @profil"
           />
         </label>
         <label className="block text-sm font-medium text-[#171717]">
-          Branża
+          Branża (opcjonalnie)
           <input
             name="industry"
             className={fieldClass}
-            placeholder="np. warsztat, beauty, klinika, e-commerce"
           />
         </label>
       </div>
 
       <label className="mt-4 block text-sm font-medium text-[#171717]">
-        Wiadomość
+        Wiadomość *
         <textarea
           name="message"
           rows={5}
           maxLength={1000}
           className={`${fieldClass} resize-none`}
-          placeholder="Opisz krótko firmę i co chcesz zautomatyzować."
+          placeholder="Krótko opisz firmę i co chcesz zautomatyzować"
         />
       </label>
 
