@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 type FormState = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "mt-2 w-full rounded-md border border-[#E8D7B9]/80 bg-[#FFF7ED] px-4 py-3 text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:bg-white focus:ring-2 focus:ring-[#0F8A6C]/20";
+  "mt-2 min-h-12 w-full rounded-xl border border-[#E8D7B9]/80 bg-[#FFF7ED] px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:bg-white focus:ring-2 focus:ring-[#0F8A6C]/20";
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
@@ -13,6 +13,11 @@ export function ContactForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (state === "loading") {
+      return;
+    }
+
     const form = event.currentTarget;
     setState("loading");
     setMessage("");
@@ -58,11 +63,12 @@ export function ContactForm() {
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-[#171717]">
-          Imię
+          Imię i nazwisko
           <input
             name="name"
+            autoComplete="name"
             className={fieldClass}
-            placeholder="Anna"
+            placeholder="Jan Kowalski"
           />
         </label>
         <label className="block text-sm font-medium text-[#171717]">
@@ -70,9 +76,10 @@ export function ContactForm() {
           <input
             name="email"
             type="email"
+            autoComplete="email"
             required
             className={fieldClass}
-            placeholder="anna@example.com"
+            placeholder="jan@firma.pl"
           />
         </label>
       </div>
@@ -83,27 +90,31 @@ export function ContactForm() {
           <input
             name="phone"
             type="tel"
+            autoComplete="tel"
             className={fieldClass}
-            placeholder="+48 123 456 789"
+            placeholder="500 000 000"
           />
         </label>
         <label className="block text-sm font-medium text-[#171717]">
-          Strona firmy
+          Nazwa firmy
           <input
-            name="website"
+            name="companyName"
+            autoComplete="organization"
             className={fieldClass}
-            placeholder="https://twojafirma.pl"
+            placeholder="Auto Serwis Kowalski"
           />
         </label>
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-[#171717]">
-          Nazwa firmy
+          Strona firmy
           <input
-            name="companyName"
+            name="website"
+            type="url"
+            autoComplete="url"
             className={fieldClass}
-            placeholder="np. Studio Nova"
+            placeholder="https://twojafirma.pl"
           />
         </label>
         <label className="block text-sm font-medium text-[#171717]">
@@ -111,7 +122,7 @@ export function ContactForm() {
           <input
             name="industry"
             className={fieldClass}
-            placeholder="np. salon beauty, usługi, klinika"
+            placeholder="np. warsztat, beauty, klinika, e-commerce"
           />
         </label>
       </div>
@@ -121,15 +132,16 @@ export function ContactForm() {
         <textarea
           name="message"
           rows={5}
+          maxLength={1000}
           className={`${fieldClass} resize-none`}
-          placeholder="Opisz krótko firmę i pytania, które najczęściej zadają klienci."
+          placeholder="Opisz krótko firmę i co chcesz zautomatyzować."
         />
       </label>
 
       <button
         type="submit"
         disabled={state === "loading"}
-        className="mt-6 w-full rounded-md bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-semibold text-[#171717] shadow-sm transition hover:shadow-[0_12px_30px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
+        className="mt-6 min-h-12 w-full rounded-xl bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-semibold text-[#171717] shadow-sm transition hover:shadow-[0_12px_30px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {state === "loading" ? "Wysyłanie..." : "Wyślij zgłoszenie"}
       </button>
