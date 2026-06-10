@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
 type Message = {
   id: string;
@@ -10,6 +10,10 @@ type Message = {
 
 type ChatWidgetProps = {
   suggestions?: string[];
+};
+
+export type ChatWidgetHandle = {
+  reset: () => void;
 };
 
 type IndustryKey =
@@ -108,13 +112,106 @@ const industryQuestionSuggestions: Record<IndustryKey, string[]> = {
   ]
 };
 
+const startPromptSuggestions = [
+  "Mam firmę usługową",
+  "Mam salon beauty",
+  "Mam warsztat samochodowy",
+  "Mam komis samochodowy",
+  "Chcę zostawić kontakt"
+];
+
+const generalPromptSuggestions = [
+  "Jak bot zbiera leady?",
+  "Czy lead trafia do Google Sheets?",
+  "Jak wygląda darmowy audyt?",
+  "Ile trwa wdrożenie?"
+];
+
+const industryPromptSuggestions: Record<IndustryKey, string[]> = {
+  automotiveWorkshop: [
+    "Czy bot umówi wizytę?",
+    "Czy zbierze markę i model auta?",
+    "Czy lead trafi do arkusza?",
+    "Czy dostanę powiadomienie?"
+  ],
+  carDealer: [
+    "Czy bot zbierze budżet klienta?",
+    "Czy kwalifikuje kupujących?",
+    "Czy sprzedawca dostanie lead?",
+    "Czy można zbierać preferencje auta?"
+  ],
+  beauty: [
+    "Czy bot może umawiać wizyty?",
+    "Czy zbierze usługę i termin?",
+    "Czy przypomni o kontakcie?",
+    "Czy zapytanie trafi do arkusza?"
+  ],
+  services: [
+    "Czy bot zbierze miasto i usługę?",
+    "Czy pomoże we wstępnej wycenie?",
+    "Czy lead trafi do Google Sheets?",
+    "Czy dostanę maila z leadem?"
+  ],
+  ecommerce: [
+    "Czy bot odpowie o produktach?",
+    "Czy zbierze pytania klientów?",
+    "Czy przekaże dane do obsługi?",
+    "Czy działa poza godzinami?"
+  ],
+  clinic: [
+    "Czy bot zbierze temat wizyty?",
+    "Czy przekaże kontakt do recepcji?",
+    "Czy może kwalifikować zapytania?",
+    "Czy lead trafi do arkusza?"
+  ],
+  restaurant: [
+    "Czy bot przyjmie rezerwację?",
+    "Czy zbierze datę i liczbę osób?",
+    "Czy powiadomi obsługę?",
+    "Czy zapisze rezerwację?"
+  ],
+  realEstate: [
+    "Czy bot zbierze budżet klienta?",
+    "Czy kwalifikuje kupujących?",
+    "Czy sprzedawca dostanie lead?",
+    "Czy można zbierać preferencje auta?"
+  ],
+  education: [
+    "Czy bot odpowie o kursach?",
+    "Czy zbierze pytania klientów?",
+    "Czy przekaże dane do obsługi?",
+    "Czy działa poza godzinami?"
+  ]
+};
+
 const leadInputClass =
-  "mt-1.5 min-h-10 w-full rounded-xl border border-[#E8D7B9]/70 bg-white px-3 py-2 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20";
+  "mt-1 h-9 w-full rounded-lg border border-[#E8D7B9]/70 bg-white px-2.5 py-1.5 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20";
 
 function isContactIntent(text: string) {
   const normalizedText = text.toLowerCase();
+  const hasEmail = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(text);
+  const hasPhone = (text.match(/(?:\+?\d[\d\s-]{5,}\d)/g) ?? []).some(
+    (match) => match.replace(/\D/g, "").length >= 7
+  );
 
   return (
+    hasEmail ||
+    hasPhone ||
+    normalizedText.includes("@") ||
+    normalizedText.includes("kontakt") ||
+    normalizedText.includes("skontaktowa") ||
+    normalizedText.includes("email") ||
+    normalizedText.includes("mail") ||
+    normalizedText.includes("telefon") ||
+    normalizedText.includes("numer") ||
+    normalizedText.includes("audyt") ||
+    normalizedText.includes("oferta") ||
+    normalizedText.includes("ofertę") ||
+    normalizedText.includes("oferte") ||
+    normalizedText.includes("wycena") ||
+    normalizedText.includes("wycenę") ||
+    normalizedText.includes("wycene") ||
+    normalizedText.includes("odezwijcie") ||
     normalizedText.includes("chcę zostawić kontakt") ||
     normalizedText.includes("chce zostawic kontakt") ||
     normalizedText.includes("zostawiam kontakt") ||
@@ -125,6 +222,46 @@ function isContactIntent(text: string) {
     normalizedText.includes("chcę darmowy audyt") ||
     normalizedText.includes("chce darmowy audyt")
   );
+}
+
+function getEmail(text: string) {
+  return text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0] ?? "";
+}
+
+function getPhone(text: string) {
+  return (text.match(/(?:\+?\d[\d\s-]{5,}\d)/g) ?? []).find(
+    (match) => match.replace(/\D/g, "").length >= 7
+  ) ?? "";
+}
+
+function getWebsite(text: string) {
+  const withoutEmail = text.replace(getEmail(text), " ");
+  const instagram = withoutEmail.match(/(?:instagram\.com\/[^\s,;]+|@[a-zA-Z0-9._]+)/i)?.[0];
+
+  if (instagram) {
+    return instagram;
+  }
+
+  return withoutEmail.match(/(?:https?:\/\/[^\s,;]+|www\.[^\s,;]+|[a-zA-Z0-9-]+\.[a-zA-Z]{2,}[^\s,;]*)/)?.[0] ?? "";
+}
+
+function getExplicitContactName(text: string, email: string) {
+  const explicitMatch =
+    text.match(/(?:nazywam si[ęe]|imi[ęe] i nazwisko\s*:)\s*([\p{L}'-]+(?:\s+[\p{L}'-]+){1,2})/iu) ??
+    text.match(/^\s*([\p{L}'-]+(?:\s+[\p{L}'-]+){1,2})\s*,\s*[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/iu);
+
+  if (!explicitMatch) {
+    return "";
+  }
+
+  const name = explicitMatch[1].trim();
+  const commonNonNames = /\b(mog[ęe]|chc[ęe]|mail|email|telefon|kontakt|prosz[ęe]|moj|mój|jak|si[ęe])\b/iu;
+
+  if (commonNonNames.test(name) || name.includes(email)) {
+    return "";
+  }
+
+  return name;
 }
 
 function detectIndustry(text: string): IndustryKey | null {
@@ -215,7 +352,59 @@ function detectIndustry(text: string): IndustryKey | null {
   return null;
 }
 
-export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
+function getSuggestedPrompts({
+  industry,
+  messages,
+  contactFormVisible,
+  startPrompts,
+  usedPromptChips
+}: {
+  industry: IndustryKey | null;
+  messages: Message[];
+  contactFormVisible: boolean;
+  startPrompts: string[];
+  usedPromptChips: string[];
+}) {
+  if (contactFormVisible) {
+    return [];
+  }
+
+  const hasUserMessage = messages.some((message) => message.role === "user");
+
+  if (!hasUserMessage) {
+    return (startPrompts.length > 0 ? startPrompts : startPromptSuggestions)
+      .filter((prompt) => !usedPromptChips.includes(prompt))
+      .slice(0, 5);
+  }
+
+  if (industry) {
+    return industryPromptSuggestions[industry]
+      .filter((prompt) => !usedPromptChips.includes(prompt))
+      .slice(0, 4);
+  }
+
+  return generalPromptSuggestions
+    .filter((prompt) => !usedPromptChips.includes(prompt))
+    .slice(0, 4);
+}
+
+function getContactDraft(text: string): Partial<LeadFormData> {
+  const email = getEmail(text);
+  const phone = getPhone(text);
+  const website = getWebsite(text);
+
+  return {
+    name: getExplicitContactName(text, email),
+    email,
+    phone,
+    website
+  };
+}
+
+export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function ChatWidget(
+  { suggestions = [] },
+  ref
+) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -224,29 +413,68 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
   const [leadForm, setLeadForm] = useState<LeadFormData>(emptyLeadForm);
   const [leadFormState, setLeadFormState] = useState<FormState>("idle");
   const [leadFormMessage, setLeadFormMessage] = useState("");
+  const [showOptionalLeadFields, setShowOptionalLeadFields] = useState(false);
+  const [usedPromptChips, setUsedPromptChips] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const userMessages = messages.filter((message) => message.role === "user");
-  const lastUserMessage = userMessages.at(-1)?.content ?? "";
-  const detectedIndustry = detectIndustry(lastUserMessage);
-  const dynamicSuggestionPool = detectedIndustry
-    ? industryQuestionSuggestions[detectedIndustry]
-    : neutralQuestionSuggestions;
-  const usedMessages = new Set(messages.map((message) => message.content));
-  const visibleDynamicSuggestions = dynamicSuggestionPool
-    .filter((suggestion) => !usedMessages.has(suggestion))
-    .slice(0, 3);
-  const shouldShowStartSuggestions =
-    !isLeadFormVisible && userMessages.length === 0 && suggestions.length > 0;
-  const shouldShowDynamicSuggestions =
-    !isLeadFormVisible && userMessages.length > 0 && !isLoading && visibleDynamicSuggestions.length > 0;
+  const detectedIndustry =
+    [...userMessages]
+      .reverse()
+      .map((message) => detectIndustry(message.content))
+      .find((industry): industry is IndustryKey => industry !== null) ?? null;
+  const suggestedPrompts = getSuggestedPrompts({
+    industry: detectedIndustry,
+    messages,
+    contactFormVisible: isLeadFormVisible,
+    startPrompts: suggestions,
+    usedPromptChips
+  });
+  const shouldShowSuggestions = suggestedPrompts.length > 0;
   const inputPlaceholder = isLeadFormVisible
     ? "Możesz wypełnić formularz albo kontynuować rozmowę..."
     : leadSubmitted || userMessages.length > 0
       ? "Napisz wiadomość..."
       : "Napisz, czym zajmuje się Twoja firma...";
 
-  function showLeadForm(nextMessages: Message[]) {
+  useImperativeHandle(ref, () => ({
+    reset() {
+      setMessages(initialMessages);
+      setInput("");
+      setIsLoading(false);
+      setIsLeadFormVisible(false);
+      setLeadSubmitted(false);
+      setLeadForm(emptyLeadForm);
+      setLeadFormState("idle");
+      setLeadFormMessage("");
+      setShowOptionalLeadFields(false);
+      setUsedPromptChips([]);
+      inputRef.current?.focus();
+    }
+  }));
+
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: "smooth"
+    });
+  }, [messages, isLeadFormVisible, isLoading, showOptionalLeadFields, leadFormMessage]);
+
+  function showLeadForm(nextMessages: Message[], draft: Partial<LeadFormData> = {}) {
     setIsLeadFormVisible(true);
+    setShowOptionalLeadFields(false);
+    setLeadForm({
+      ...emptyLeadForm,
+      ...Object.fromEntries(
+        Object.entries(draft).filter(([, value]) => typeof value === "string" && value.trim())
+      )
+    });
     setLeadFormState("idle");
     setLeadFormMessage("");
     setMessages([
@@ -255,7 +483,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         id: crypto.randomUUID(),
         role: "assistant",
         content:
-          "Jasne — możesz zostawić dane w krótkim formularzu poniżej. Jeśli wolisz, możesz też kontynuować rozmowę bez formularza."
+          "Jasne — możesz zostawić dane w krótkim formularzu poniżej."
       }
     ]);
   }
@@ -269,6 +497,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
 
   function continueWithoutForm() {
     setIsLeadFormVisible(false);
+    setShowOptionalLeadFields(false);
     setLeadFormState("idle");
     setLeadFormMessage("");
     setMessages((current) => [
@@ -344,6 +573,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
       setIsLeadFormVisible(false);
       setLeadSubmitted(true);
       setLeadForm(emptyLeadForm);
+      setShowOptionalLeadFields(false);
       setLeadFormState("idle");
       setMessages((current) => [
         ...current,
@@ -377,7 +607,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
     setInput("");
 
     if (isContactIntent(trimmedText)) {
-      showLeadForm(nextMessages);
+      showLeadForm(nextMessages, getContactDraft(trimmedText));
       return;
     }
 
@@ -435,9 +665,16 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
     await sendMessage(input);
   }
 
+  async function handlePromptClick(prompt: string) {
+    setUsedPromptChips((current) => (
+      current.includes(prompt) ? current : [...current, prompt]
+    ));
+    await sendMessage(prompt);
+  }
+
   return (
-    <section className="overflow-hidden rounded-3xl border border-[#E8D7B9]/80 bg-white shadow-[0_24px_80px_rgba(14,42,36,0.18)] ring-1 ring-[#E8D7B9]/60">
-      <div className="flex items-start justify-between gap-4 border-b border-[#E8D7B9]/60 bg-gradient-to-r from-white to-[#F7F2E8] px-5 py-4 sm:px-6">
+    <section className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-[#E8D7B9]/80 bg-white shadow-[0_24px_80px_rgba(14,42,36,0.18)] ring-1 ring-[#E8D7B9]/60">
+      <div className="flex flex-none items-start justify-between gap-4 border-b border-[#E8D7B9]/60 bg-gradient-to-r from-white to-[#F7F2E8] px-5 py-4 sm:px-6">
         <div>
           <p className="mb-2 inline-flex rounded-full bg-[#0F8A6C]/10 px-3 py-1 text-xs font-semibold text-[#0F8A6C] ring-1 ring-[#0F8A6C]/15">
             Demo AI konsultanta
@@ -467,7 +704,10 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         </div>
       </div>
 
-      <div className="h-[430px] space-y-4 overflow-y-auto bg-gradient-to-b from-[#F7F2E8] via-white to-[#F7F2E8]/70 px-4 py-5 sm:px-6">
+      <div
+        ref={messagesContainerRef}
+        className="min-h-0 flex-1 space-y-4 overflow-y-auto bg-gradient-to-b from-[#F7F2E8] via-white to-[#F7F2E8]/70 px-4 py-5 sm:px-6"
+      >
         {messages.map((message) => (
           <div
             key={message.id}
@@ -476,7 +716,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
             }`}
           >
             <div
-              className={`max-w-[84%] rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm ${
+              className={`max-w-[75%] break-words rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm [overflow-wrap:anywhere] sm:max-w-[520px] ${
                 message.role === "user"
                   ? "bg-[#171717] text-white shadow-[0_10px_28px_rgba(14,42,36,0.18)]"
                   : "border border-slate-200 bg-white text-[#171717]"
@@ -492,9 +732,16 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
             <form
               onSubmit={handleLeadFormSubmit}
               noValidate
-              className="w-full max-w-[92%] rounded-2xl border border-[#E8D7B9]/80 bg-[#FFF7ED] p-4 text-[#171717] shadow-[0_18px_45px_rgba(14,42,36,0.12)] sm:max-w-[84%]"
+              className="w-full max-w-[420px] rounded-2xl border border-[#E8D7B9]/80 bg-[#FFF7ED] p-3 text-[#171717] shadow-[0_14px_34px_rgba(14,42,36,0.12)] sm:p-4"
             >
-              <div className="grid gap-3">
+              <div className="mb-3">
+                <p className="text-sm font-bold text-[#171717]">Zostaw kontakt</p>
+                <p className="mt-1 text-xs leading-5 text-stone-600">
+                  Uzupełnij krótkie dane — odezwiemy się z propozycją.
+                </p>
+              </div>
+
+              <div className="grid gap-2.5">
                 <label className="text-xs font-semibold text-[#171717]">
                   Imię i nazwisko *
                   <input
@@ -513,24 +760,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
                   />
                 </label>
                 <label className="text-xs font-semibold text-[#171717]">
-                  Telefon (opcjonalnie)
-                  <input
-                    value={leadForm.phone}
-                    onChange={(event) => handleLeadFormChange("phone", event.target.value)}
-                    className={leadInputClass}
-                    type="tel"
-                  />
-                </label>
-                <label className="text-xs font-semibold text-[#171717]">
-                  Nazwa firmy (opcjonalnie)
-                  <input
-                    value={leadForm.companyName}
-                    onChange={(event) => handleLeadFormChange("companyName", event.target.value)}
-                    className={leadInputClass}
-                  />
-                </label>
-                <label className="text-xs font-semibold text-[#171717]">
-                  Strona firmy lub Instagram *
+                  Strona / Instagram *
                   <input
                     value={leadForm.website}
                     onChange={(event) => handleLeadFormChange("website", event.target.value)}
@@ -540,23 +770,54 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
                   />
                 </label>
                 <label className="text-xs font-semibold text-[#171717]">
-                  Branża (opcjonalnie)
-                  <input
-                    value={leadForm.industry}
-                    onChange={(event) => handleLeadFormChange("industry", event.target.value)}
-                    className={leadInputClass}
-                  />
-                </label>
-                <label className="text-xs font-semibold text-[#171717]">
                   Wiadomość *
                   <textarea
                     value={leadForm.message}
                     onChange={(event) => handleLeadFormChange("message", event.target.value)}
-                    className={`${leadInputClass} min-h-20 resize-none`}
+                    className={`${leadInputClass} min-h-[72px] resize-none`}
                     maxLength={1000}
-                    placeholder="Krótko opisz firmę i co chcesz zautomatyzować"
+                    placeholder="Krótko opisz, czego potrzebujesz"
                   />
                 </label>
+
+                <button
+                  type="button"
+                  onClick={() => setShowOptionalLeadFields((current) => !current)}
+                  className="w-fit text-xs font-semibold text-[#0F8A6C] underline-offset-4 transition hover:text-[#0E2A24] hover:underline"
+                  aria-expanded={showOptionalLeadFields}
+                >
+                  {showOptionalLeadFields ? "Ukryj pola opcjonalne" : "Pokaż pola opcjonalne"}
+                </button>
+
+                {showOptionalLeadFields ? (
+                  <div className="grid gap-2.5 rounded-xl border border-[#E8D7B9]/55 bg-white/50 p-2.5">
+                    <label className="text-xs font-semibold text-[#171717]">
+                      Telefon (opcjonalnie)
+                      <input
+                        value={leadForm.phone}
+                        onChange={(event) => handleLeadFormChange("phone", event.target.value)}
+                        className={leadInputClass}
+                        type="tel"
+                      />
+                    </label>
+                    <label className="text-xs font-semibold text-[#171717]">
+                      Nazwa firmy (opcjonalnie)
+                      <input
+                        value={leadForm.companyName}
+                        onChange={(event) => handleLeadFormChange("companyName", event.target.value)}
+                        className={leadInputClass}
+                      />
+                    </label>
+                    <label className="text-xs font-semibold text-[#171717]">
+                      Branża (opcjonalnie)
+                      <input
+                        value={leadForm.industry}
+                        onChange={(event) => handleLeadFormChange("industry", event.target.value)}
+                        className={leadInputClass}
+                      />
+                    </label>
+                  </div>
+                ) : null}
               </div>
 
               {leadFormMessage ? (
@@ -565,11 +826,11 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
                 </p>
               ) : null}
 
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              <div className="mt-3 grid gap-2 min-[420px]:grid-cols-2">
                 <button
                   type="submit"
                   disabled={leadFormState === "loading" || leadSubmitted}
-                  className="min-h-10 rounded-xl bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-4 py-2 text-xs font-bold text-[#171717] shadow-sm transition hover:shadow-[0_10px_24px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-65"
+                  className="min-h-9 rounded-xl bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-3 py-2 text-xs font-bold text-[#171717] shadow-sm transition hover:shadow-[0_10px_24px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   {leadFormState === "loading" ? "Wysyłanie..." : "Wyślij kontakt"}
                 </button>
@@ -577,7 +838,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
                   type="button"
                   onClick={continueWithoutForm}
                   disabled={leadFormState === "loading"}
-                  className="min-h-10 rounded-xl border border-[#E8D7B9]/70 bg-white px-4 py-2 text-xs font-bold text-[#171717] transition hover:border-[#0F8A6C]/50 hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-65"
+                  className="min-h-9 rounded-xl border border-[#E8D7B9]/70 bg-white px-3 py-2 text-xs font-bold text-[#171717] transition hover:border-[#0F8A6C]/50 hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   Kontynuuj bez formularza
                 </button>
@@ -595,19 +856,19 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         ) : null}
       </div>
 
-      {shouldShowStartSuggestions || shouldShowDynamicSuggestions ? (
-        <div className="border-t border-slate-200 bg-slate-50/90 px-4 py-3 sm:px-6">
+      {shouldShowSuggestions ? (
+        <div className="flex-none border-t border-slate-200 bg-slate-50/90 px-4 py-3 sm:px-6">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-            {shouldShowStartSuggestions ? "Przykładowe prompty" : "Możesz zapytać też o:"}
+            {userMessages.length === 0 ? "Przykładowe prompty" : "Możesz zapytać też o:"}
           </p>
           <div className="flex flex-wrap gap-2">
-            {(shouldShowStartSuggestions ? suggestions.slice(0, 5) : visibleDynamicSuggestions).map((suggestion) => (
+            {suggestedPrompts.map((suggestion) => (
               <button
                 key={suggestion}
                 type="button"
-                onClick={() => sendMessage(suggestion)}
+                onClick={() => handlePromptClick(suggestion)}
                 disabled={isLoading}
-                className="rounded-full border border-[#E8D7B9]/70 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0F8A6C] hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-55"
+                className="max-w-full rounded-full border border-[#E8D7B9]/70 bg-white px-3 py-1.5 text-xs font-medium leading-5 text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0F8A6C] hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-55"
               >
                 {suggestion}
               </button>
@@ -618,7 +879,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-3 border-t border-slate-200 bg-white p-4 sm:flex-row"
+        className="flex flex-none flex-col gap-3 border-t border-slate-200 bg-white p-4 sm:flex-row"
       >
         <input
           ref={inputRef}
@@ -638,4 +899,4 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
       </form>
     </section>
   );
-}
+});

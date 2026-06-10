@@ -3,6 +3,7 @@ import { ChatModal } from "@/components/ChatModal";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { IndustryDemoSwitcher } from "@/components/IndustryDemoSwitcher";
+import { LeadMechanismsDemo } from "@/components/LeadMechanismsDemo";
 import { LeadPreview } from "@/components/LeadPreview";
 import { Navbar } from "@/components/Navbar";
 import { ScrollToTopOnLoad } from "@/components/ScrollToTopOnLoad";
@@ -389,6 +390,8 @@ export default function Home() {
       </section>
 
       <LeadPreview />
+
+      <LeadMechanismsDemo />
 
       <section id="wdrozenie" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
