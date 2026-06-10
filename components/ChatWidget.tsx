@@ -8,28 +8,8 @@ type Message = {
   content: string;
 };
 
-const initialMessages: Message[] = [
-  {
-    id: "welcome",
-    role: "assistant",
-    content:
-      "Cześć! Pomagam firmom sprawdzić, jak mogą wykorzystać AI do obsługi klientów, zbierania leadów i automatyzacji pracy. Napisz, czym zajmuje się Twoja firma, a podpowiem, jaki chatbot lub automatyzacja może mieć sens."
-  }
-];
-
 type ChatWidgetProps = {
   suggestions?: string[];
-};
-
-type ChatLeadPayload = {
-  name: string;
-  email: string;
-  phone: string;
-  website: string;
-  companyName: string;
-  industry: string;
-  message: string;
-  source: "chatbot";
 };
 
 type IndustryKey =
@@ -39,7 +19,40 @@ type IndustryKey =
   | "services"
   | "ecommerce"
   | "clinic"
-  | "restaurant";
+  | "restaurant"
+  | "realEstate"
+  | "education";
+
+type LeadFormData = {
+  name: string;
+  email: string;
+  phone: string;
+  website: string;
+  companyName: string;
+  industry: string;
+  message: string;
+};
+
+type FormState = "idle" | "loading" | "error";
+
+const initialMessages: Message[] = [
+  {
+    id: "welcome",
+    role: "assistant",
+    content:
+      "Cześć! Pomagam firmom sprawdzić, jak mogą wykorzystać AI do obsługi klientów, zbierania leadów i automatyzacji pracy. Napisz, czym zajmuje się Twoja firma, a podpowiem, jaki chatbot lub automatyzacja może mieć sens."
+  }
+];
+
+const emptyLeadForm: LeadFormData = {
+  name: "",
+  email: "",
+  phone: "",
+  website: "",
+  companyName: "",
+  industry: "",
+  message: ""
+};
 
 const neutralQuestionSuggestions = [
   "Jak bot zbiera leady?",
@@ -82,18 +95,21 @@ const industryQuestionSuggestions: Record<IndustryKey, string[]> = {
     "Czy bot może przyjmować rezerwacje?",
     "Czy zbierze datę i liczbę osób?",
     "Czy rezerwacja trafi do arkusza?"
+  ],
+  realEstate: [
+    "Czy bot zbierze budżet klienta?",
+    "Czy może kwalifikować kupujących?",
+    "Czy lead trafi do agenta?"
+  ],
+  education: [
+    "Czy bot zbierze poziom kursanta?",
+    "Czy może dobrać kurs lub termin?",
+    "Czy kontakt trafi do sekretariatu?"
   ]
 };
 
-const industryLabels: Record<IndustryKey, string> = {
-  automotiveWorkshop: "warsztat samochodowy",
-  carDealer: "komis samochodowy",
-  beauty: "salon beauty",
-  services: "firma usługowa",
-  ecommerce: "e-commerce",
-  clinic: "klinika / gabinet",
-  restaurant: "restauracja"
-};
+const leadInputClass =
+  "mt-1.5 min-h-10 w-full rounded-xl border border-[#E8D7B9]/70 bg-white px-3 py-2 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20";
 
 function isContactIntent(text: string) {
   const normalizedText = text.toLowerCase();
@@ -104,6 +120,8 @@ function isContactIntent(text: string) {
     normalizedText.includes("zostawiam kontakt") ||
     normalizedText.includes("proszę o kontakt") ||
     normalizedText.includes("prosze o kontakt") ||
+    normalizedText.includes("jak się z wami skontaktować") ||
+    normalizedText.includes("jak sie z wami skontaktowac") ||
     normalizedText.includes("chcę darmowy audyt") ||
     normalizedText.includes("chce darmowy audyt")
   );
@@ -112,11 +130,22 @@ function isContactIntent(text: string) {
 function detectIndustry(text: string): IndustryKey | null {
   const normalizedText = text.toLowerCase();
 
-  if (normalizedText.includes("warsztat")) {
+  if (
+    normalizedText.includes("warsztat") ||
+    normalizedText.includes("mechanik") ||
+    normalizedText.includes("auto serwis") ||
+    normalizedText.includes("autoserwis")
+  ) {
     return "automotiveWorkshop";
   }
 
-  if (normalizedText.includes("komis")) {
+  if (
+    normalizedText.includes("komis") ||
+    normalizedText.includes("sprzedaż aut") ||
+    normalizedText.includes("sprzedaz aut") ||
+    normalizedText.includes("samochody używane") ||
+    normalizedText.includes("samochody uzywane")
+  ) {
     return "carDealer";
   }
 
@@ -124,6 +153,9 @@ function detectIndustry(text: string): IndustryKey | null {
     normalizedText.includes("salon beauty") ||
     normalizedText.includes("beauty") ||
     normalizedText.includes("kosmetycz") ||
+    normalizedText.includes("paznokcie") ||
+    normalizedText.includes("fryzjer") ||
+    normalizedText.includes("barber") ||
     normalizedText.includes("salon")
   ) {
     return "beauty";
@@ -136,99 +168,62 @@ function detectIndustry(text: string): IndustryKey | null {
   if (
     normalizedText.includes("sklep") ||
     normalizedText.includes("e-commerce") ||
-    normalizedText.includes("ecommerce")
+    normalizedText.includes("ecommerce") ||
+    normalizedText.includes("produkty")
   ) {
     return "ecommerce";
   }
 
-  if (normalizedText.includes("gabinet") || normalizedText.includes("klinika")) {
+  if (
+    normalizedText.includes("gabinet") ||
+    normalizedText.includes("klinika") ||
+    normalizedText.includes("stomatolog") ||
+    normalizedText.includes("lekarz")
+  ) {
     return "clinic";
   }
 
-  if (normalizedText.includes("restaurac")) {
+  if (
+    normalizedText.includes("restaurac") ||
+    normalizedText.includes("rezerwacje") ||
+    normalizedText.includes("stolik") ||
+    normalizedText.includes("gastronomia")
+  ) {
     return "restaurant";
   }
 
-  return null;
-}
-
-function getPhone(text: string) {
-  const matches = text.match(/(?:\+?\d[\d\s-]{5,}\d)/g) ?? [];
-
-  return matches.find((match) => match.replace(/\D/g, "").length >= 7)?.trim() ?? "";
-}
-
-function getWebsite(text: string) {
-  const instagram = text.match(/(?:instagram\.com\/[^\s,;]+|@[a-zA-Z0-9._]+)/i)?.[0];
-
-  if (instagram) {
-    return instagram.trim();
+  if (
+    normalizedText.includes("nieruchomości") ||
+    normalizedText.includes("nieruchomosci") ||
+    normalizedText.includes("mieszkania") ||
+    normalizedText.includes("deweloper") ||
+    normalizedText.includes("agent")
+  ) {
+    return "realEstate";
   }
 
-  return text.match(/(?:https?:\/\/[^\s,;]+|www\.[^\s,;]+|[a-zA-Z0-9-]+\.[a-zA-Z]{2,}[^\s,;]*)/)?.[0]?.trim() ?? "";
-}
+  if (
+    normalizedText.includes("kursy") ||
+    normalizedText.includes("szkoła") ||
+    normalizedText.includes("szkola") ||
+    normalizedText.includes("szkolenia") ||
+    normalizedText.includes("edukacja")
+  ) {
+    return "education";
+  }
 
-function getName(text: string, email: string, phone: string, website: string, industry: string) {
-  const cleanedText = text
-    .replace(email, " ")
-    .replace(phone, " ")
-    .replace(website, " ")
-    .replace(industry, " ")
-    .replace(/[,;|]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  const blockedWords = new Set([
-    "warsztat",
-    "samochodowy",
-    "komis",
-    "salon",
-    "beauty",
-    "firma",
-    "usługowa",
-    "uslugowa",
-    "klinika",
-    "gabinet",
-    "restauracja",
-    "ecommerce",
-    "e-commerce"
-  ]);
-
-  return cleanedText
-    .split(" ")
-    .filter((word) => !blockedWords.has(word.toLowerCase()) && !/\d/.test(word))
-    .slice(0, 3)
-    .join(" ");
-}
-
-function parseContactLead(text: string): ChatLeadPayload {
-  const email = text.match(/[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+/)?.[0]?.trim() ?? "";
-  const phone = getPhone(text);
-  const textWithoutEmail = email ? text.replace(email, " ") : text;
-  const website = getWebsite(textWithoutEmail);
-  const industryKey = detectIndustry(text);
-  const industry = industryKey ? industryLabels[industryKey] : "";
-  const name = getName(text, email, phone, website, industry);
-
-  return {
-    name,
-    email,
-    phone,
-    website,
-    companyName: "",
-    industry,
-    message: text.slice(0, 1000),
-    source: "chatbot"
-  };
+  return null;
 }
 
 export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSavingLead, setIsSavingLead] = useState(false);
-  const [isContactMode, setIsContactMode] = useState(false);
-  const [hasSubmittedChatLead, setHasSubmittedChatLead] = useState(false);
+  const [isLeadFormVisible, setIsLeadFormVisible] = useState(false);
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadForm, setLeadForm] = useState<LeadFormData>(emptyLeadForm);
+  const [leadFormState, setLeadFormState] = useState<FormState>("idle");
+  const [leadFormMessage, setLeadFormMessage] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const userMessages = messages.filter((message) => message.role === "user");
   const lastUserMessage = userMessages.at(-1)?.content ?? "";
@@ -240,9 +235,130 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
   const visibleDynamicSuggestions = dynamicSuggestionPool
     .filter((suggestion) => !usedMessages.has(suggestion))
     .slice(0, 3);
-  const shouldShowStartSuggestions = userMessages.length === 0 && suggestions.length > 0;
+  const shouldShowStartSuggestions =
+    !isLeadFormVisible && userMessages.length === 0 && suggestions.length > 0;
   const shouldShowDynamicSuggestions =
-    userMessages.length > 0 && !isLoading && visibleDynamicSuggestions.length > 0;
+    !isLeadFormVisible && userMessages.length > 0 && !isLoading && visibleDynamicSuggestions.length > 0;
+  const inputPlaceholder = isLeadFormVisible
+    ? "Możesz wypełnić formularz albo kontynuować rozmowę..."
+    : leadSubmitted || userMessages.length > 0
+      ? "Napisz wiadomość..."
+      : "Napisz, czym zajmuje się Twoja firma...";
+
+  function showLeadForm(nextMessages: Message[]) {
+    setIsLeadFormVisible(true);
+    setLeadFormState("idle");
+    setLeadFormMessage("");
+    setMessages([
+      ...nextMessages,
+      {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content:
+          "Jasne — możesz zostawić dane w krótkim formularzu poniżej. Jeśli wolisz, możesz też kontynuować rozmowę bez formularza."
+      }
+    ]);
+  }
+
+  function handleLeadFormChange(field: keyof LeadFormData, value: string) {
+    setLeadForm((current) => ({
+      ...current,
+      [field]: value
+    }));
+  }
+
+  function continueWithoutForm() {
+    setIsLeadFormVisible(false);
+    setLeadFormState("idle");
+    setLeadFormMessage("");
+    setMessages((current) => [
+      ...current,
+      {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content:
+          "Jasne, możemy kontynuować rozmowę. Napisz, co chcesz sprawdzić w automatyzacji AI."
+      }
+    ]);
+    inputRef.current?.focus();
+  }
+
+  async function handleLeadFormSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (leadFormState === "loading" || leadSubmitted) {
+      return;
+    }
+
+    const payload = {
+      name: leadForm.name.trim(),
+      email: leadForm.email.trim(),
+      phone: leadForm.phone.trim(),
+      website: leadForm.website.trim(),
+      companyName: leadForm.companyName.trim(),
+      industry: leadForm.industry.trim(),
+      message: leadForm.message.trim(),
+      source: "chatbot-form"
+    };
+
+    if (!payload.name) {
+      setLeadFormState("error");
+      setLeadFormMessage("Podaj imię i nazwisko.");
+      return;
+    }
+
+    if (!payload.email) {
+      setLeadFormState("error");
+      setLeadFormMessage("Podaj adres email.");
+      return;
+    }
+
+    if (!payload.website) {
+      setLeadFormState("error");
+      setLeadFormMessage("Podaj stronę firmy lub Instagram.");
+      return;
+    }
+
+    if (!payload.message) {
+      setLeadFormState("error");
+      setLeadFormMessage("Napisz krótko, czego dotyczy zgłoszenie.");
+      return;
+    }
+
+    setLeadFormState("loading");
+    setLeadFormMessage("");
+
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Lead request failed");
+      }
+
+      setIsLeadFormVisible(false);
+      setLeadSubmitted(true);
+      setLeadForm(emptyLeadForm);
+      setLeadFormState("idle");
+      setMessages((current) => [
+        ...current,
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content:
+            "Dziękuję! Zapisałem kontakt i przekazałem go do automatyzacji. Odezwiemy się z propozycją wdrożenia AI."
+        }
+      ]);
+    } catch {
+      setLeadFormState("error");
+      setLeadFormMessage("Nie udało się zapisać kontaktu. Spróbuj ponownie albo użyj formularza na stronie.");
+    }
+  }
 
   async function sendMessage(text: string) {
     const trimmedText = text.trim();
@@ -255,71 +371,19 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
       role: "user",
       content: trimmedText
     };
-
     const nextMessages = [...messages, userMessage];
+
     setMessages(nextMessages);
     setInput("");
+
+    if (isContactIntent(trimmedText)) {
+      showLeadForm(nextMessages);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      if (isContactIntent(trimmedText) && !hasSubmittedChatLead) {
-        setIsContactMode(true);
-        setMessages([
-          ...nextMessages,
-          {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            content:
-              "Jasne — podaj proszę imię oraz email lub telefon. Możesz też dopisać branżę albo stronę/Instagram."
-          }
-        ]);
-        return;
-      }
-
-      if (isContactMode && !hasSubmittedChatLead) {
-        const leadPayload = parseContactLead(trimmedText);
-
-        if (!leadPayload.email && !leadPayload.phone) {
-          setMessages([
-            ...nextMessages,
-            {
-              id: crypto.randomUUID(),
-              role: "assistant",
-              content:
-                "Podaj proszę email albo numer telefonu, żebym mógł przekazać kontakt."
-            }
-          ]);
-          return;
-        }
-
-        setIsSavingLead(true);
-
-        const leadResponse = await fetch("/api/lead", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(leadPayload)
-        });
-
-        if (!leadResponse.ok) {
-          throw new Error("Nie udało się przekazać kontaktu. Spróbuj jeszcze raz albo użyj formularza na stronie.");
-        }
-
-        setHasSubmittedChatLead(true);
-        setIsContactMode(false);
-        setMessages([
-          ...nextMessages,
-          {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            content:
-              "Dziękuję! Przekazałem kontakt — odezwiemy się z propozycją automatyzacji AI."
-          }
-        ]);
-        return;
-      }
-
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -361,7 +425,6 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         }
       ]);
     } finally {
-      setIsSavingLead(false);
       setIsLoading(false);
       inputRef.current?.focus();
     }
@@ -423,10 +486,110 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
             </div>
           </div>
         ))}
+
+        {isLeadFormVisible ? (
+          <div className="flex justify-start">
+            <form
+              onSubmit={handleLeadFormSubmit}
+              noValidate
+              className="w-full max-w-[92%] rounded-2xl border border-[#E8D7B9]/80 bg-[#FFF7ED] p-4 text-[#171717] shadow-[0_18px_45px_rgba(14,42,36,0.12)] sm:max-w-[84%]"
+            >
+              <div className="grid gap-3">
+                <label className="text-xs font-semibold text-[#171717]">
+                  Imię i nazwisko *
+                  <input
+                    value={leadForm.name}
+                    onChange={(event) => handleLeadFormChange("name", event.target.value)}
+                    className={leadInputClass}
+                  />
+                </label>
+                <label className="text-xs font-semibold text-[#171717]">
+                  Email *
+                  <input
+                    value={leadForm.email}
+                    onChange={(event) => handleLeadFormChange("email", event.target.value)}
+                    className={leadInputClass}
+                    type="email"
+                  />
+                </label>
+                <label className="text-xs font-semibold text-[#171717]">
+                  Telefon (opcjonalnie)
+                  <input
+                    value={leadForm.phone}
+                    onChange={(event) => handleLeadFormChange("phone", event.target.value)}
+                    className={leadInputClass}
+                    type="tel"
+                  />
+                </label>
+                <label className="text-xs font-semibold text-[#171717]">
+                  Nazwa firmy (opcjonalnie)
+                  <input
+                    value={leadForm.companyName}
+                    onChange={(event) => handleLeadFormChange("companyName", event.target.value)}
+                    className={leadInputClass}
+                  />
+                </label>
+                <label className="text-xs font-semibold text-[#171717]">
+                  Strona firmy lub Instagram *
+                  <input
+                    value={leadForm.website}
+                    onChange={(event) => handleLeadFormChange("website", event.target.value)}
+                    className={leadInputClass}
+                    type="text"
+                    placeholder="twojafirma.pl lub @profil"
+                  />
+                </label>
+                <label className="text-xs font-semibold text-[#171717]">
+                  Branża (opcjonalnie)
+                  <input
+                    value={leadForm.industry}
+                    onChange={(event) => handleLeadFormChange("industry", event.target.value)}
+                    className={leadInputClass}
+                  />
+                </label>
+                <label className="text-xs font-semibold text-[#171717]">
+                  Wiadomość *
+                  <textarea
+                    value={leadForm.message}
+                    onChange={(event) => handleLeadFormChange("message", event.target.value)}
+                    className={`${leadInputClass} min-h-20 resize-none`}
+                    maxLength={1000}
+                    placeholder="Krótko opisz firmę i co chcesz zautomatyzować"
+                  />
+                </label>
+              </div>
+
+              {leadFormMessage ? (
+                <p className="mt-3 text-xs font-semibold text-red-600">
+                  {leadFormMessage}
+                </p>
+              ) : null}
+
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                <button
+                  type="submit"
+                  disabled={leadFormState === "loading" || leadSubmitted}
+                  className="min-h-10 rounded-xl bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-4 py-2 text-xs font-bold text-[#171717] shadow-sm transition hover:shadow-[0_10px_24px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-65"
+                >
+                  {leadFormState === "loading" ? "Wysyłanie..." : "Wyślij kontakt"}
+                </button>
+                <button
+                  type="button"
+                  onClick={continueWithoutForm}
+                  disabled={leadFormState === "loading"}
+                  className="min-h-10 rounded-xl border border-[#E8D7B9]/70 bg-white px-4 py-2 text-xs font-bold text-[#171717] transition hover:border-[#0F8A6C]/50 hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-65"
+                >
+                  Kontynuuj bez formularza
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : null}
+
         {isLoading ? (
           <div className="flex justify-start">
             <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-[#171717] shadow-sm">
-              {isSavingLead ? "Przekazuję kontakt..." : "Piszę odpowiedź..."}
+              Piszę odpowiedź...
             </div>
           </div>
         ) : null}
@@ -461,7 +624,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
           ref={inputRef}
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          placeholder="Napisz, czym zajmuje się Twoja firma..."
+          placeholder={inputPlaceholder}
           className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#E8D7B9]/80 bg-white px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:bg-white focus:ring-2 focus:ring-[#0F8A6C]/35"
           disabled={isLoading}
         />
