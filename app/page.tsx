@@ -1,11 +1,14 @@
 import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
+import { AIAuditScore } from "@/components/AIAuditScore";
 import { ChatModal } from "@/components/ChatModal";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { IndustryDemoSwitcher } from "@/components/IndustryDemoSwitcher";
 import { LeadMechanismsDemo } from "@/components/LeadMechanismsDemo";
 import { LeadPreview } from "@/components/LeadPreview";
+import { LiveLeadFlow } from "@/components/LiveLeadFlow";
 import { Navbar } from "@/components/Navbar";
+import { ScenarioGenerator } from "@/components/ScenarioGenerator";
 import { ScrollToTopOnLoad } from "@/components/ScrollToTopOnLoad";
 
 const problems = [
@@ -365,6 +368,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <LiveLeadFlow />
+      <ScenarioGenerator />
+      <AIAuditScore />
 
       <IndustryDemoSwitcher />
 

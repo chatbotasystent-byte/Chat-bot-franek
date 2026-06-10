@@ -58,60 +58,6 @@ const emptyLeadForm: LeadFormData = {
   message: ""
 };
 
-const neutralQuestionSuggestions = [
-  "Jak bot zbiera leady?",
-  "Czy dane trafią do Google Sheets?",
-  "Jak wygląda darmowy audyt?"
-];
-
-const industryQuestionSuggestions: Record<IndustryKey, string[]> = {
-  automotiveWorkshop: [
-    "Czy bot zbierze markę i model auta?",
-    "Czy może zapisać preferowany termin?",
-    "Czy lead trafi do Google Sheets?"
-  ],
-  carDealer: [
-    "Czy bot zbierze budżet klienta?",
-    "Czy może kwalifikować kupujących?",
-    "Czy sprzedawca dostanie lead na email?"
-  ],
-  beauty: [
-    "Czy bot może umawiać wizyty?",
-    "Czy zbierze usługę i preferowany termin?",
-    "Czy zapytanie trafi do recepcji?"
-  ],
-  services: [
-    "Czy bot zbierze miasto i typ usługi?",
-    "Czy może pomóc we wstępnej wycenie?",
-    "Czy kontakt trafi do arkusza?"
-  ],
-  ecommerce: [
-    "Czy bot odpowie na pytania o produkty?",
-    "Czy może zbierać zapytania klientów?",
-    "Czy przekaże dane do obsługi?"
-  ],
-  clinic: [
-    "Czy bot zbierze temat wizyty?",
-    "Czy może przekazać kontakt do recepcji?",
-    "Czy dane trafią do arkusza?"
-  ],
-  restaurant: [
-    "Czy bot może przyjmować rezerwacje?",
-    "Czy zbierze datę i liczbę osób?",
-    "Czy rezerwacja trafi do arkusza?"
-  ],
-  realEstate: [
-    "Czy bot zbierze budżet klienta?",
-    "Czy może kwalifikować kupujących?",
-    "Czy lead trafi do agenta?"
-  ],
-  education: [
-    "Czy bot zbierze poziom kursanta?",
-    "Czy może dobrać kurs lub termin?",
-    "Czy kontakt trafi do sekretariatu?"
-  ]
-};
-
 const startPromptSuggestions = [
   "Mam firmę usługową",
   "Mam salon beauty",
@@ -900,3 +846,4 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
     </section>
   );
 });
+
