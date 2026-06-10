@@ -21,24 +21,131 @@ type ChatWidgetProps = {
   suggestions?: string[];
 };
 
+type IndustryKey =
+  | "automotiveWorkshop"
+  | "carDealer"
+  | "beauty"
+  | "services"
+  | "ecommerce"
+  | "clinic"
+  | "restaurant";
+
+const neutralQuestionSuggestions = [
+  "Jak bot zbiera leady?",
+  "Czy dane trafią do Google Sheets?",
+  "Jak wygląda darmowy audyt?"
+];
+
+const industryQuestionSuggestions: Record<IndustryKey, string[]> = {
+  automotiveWorkshop: [
+    "Czy bot zbierze markę i model auta?",
+    "Czy może zapisać preferowany termin?",
+    "Czy lead trafi do Google Sheets?"
+  ],
+  carDealer: [
+    "Czy bot zbierze budżet klienta?",
+    "Czy może kwalifikować kupujących?",
+    "Czy sprzedawca dostanie lead na email?"
+  ],
+  beauty: [
+    "Czy bot może umawiać wizyty?",
+    "Czy zbierze usługę i preferowany termin?",
+    "Czy zapytanie trafi do recepcji?"
+  ],
+  services: [
+    "Czy bot zbierze miasto i typ usługi?",
+    "Czy może pomóc we wstępnej wycenie?",
+    "Czy kontakt trafi do arkusza?"
+  ],
+  ecommerce: [
+    "Czy bot odpowie na pytania o produkty?",
+    "Czy może zbierać zapytania klientów?",
+    "Czy przekaże dane do obsługi?"
+  ],
+  clinic: [
+    "Czy bot zbierze temat wizyty?",
+    "Czy może przekazać kontakt do recepcji?",
+    "Czy dane trafią do arkusza?"
+  ],
+  restaurant: [
+    "Czy bot może przyjmować rezerwacje?",
+    "Czy zbierze datę i liczbę osób?",
+    "Czy rezerwacja trafi do arkusza?"
+  ]
+};
+
+function detectIndustry(text: string): IndustryKey | null {
+  const normalizedText = text.toLowerCase();
+
+  if (normalizedText.includes("warsztat")) {
+    return "automotiveWorkshop";
+  }
+
+  if (normalizedText.includes("komis")) {
+    return "carDealer";
+  }
+
+  if (
+    normalizedText.includes("salon beauty") ||
+    normalizedText.includes("beauty") ||
+    normalizedText.includes("kosmetycz") ||
+    normalizedText.includes("salon")
+  ) {
+    return "beauty";
+  }
+
+  if (normalizedText.includes("usług") || normalizedText.includes("uslug")) {
+    return "services";
+  }
+
+  if (
+    normalizedText.includes("sklep") ||
+    normalizedText.includes("e-commerce") ||
+    normalizedText.includes("ecommerce")
+  ) {
+    return "ecommerce";
+  }
+
+  if (normalizedText.includes("gabinet") || normalizedText.includes("klinika")) {
+    return "clinic";
+  }
+
+  if (normalizedText.includes("restaurac")) {
+    return "restaurant";
+  }
+
+  return null;
+}
+
 export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const userMessages = messages.filter((message) => message.role === "user");
+  const lastUserMessage = userMessages.at(-1)?.content ?? "";
+  const detectedIndustry = detectIndustry(lastUserMessage);
+  const dynamicSuggestionPool = detectedIndustry
+    ? industryQuestionSuggestions[detectedIndustry]
+    : neutralQuestionSuggestions;
+  const usedMessages = new Set(messages.map((message) => message.content));
+  const visibleDynamicSuggestions = dynamicSuggestionPool
+    .filter((suggestion) => !usedMessages.has(suggestion))
+    .slice(0, 3);
+  const shouldShowStartSuggestions = userMessages.length === 0 && suggestions.length > 0;
+  const shouldShowDynamicSuggestions =
+    userMessages.length > 0 && !isLoading && visibleDynamicSuggestions.length > 0;
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const text = input.trim();
-    if (!text || isLoading) {
+  async function sendMessage(text: string) {
+    const trimmedText = text.trim();
+    if (!trimmedText || isLoading) {
       return;
     }
 
     const userMessage: Message = {
       id: crypto.randomUUID(),
       role: "user",
-      content: text
+      content: trimmedText
     };
 
     const nextMessages = [...messages, userMessage];
@@ -53,7 +160,7 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          message: text,
+          message: trimmedText,
           history: messages.map(({ role, content }) => ({ role, content }))
         })
       });
@@ -93,6 +200,11 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
     }
   }
 
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await sendMessage(input);
+  }
+
   return (
     <section className="overflow-hidden rounded-3xl border border-[#E8D7B9]/80 bg-white shadow-[0_24px_80px_rgba(14,42,36,0.18)] ring-1 ring-[#E8D7B9]/60">
       <div className="flex items-start justify-between gap-4 border-b border-[#E8D7B9]/60 bg-gradient-to-r from-white to-[#F7F2E8] px-5 py-4 sm:px-6">
@@ -101,10 +213,10 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
             Demo AI konsultanta
           </p>
           <h2 className="text-xl font-semibold text-[#171717]">
-            Chat AI Growth Partners
+            Chat AI Automatyzacja
           </h2>
           <p className="mt-1 text-sm leading-6 text-slate-600">
-            Demo konsultanta AI dla małych i średnich firm
+            Demo konsultanta AI dla różnych branż
           </p>
         </div>
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#171717] text-white shadow-[0_12px_30px_rgba(14,42,36,0.18)]">
@@ -153,18 +265,19 @@ export function ChatWidget({ suggestions = [] }: ChatWidgetProps) {
         ) : null}
       </div>
 
-      {suggestions.length > 0 ? (
+      {shouldShowStartSuggestions || shouldShowDynamicSuggestions ? (
         <div className="border-t border-slate-200 bg-slate-50/90 px-4 py-3 sm:px-6">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-            Przykładowe prompty
+            {shouldShowStartSuggestions ? "Przykładowe prompty" : "Możesz zapytać też o:"}
           </p>
           <div className="flex flex-wrap gap-2">
-            {suggestions.map((suggestion) => (
+            {(shouldShowStartSuggestions ? suggestions.slice(0, 5) : visibleDynamicSuggestions).map((suggestion) => (
               <button
                 key={suggestion}
                 type="button"
-                onClick={() => setInput(suggestion)}
-                className="rounded-full border border-[#E8D7B9]/70 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0F8A6C] hover:text-[#0F8A6C]"
+                onClick={() => sendMessage(suggestion)}
+                disabled={isLoading}
+                className="rounded-full border border-[#E8D7B9]/70 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0F8A6C] hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-55"
               >
                 {suggestion}
               </button>

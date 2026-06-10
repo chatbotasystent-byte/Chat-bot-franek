@@ -1,19 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
-type LeadPreviewState = {
-  name: string;
-  email: string;
-  industry: string;
-  message: string;
-};
-
-const initialLead: LeadPreviewState = {
-  name: "",
-  email: "",
-  industry: "",
-  message: ""
+const exampleLead = {
+  name: "Jan Kowalski",
+  email: "jan@example.pl",
+  industry: "firma usługowa",
+  message: "Prośba o kontakt",
+  status: "Nowy"
 };
 
 function openChatModal() {
@@ -21,7 +15,6 @@ function openChatModal() {
 }
 
 export function LeadPreview() {
-  const [lead, setLead] = useState(initialLead);
   const today = useMemo(
     () =>
       new Intl.DateTimeFormat("pl-PL", {
@@ -31,16 +24,12 @@ export function LeadPreview() {
     []
   );
 
-  function updateLead(field: keyof LeadPreviewState, value: string) {
-    setLead((current) => ({ ...current, [field]: value }));
-  }
-
   const previewFields = [
     ["Data", today],
-    ["Imię", lead.name || "—"],
-    ["Email", lead.email || "—"],
-    ["Branża", lead.industry || "—"],
-    ["Wiadomość", lead.message || "—"]
+    ["Imię", exampleLead.name],
+    ["Email", exampleLead.email],
+    ["Branża", exampleLead.industry],
+    ["Wiadomość", exampleLead.message]
   ];
 
   return (
@@ -51,11 +40,11 @@ export function LeadPreview() {
             AI Automatyzacja
           </p>
           <h2 className="mt-4 text-3xl font-semibold tracking-normal text-white sm:text-4xl">
-            Tak może wyglądać lead w Google Sheets
+            Tak wygląda lead zapisany w Google Sheets
           </h2>
           <p className="mt-4 leading-7 text-slate-300">
-            Wpisz przykładowe dane i zobacz, jak jeden lead może pojawić się w
-            arkuszu. To wizualne demo, bez wysyłania danych do backendu.
+            To przykładowy podgląd danych, które chatbot lub formularz może
+            automatycznie przekazać do arkusza.
           </p>
           <p className="mt-4 text-sm leading-6 text-slate-400">
             W prawdziwym wdrożeniu taki lead może automatycznie trafić do Google
@@ -79,81 +68,42 @@ export function LeadPreview() {
           </div>
         </div>
 
-        <div className="glass-card gradient-border rounded-3xl p-5 shadow-[0_22px_70px_rgba(8,145,178,0.16)] sm:p-6">
+        <div className="glass-card gradient-border rounded-3xl p-5 shadow-[0_22px_70px_rgba(14,42,36,0.18)] sm:p-6">
           <div className="flex flex-col gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-lg font-semibold text-white">AI Automatyzacja</p>
-              <p className="mt-1 text-sm text-slate-400">Dane aktualizują się na żywo.</p>
+              <p className="text-lg font-semibold text-white">Przykładowe dane leada</p>
+              <p className="mt-1 text-sm text-slate-400">Statyczny podgląd arkusza.</p>
             </div>
             <span className="inline-flex w-fit rounded-full border border-[#E8D7B9]/25 bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">
               Demo arkusza
             </span>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <label className="mt-5 block text-sm font-medium text-slate-100 md:mt-0">
-              Imię
-              <input
-                value={lead.name}
-                onChange={(event) => updateLead("name", event.target.value)}
-                className="mt-2 min-h-11 w-full rounded-xl border border-[#E8D7B9]/30 bg-[#FFF7ED] px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/30"
-                placeholder="np. Anna"
-              />
-            </label>
-            <label className="block text-sm font-medium text-slate-100">
-              Email
-              <input
-                value={lead.email}
-                onChange={(event) => updateLead("email", event.target.value)}
-                className="mt-2 min-h-11 w-full rounded-xl border border-[#E8D7B9]/30 bg-[#FFF7ED] px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/30"
-                placeholder="np. kontakt@example.pl"
-              />
-            </label>
-            <label className="block text-sm font-medium text-slate-100">
-              Branża
-              <input
-                value={lead.industry}
-                onChange={(event) => updateLead("industry", event.target.value)}
-                className="mt-2 min-h-11 w-full rounded-xl border border-[#E8D7B9]/30 bg-[#FFF7ED] px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/30"
-                placeholder="np. firma usługowa"
-              />
-            </label>
-            <label className="block text-sm font-medium text-slate-100">
-              Wiadomość
-              <input
-                value={lead.message}
-                onChange={(event) => updateLead("message", event.target.value)}
-                className="mt-2 min-h-11 w-full rounded-xl border border-[#E8D7B9]/30 bg-[#FFF7ED] px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/30"
-                placeholder="np. Proszę o kontakt w sprawie wyceny"
-              />
-            </label>
-          </div>
-
           <div className="mt-6 hidden overflow-hidden rounded-2xl border border-white/10 bg-[#171717]/42 text-sm lg:block">
-            <div className="grid grid-cols-[0.7fr_0.9fr_1.45fr_1.15fr_1.55fr_0.9fr] bg-[#0F8A6C]/14 text-[#A7F3D0]">
+            <div className="grid grid-cols-[0.7fr_1fr_1.45fr_1.2fr_1.55fr_0.8fr] bg-[#0F8A6C]/14 text-[#A7F3D0]">
               {["Data", "Imię", "Email", "Branża", "Wiadomość", "Status"].map((column) => (
                 <div key={column} className={`border-b border-white/10 px-3 py-3 font-semibold ${column === "Status" ? "text-center" : ""}`}>
                   {column}
                 </div>
               ))}
             </div>
-            <div className="grid min-h-16 grid-cols-[0.7fr_0.9fr_1.45fr_1.15fr_1.55fr_0.9fr] items-center text-slate-200">
+            <div className="grid min-h-16 grid-cols-[0.7fr_1fr_1.45fr_1.2fr_1.55fr_0.8fr] items-center text-slate-200">
               <div className="min-w-0 px-3 py-4">{today}</div>
               <div className="min-w-0 px-3 py-4">
-                <span className="block truncate">{lead.name || "—"}</span>
+                <span className="block truncate">{exampleLead.name}</span>
               </div>
               <div className="min-w-0 px-3 py-4">
-                <span className="block truncate">{lead.email || "—"}</span>
+                <span className="block truncate">{exampleLead.email}</span>
               </div>
               <div className="min-w-0 px-3 py-4">
-                <span className="block truncate">{lead.industry || "—"}</span>
+                <span className="block truncate">{exampleLead.industry}</span>
               </div>
               <div className="min-w-0 px-3 py-4">
-                <span className="block truncate">{lead.message || "—"}</span>
+                <span className="block truncate">{exampleLead.message}</span>
               </div>
               <div className="flex min-w-0 items-center justify-center px-3 py-4">
                 <span className="inline-flex rounded-full bg-[#0F8A6C]/14 px-3 py-1 text-xs font-semibold text-[#A7F3D0] ring-1 ring-[#0F8A6C]/25">
-                  Nowy
+                  {exampleLead.status}
                 </span>
               </div>
             </div>
@@ -173,15 +123,14 @@ export function LeadPreview() {
               ))}
               <div className="pt-1">
                 <span className="rounded-full bg-[#0F8A6C]/14 px-3 py-1 text-xs font-semibold text-[#A7F3D0] ring-1 ring-[#0F8A6C]/25">
-                  Nowy
+                  {exampleLead.status}
                 </span>
               </div>
             </div>
           </div>
 
           <p className="mt-4 text-xs leading-5 text-slate-400">
-            To wizualne demo. W prawdziwym wdrożeniu lead może trafić do Google
-            Sheets, CRM albo na email.
+            To wizualne demo. W tej sekcji nic nie jest wysyłane do backendu.
           </p>
         </div>
       </div>

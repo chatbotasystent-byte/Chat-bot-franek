@@ -17,7 +17,7 @@ export function DemoGuide() {
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setIsVisible(sessionStorage.getItem(STORAGE_KEY) !== "true");
-    }, 1000);
+    }, 800);
 
     return () => window.clearTimeout(timer);
   }, []);
@@ -37,7 +37,7 @@ export function DemoGuide() {
 
   return (
     <aside
-      className="gradient-border animate-fade-up fixed bottom-10 left-8 z-50 hidden w-[22rem] rounded-3xl bg-[#171717]/92 p-6 shadow-[0_24px_80px_rgba(14,42,36,0.36)] ring-1 ring-[#E8D7B9]/12 backdrop-blur-xl md:block lg:w-[23.5rem]"
+      className="gradient-border animate-fade-up fixed bottom-6 left-6 z-50 hidden w-[22rem] rounded-3xl bg-[#171717]/92 p-6 shadow-[0_24px_80px_rgba(14,42,36,0.36)] ring-1 ring-[#E8D7B9]/12 backdrop-blur-xl md:block lg:w-[23.5rem]"
       aria-label="Jak przetestować demo chatbota"
     >
       <div className="flex items-start justify-between gap-4">

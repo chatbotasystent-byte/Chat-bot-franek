@@ -9,9 +9,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "AI Growth Partners | Chatbot AI dla firm",
+  title: "AI Automatyzacja — Chatbot AI dla firm",
   description:
-    "Demo chatbota AI dla firm usługowych. Bot odpowiada klientom 24/7, zbiera leady i może zapisywać zapytania do Google Sheets.",
+    "Demo chatbota AI, który odpowiada klientom, zbiera leady i zapisuje zapytania do Google Sheets.",
   icons: {
     icon: [
       { url: "/favicon.png?v=6", type: "image/png" }

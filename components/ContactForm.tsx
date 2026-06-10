@@ -21,9 +21,12 @@ export function ContactForm() {
     const payload = {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
       website: String(formData.get("website") ?? ""),
+      companyName: String(formData.get("companyName") ?? ""),
       industry: String(formData.get("industry") ?? ""),
-      message: String(formData.get("message") ?? "")
+      message: String(formData.get("message") ?? ""),
+      source: "contact-form"
     };
 
     try {
@@ -36,19 +39,15 @@ export function ContactForm() {
       });
 
       if (!response.ok) {
-        throw new Error("Nie udało się wysłać formularza.");
+        throw new Error("Lead request failed");
       }
 
       form.reset();
       setState("success");
-      setMessage("Dziękujemy. Przygotujemy krótką propozycję i wrócimy z kontaktem.");
-    } catch (error) {
+      setMessage("Dziękujemy! Odezwiemy się z propozycją automatyzacji AI.");
+    } catch {
       setState("error");
-      setMessage(
-        error instanceof Error
-          ? error.message
-          : "Wystąpił błąd podczas wysyłania formularza."
-      );
+      setMessage("Nie udało się wysłać formularza. Spróbuj ponownie lub skontaktuj się mailowo.");
     }
   }
 
@@ -62,7 +61,6 @@ export function ContactForm() {
           Imię
           <input
             name="name"
-            required
             className={fieldClass}
             placeholder="Anna"
           />
@@ -81,19 +79,37 @@ export function ContactForm() {
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-[#171717]">
+          Telefon
+          <input
+            name="phone"
+            type="tel"
+            className={fieldClass}
+            placeholder="+48 123 456 789"
+          />
+        </label>
+        <label className="block text-sm font-medium text-[#171717]">
           Strona firmy
           <input
             name="website"
-            required
             className={fieldClass}
             placeholder="https://twojafirma.pl"
+          />
+        </label>
+      </div>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <label className="block text-sm font-medium text-[#171717]">
+          Nazwa firmy
+          <input
+            name="companyName"
+            className={fieldClass}
+            placeholder="np. Studio Nova"
           />
         </label>
         <label className="block text-sm font-medium text-[#171717]">
           Branża
           <input
             name="industry"
-            required
             className={fieldClass}
             placeholder="np. salon beauty, usługi, klinika"
           />
@@ -105,7 +121,6 @@ export function ContactForm() {
         <textarea
           name="message"
           rows={5}
-          required
           className={`${fieldClass} resize-none`}
           placeholder="Opisz krótko firmę i pytania, które najczęściej zadają klienci."
         />
@@ -114,7 +129,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="mt-6 w-full rounded-md bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-semibold text-[#171717] shadow-sm transition hover:shadow-[0_12px_30px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:bg-slate-300"
+        className="mt-6 w-full rounded-md bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-semibold text-[#171717] shadow-sm transition hover:shadow-[0_12px_30px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {state === "loading" ? "Wysyłanie..." : "Wyślij zgłoszenie"}
       </button>

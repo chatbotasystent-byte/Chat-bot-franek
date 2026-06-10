@@ -1,11 +1,11 @@
 import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
 import { ChatModal } from "@/components/ChatModal";
 import { ContactForm } from "@/components/ContactForm";
-import { DemoGuide } from "@/components/DemoGuide";
 import { Footer } from "@/components/Footer";
 import { IndustryDemoSwitcher } from "@/components/IndustryDemoSwitcher";
 import { LeadPreview } from "@/components/LeadPreview";
 import { Navbar } from "@/components/Navbar";
+import { ScrollToTopOnLoad } from "@/components/ScrollToTopOnLoad";
 
 const problems = [
   {
@@ -36,8 +36,9 @@ const benefits = [
 const suggestions = [
   "Mam firmę usługową",
   "Mam salon beauty",
-  "Chcę zbierać leady",
-  "Mam warsztat samochodowy"
+  "Mam warsztat samochodowy",
+  "Mam komis samochodowy",
+  "Chcę zostawić kontakt"
 ];
 
 const industries = [
@@ -67,6 +68,8 @@ const process = [
   ["Integracja", "Zapytania klientów mogą trafiać do jednego arkusza lub CRM."],
   ["Optymalizacja", "Po wdrożeniu rozwijamy odpowiedzi i scenariusze."]
 ];
+
+const productStackSteps = ["Chatbot odpowiada", "Kontakt zebrany", "Lead w arkuszu"];
 
 const faq = [
   ["Czy muszę znać się na AI?", "Nie. Przygotowujemy konfigurację, scenariusz rozmowy i wdrożenie techniczne."],
@@ -201,36 +204,46 @@ function SheetsMockup() {
 
 function ProductStackVisual() {
   return (
-    <div className="relative min-h-[360px]">
-      <div className="animate-soft-pulse absolute inset-8 rounded-full bg-[#0F8A6C]/14 blur-3xl" />
-      <div className="glass-card gradient-border absolute left-0 top-6 w-[76%] rounded-3xl p-5 shadow-[0_28px_80px_rgba(15,138,108,0.16)]">
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold text-white">Panel automatyzacji</p>
-          <span className="rounded-full bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">live</span>
-        </div>
-        <div className="mt-5 space-y-3">
-          {["Chatbot odpowiada", "Kontakt zebrany", "Lead w arkuszu"].map((item, index) => (
-            <div key={item} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#0F8A6C]/16 text-xs font-bold text-[#A7F3D0]">
-                {index + 1}
-              </span>
-              <span className="text-sm font-medium text-slate-200">{item}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="glass-card absolute bottom-8 right-0 w-[72%] rounded-3xl p-5 shadow-[0_28px_80px_rgba(201,168,106,0.16)]">
-        <p className="text-sm font-semibold text-[#E8D7B9]">Google Sheets</p>
-        <div className="mt-4 rounded-2xl bg-[#F7F2E8] p-4">
-          <div className="grid grid-cols-3 gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#0E2A24]">
-            <span>Imię</span>
-            <span>Branża</span>
-            <span>Status</span>
+    <div className="relative rounded-3xl">
+      <div className="animate-soft-pulse pointer-events-none absolute inset-8 rounded-full bg-[#0F8A6C]/14 blur-3xl" />
+      <div className="relative grid gap-5">
+        <div className="glass-card gradient-border rounded-3xl p-5 shadow-[0_28px_80px_rgba(15,138,108,0.16)] sm:p-6">
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-sm font-semibold text-white">Panel automatyzacji</p>
+            <span className="rounded-full bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">live</span>
           </div>
-          <div className="mt-3 grid grid-cols-3 gap-2 rounded-xl bg-white px-3 py-3 text-xs font-semibold text-slate-700">
-            <span>Anna</span>
-            <span>usługi</span>
-            <span className="text-[#0F8A6C]">Nowy</span>
+          <div className="mt-5 grid gap-3">
+            {productStackSteps.map((item, index) => (
+              <div key={item} className="flex min-h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#0F8A6C]/16 text-xs font-bold text-[#A7F3D0]">
+                  {index + 1}
+                </span>
+                <span className="min-w-0 text-sm font-medium leading-5 text-slate-200">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="glass-card rounded-3xl p-5 shadow-[0_28px_80px_rgba(201,168,106,0.16)] sm:p-6">
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-sm font-semibold text-[#E8D7B9]">Google Sheets</p>
+            <span className="rounded-full border border-[#E8D7B9]/20 bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">
+              zapis leada
+            </span>
+          </div>
+          <div className="mt-4 rounded-2xl bg-[#F7F2E8] p-4">
+            <div className="grid grid-cols-[0.9fr_1fr_0.8fr] gap-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[#0E2A24]">
+              <span>Imię</span>
+              <span>Branża</span>
+              <span>Status</span>
+            </div>
+            <div className="mt-3 grid grid-cols-[0.9fr_1fr_0.8fr] items-center gap-3 rounded-xl bg-white px-3 py-3 text-xs font-semibold text-slate-700 shadow-sm">
+              <span className="truncate">Anna</span>
+              <span className="truncate">usługi</span>
+              <span className="rounded-full bg-[#0F8A6C]/10 px-2.5 py-1 text-center text-[11px] text-[#0F8A6C] ring-1 ring-[#0F8A6C]/15">
+                Nowy
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -240,22 +253,24 @@ function ProductStackVisual() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#171717] text-white">
-      <Navbar />
+    <>
+      <ScrollToTopOnLoad />
+      <main className="min-h-screen overflow-hidden bg-[#171717] text-white">
+        <Navbar />
 
       <section className="relative px-5 pb-14 pt-16 sm:px-8 sm:pt-20 lg:px-12 lg:pb-20 lg:pt-24">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(15,138,108,0.22),transparent_30rem),radial-gradient(circle_at_84%_16%,rgba(201,168,106,0.16),transparent_34rem),radial-gradient(circle_at_50%_100%,rgba(14,42,36,0.28),transparent_30rem)]" />
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="animate-fade-up">
             <div className="inline-flex rounded-full border border-[#E8D7B9]/25 bg-white/[0.07] px-4 py-2 text-sm font-semibold text-[#E8D7B9] shadow-[0_0_28px_rgba(232,215,185,0.14)] backdrop-blur">
-              Chatbot AI dla firm usługowych
+              Chatbot AI dla firm, które obsługują zapytania klientów
             </div>
             <h1 className="mt-9 max-w-4xl text-4xl font-semibold tracking-normal text-white sm:text-5xl lg:text-6xl">
               Chatbot AI, który odpowiada klientom i zbiera leady za Ciebie
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300">
-              Wdrażamy chatboty AI dla firm usługowych. Bot odpowiada na pytania
-              klientów 24/7, zbiera dane kontaktowe i zapisuje zapytania w
+              Demo automatyzacji AI dla małych i średnich firm. Bot odpowiada
+              klientom 24/7, zbiera dane kontaktowe i zapisuje zapytania w
               Google Sheets.
             </p>
             <p className="mt-5 inline-flex rounded-full border border-[#0F8A6C]/25 bg-[#0F8A6C]/12 px-4 py-2 text-sm font-semibold text-[#A7F3D0]">
@@ -357,7 +372,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Branże"
             title="Dla jakich firm sprawdzi się chatbot AI?"
-            description="Rozwiązanie jest ogólne i można je dopasować do wielu firm usługowych, lokalnych i B2B."
+            description="Rozwiązanie można dopasować do firm usługowych, lokalnych, internetowych i B2B."
             tone="light"
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -469,8 +484,8 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
-      <DemoGuide />
-    </main>
+        <Footer />
+      </main>
+    </>
   );
 }

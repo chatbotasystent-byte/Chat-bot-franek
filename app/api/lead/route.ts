@@ -4,63 +4,71 @@ type LeadPayload = {
   name?: string;
   email?: string;
   phone?: string;
-  companyName?: string;
   website?: string;
+  companyName?: string;
   industry?: string;
   message?: string;
   source?: string;
 };
 
-async function saveLead(lead: LeadPayload) {
-  console.log("New AI Growth Partners lead:", {
-    ...lead,
-    createdAt: new Date().toISOString()
-  });
-
-  // Later you can send this payload to Make, Zapier or Google Sheets here.
-  // Example:
-  // if (process.env.MAKE_WEBHOOK_URL) {
-  //   await fetch(process.env.MAKE_WEBHOOK_URL, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(lead)
-  //   });
-  // }
-}
-
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as LeadPayload;
+    const createdAt = new Date().toISOString();
+
     const lead = {
+      createdAt,
       name: body.name?.trim() ?? "",
       email: body.email?.trim() ?? "",
       phone: body.phone?.trim() ?? "",
-      companyName: body.companyName?.trim() ?? "",
       website: body.website?.trim() ?? "",
+      companyName: body.companyName?.trim() ?? "",
       industry: body.industry?.trim() ?? "",
       message: body.message?.trim() ?? "",
       source: body.source?.trim() ?? ""
     };
 
-    const isPopupLead = lead.source === "newsletter-popup";
-    const isInvalidPopupLead =
-      isPopupLead && (!lead.email || !lead.industry || !lead.message);
-    const isInvalidAuditLead = !isPopupLead && (
-      !lead.name ||
-      !lead.email ||
-      !lead.website ||
-      !lead.industry ||
-      !lead.message
-    );
-
-    if (isInvalidPopupLead || isInvalidAuditLead) {
+    if (!lead.email) {
       return NextResponse.json(
-        { error: "Wypełnij wszystkie pola formularza." },
+        { error: "Email jest wymagany" },
         { status: 400 }
       );
     }
 
-    await saveLead(lead);
+    const webhookUrl = process.env.MAKE_WEBHOOK_URL;
+
+    if (!webhookUrl) {
+      return NextResponse.json(
+        { error: "Brak MAKE_WEBHOOK_URL w konfiguracji serwera" },
+        { status: 500 }
+      );
+    }
+
+    let makeResponse: Response;
+
+    try {
+      makeResponse = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lead)
+      });
+    } catch (error) {
+      console.error("Make webhook request failed:", error);
+
+      return NextResponse.json(
+        { error: "Nie udało się przekazać leada do automatyzacji" },
+        { status: 502 }
+      );
+    }
+
+    if (!makeResponse.ok) {
+      console.error("Make webhook responded with error:", makeResponse.status);
+
+      return NextResponse.json(
+        { error: "Nie udało się przekazać leada do automatyzacji" },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -4,68 +4,68 @@ import { useState } from "react";
 
 type IndustryDemo = {
   name: string;
-  questions: string[];
+  question: string;
   answer: string;
   data: string[];
-  botMessage: string;
+  result: string;
 };
 
 const demos: IndustryDemo[] = [
   {
+    name: "Firma usługowa",
+    question: "Czy możecie wycenić usługę w moim mieście?",
+    answer:
+      "Jasne. Podaj mi proszę miasto, typ usługi i kontakt, a przekażę zapytanie do zespołu.",
+    data: ["imię", "telefon", "miasto", "typ usługi", "opis problemu"],
+    result: "Lead trafia do Google Sheets i firma może oddzwonić."
+  },
+  {
     name: "Salon beauty",
-    questions: ["Czy są wolne terminy?", "Ile kosztuje usługa?", "Jak długo trwa wizyta?"],
-    answer: "Chatbot może wyjaśnić ofertę, zebrać preferowany termin i przekazać zapytanie do recepcji.",
+    question: "Czy macie wolny termin na paznokcie w piątek?",
+    answer:
+      "Mogę sprawdzić zapytanie i zebrać dane do kontaktu. Podaj proszę usługę, preferowany termin i telefon.",
     data: ["imię", "telefon", "usługa", "preferowany termin"],
-    botMessage:
-      "Mogę pomóc dobrać usługę i zebrać dane do rezerwacji. Napisz, jaka usługa Cię interesuje i jaki termin byłby wygodny."
+    result: "Zapytanie trafia do arkusza lub recepcji."
   },
   {
     name: "Warsztat samochodowy",
-    questions: ["Czy naprawicie ten problem?", "Kiedy jest wolny termin?", "Ile może kosztować wycena?"],
-    answer: "Bot zbiera objawy auta, dane pojazdu i kontakt, żeby warsztat mógł szybciej oddzwonić.",
-    data: ["marka auta", "model", "problem", "telefon"],
-    botMessage:
-      "Opisz krótko problem z autem, podaj markę i model oraz numer telefonu. Przekażę zgłoszenie do warsztatu."
+    question: "Czy mogę umówić auto na diagnostykę?",
+    answer:
+      "Jasne. Podaj markę auta, opis problemu, preferowany termin i telefon, a przekażę zgłoszenie do warsztatu.",
+    data: ["imię", "telefon", "marka auta", "problem", "termin"],
+    result: "Lead trafia do Google Sheets."
   },
   {
-    name: "Firma remontowa",
-    questions: ["Ile kosztuje remont?", "Kiedy możecie zacząć?", "Czy robicie wyceny?"],
-    answer: "Chatbot porządkuje pierwsze zapytanie: zakres prac, lokalizację i podstawowe dane do wyceny.",
-    data: ["rodzaj prac", "metraż", "miasto", "telefon"],
-    botMessage:
-      "Napisz, jaki zakres prac Cię interesuje, w jakim mieście i jaki metraż obejmuje zlecenie. Firma wróci z konkretną odpowiedzią."
+    name: "Komis samochodowy",
+    question: "Interesuje mnie auto do 50 tys. zł.",
+    answer:
+      "Mogę zebrać preferencje i przekazać je sprzedawcy. Podaj budżet, typ auta i kontakt.",
+    data: ["imię", "telefon", "budżet", "typ auta", "preferencje"],
+    result: "Sprzedawca dostaje gotowy lead."
   },
   {
-    name: "Gabinet / klinika",
-    questions: ["Jakie usługi są dostępne?", "Czy są wolne terminy?", "Jak przygotować się do wizyty?"],
-    answer: "Bot odpowiada na podstawowe pytania i zbiera dane do kontaktu z rejestracją.",
-    data: ["usługa", "preferowany termin", "telefon/email"],
-    botMessage:
-      "Napisz, jaka usługa Cię interesuje i jaki termin byłby wygodny. Zostaw też telefon lub email do kontaktu."
+    name: "Klinika / gabinet",
+    question: "Czy mogę umówić konsultację?",
+    answer:
+      "Mogę zebrać temat wizyty, preferowany termin oraz kontakt i przekazać zgłoszenie do recepcji.",
+    data: ["imię", "telefon", "temat wizyty", "preferowany termin"],
+    result: "Kontakt trafia do arkusza lub recepcji."
   },
   {
-    name: "Szkoła językowa",
-    questions: ["Jaki kurs wybrać?", "Kiedy są zajęcia?", "Czy są grupy dla mojego poziomu?"],
-    answer: "Chatbot pomaga wstępnie dobrać kurs i zebrać dane potrzebne do kontaktu z opiekunem.",
-    data: ["język", "poziom", "wiek", "kontakt"],
-    botMessage:
-      "Napisz, jakiego języka chcesz się uczyć, jaki masz poziom i dla kogo jest kurs. Zostaw kontakt, a szkoła wróci z propozycją."
+    name: "Restauracja",
+    question: "Czy można zarezerwować stolik na sobotę?",
+    answer:
+      "Jasne. Podaj proszę godzinę, liczbę osób i telefon kontaktowy.",
+    data: ["imię", "telefon", "data", "godzina", "liczba osób"],
+    result: "Rezerwacja trafia do arkusza."
   },
   {
-    name: "Biuro nieruchomości",
-    questions: ["Czy oferta jest aktualna?", "Jaki budżet jest potrzebny?", "Czy można umówić prezentację?"],
-    answer: "Bot zbiera preferencje klienta i przekazuje lead do agenta.",
-    data: ["budżet", "miasto", "typ nieruchomości", "telefon"],
-    botMessage:
-      "Podaj miasto, budżet i typ nieruchomości, którego szukasz. Zostaw telefon, a agent wróci z dopasowaną ofertą."
-  },
-  {
-    name: "Firma usługowa",
-    questions: ["Czy realizujecie taką usługę?", "Jaki jest termin?", "Czy mogę dostać wycenę?"],
-    answer: "Chatbot kwalifikuje zapytanie i zbiera podstawowe dane, zanim firma oddzwoni.",
-    data: ["usługa", "termin", "miasto", "kontakt"],
-    botMessage:
-      "Napisz, jakiej usługi szukasz, w jakim mieście i kiedy chcesz ją zrealizować. Zostaw kontakt, a firma przygotuje odpowiedź."
+    name: "E-commerce",
+    question: "Czy ten produkt jest dostępny?",
+    answer:
+      "Mogę zebrać pytanie o produkt i przekazać je obsłudze. Podaj nazwę produktu i email.",
+    data: ["imię", "email", "produkt", "pytanie", "numer zamówienia"],
+    result: "Zapytanie trafia do obsługi lub Google Sheets."
   }
 ];
 
@@ -88,8 +88,8 @@ export function IndustryDemoSwitcher() {
             Zobacz przykład dla swojej branży
           </h2>
           <p className="mt-4 leading-7 text-slate-300">
-            Wybierz branżę i zobacz, jakie pytania może obsługiwać chatbot oraz
-            jakie dane może zbierać.
+            Wybierz branżę i sprawdź, jakie pytania może obsłużyć chatbot oraz
+            jakie dane może przekazać do arkusza.
           </p>
         </div>
 
@@ -110,15 +110,18 @@ export function IndustryDemoSwitcher() {
           ))}
         </div>
 
-        <div className="glass-card gradient-border mt-8 grid gap-6 rounded-3xl p-5 sm:p-7 lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="glass-card gradient-border mt-8 grid gap-6 rounded-3xl p-5 sm:p-7 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E8D7B9]">
               {active.name}
             </p>
             <h3 className="mt-4 text-2xl font-semibold text-white">
-              Co może zrobić chatbot?
+              Jak może wyglądać rozmowa?
             </h3>
-            <p className="mt-4 leading-7 text-slate-300">{active.answer}</p>
+            <p className="mt-4 leading-7 text-slate-300">
+              To wizualny przykład. W prawdziwym wdrożeniu odpowiedzi, pytania i
+              formularz można dopasować do oferty firmy.
+            </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <button
@@ -137,14 +140,18 @@ export function IndustryDemoSwitcher() {
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 lg:grid-cols-2">
             <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
-              <h4 className="text-sm font-semibold text-white">Typowe pytania</h4>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
-                {active.questions.map((item) => (
-                  <li key={item}>“{item}”</li>
-                ))}
-              </ul>
+              <h4 className="text-sm font-semibold text-white">Pytanie klienta</h4>
+              <p className="mt-4 text-sm leading-6 text-slate-300">
+                &ldquo;{active.question}&rdquo;
+              </p>
+            </div>
+            <div className="rounded-2xl border border-[#E8D7B9]/18 bg-[#E8D7B9]/[0.06] p-5">
+              <h4 className="text-sm font-semibold text-white">Odpowiedź AI</h4>
+              <p key={active.name} className="animate-fade-up mt-4 text-sm leading-6 text-slate-200">
+                {active.answer}
+              </p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
               <h4 className="text-sm font-semibold text-white">Dane do zebrania</h4>
@@ -156,10 +163,11 @@ export function IndustryDemoSwitcher() {
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-[#E8D7B9]/18 bg-[#E8D7B9]/[0.06] p-5">
-              <h4 className="text-sm font-semibold text-white">Przykład odpowiedzi</h4>
-              <p key={active.name} className="animate-fade-up mt-4 text-sm leading-6 text-slate-200">
-                {active.botMessage}
+            <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
+              <h4 className="text-sm font-semibold text-white">Efekt końcowy</h4>
+              <p className="mt-4 text-sm leading-6 text-slate-300">{active.result}</p>
+              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#E8D7B9]">
+                Google Sheets / CRM / email
               </p>
             </div>
           </div>

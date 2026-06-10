@@ -8,10 +8,11 @@ const highlights = [
 ];
 
 const suggestions = [
-  "Mam restaurację",
-  "Mam salon beauty",
   "Mam firmę usługową",
-  "Chcę zbierać leady"
+  "Mam salon beauty",
+  "Mam warsztat samochodowy",
+  "Mam komis samochodowy",
+  "Chcę zostawić kontakt"
 ];
 
 export function ChatDemoSection() {
