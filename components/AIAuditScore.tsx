@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 
+type Answer = boolean | null;
+
 const auditQuestions = [
   "Czy masz stronę internetową albo profil na Instagramie?",
   "Czy klienci często pytają o cenę, termin albo dostępność?",
@@ -11,27 +13,35 @@ const auditQuestions = [
   "Czy prowadzisz firmę, która obsługuje zapytania klientów?"
 ];
 
-function getScoreLabel(score: number) {
+function getScoreLabel(score: number, answeredCount: number) {
+  if (answeredCount === 0) {
+    return {
+      title: "Odpowiedz na pytania, aby zobaczyć rekomendację.",
+      description: "Wynik pojawi się po pierwszej odpowiedzi. Audyt pokazuje, które mechanizmy AI mogą mieć największy sens.",
+      mechanisms: ["formularz", "chatbot", "Google Sheets"]
+    };
+  }
+
   if (score <= 35) {
     return {
       title: "Niski potencjał",
-      description: "Na razie wystarczy prosty formularz i podstawowe uporządkowanie zapytań.",
-      mechanisms: ["formularz", "email notification"]
+      description: "Najlepszy pierwszy krok to prosty formularz kontaktowy i powiadomienie email dla zespołu.",
+      mechanisms: ["formularz", "email"]
     };
   }
 
   if (score <= 70) {
     return {
       title: "Średni potencjał",
-      description: "Warto wdrożyć formularz leadowy, zapis do Google Sheets i powiadomienia email.",
-      mechanisms: ["formularz", "Google Sheets", "email notification"]
+      description: "Warto połączyć formularz leadowy, Google Sheets i powiadomienia, żeby uporządkować zapytania.",
+      mechanisms: ["formularz", "Google Sheets", "powiadomienia"]
     };
   }
 
   return {
     title: "Wysoki potencjał",
-    description: "Chatbot AI, popup leadowy i automatyzacja Google Sheets mogą realnie skrócić czas reakcji i uporządkować zapytania.",
-    mechanisms: ["chatbot", "popup", "Google Sheets", "email notification"]
+    description: "Największy sens ma zestaw: chatbot, popup leadowy, Google Sheets oraz email lub CRM.",
+    mechanisms: ["chatbot", "popup", "Google Sheets", "email/CRM"]
   };
 }
 
@@ -43,14 +53,22 @@ function scrollToContact() {
 }
 
 export function AIAuditScore() {
-  const [answers, setAnswers] = useState<boolean[]>(Array(auditQuestions.length).fill(false));
+  const [answers, setAnswers] = useState<Answer[]>(Array(auditQuestions.length).fill(null));
 
-  const score = useMemo(() => Math.min(100, 10 + answers.filter(Boolean).length * 15), [answers]);
-  const result = getScoreLabel(score);
+  const answeredCount = answers.filter((answer) => answer !== null).length;
+  const positiveCount = answers.filter(Boolean).length;
+  const score = useMemo(() => {
+    if (answeredCount === 0) {
+      return 0;
+    }
 
-  function toggleAnswer(index: number) {
+    return Math.min(100, Math.round((positiveCount / auditQuestions.length) * 100));
+  }, [answeredCount, positiveCount]);
+  const result = getScoreLabel(score, answeredCount);
+
+  function setAnswer(index: number, value: boolean) {
     setAnswers((current) => current.map((answer, itemIndex) => (
-      itemIndex === index ? !answer : answer
+      itemIndex === index ? value : answer
     )));
   }
 
@@ -59,35 +77,52 @@ export function AIAuditScore() {
       <div className="absolute inset-x-0 top-20 -z-10 h-80 bg-[radial-gradient(circle,rgba(201,168,106,0.13),transparent_38rem)]" />
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
-            AI AUDIT SCORE
-          </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F7F2E8] sm:text-4xl">
-            Sprawdź potencjał automatyzacji swojej strony
-          </h2>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+                AI AUDIT SCORE
+              </p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F7F2E8] sm:text-4xl">
+                Sprawdź potencjał automatyzacji swojej strony
+              </h2>
+            </div>
+            <span className="w-fit rounded-full border border-[#E8D7B9]/25 bg-[#E8D7B9]/10 px-4 py-2 text-sm font-bold text-[#E8D7B9]">
+              Odpowiedziano: {answeredCount}/{auditQuestions.length}
+            </span>
+          </div>
           <p className="mt-4 leading-7 text-[#D6D3D1]">
-            Odpowiedz na kilka pytań i zobacz, czy Twoja strona może lepiej zbierać zapytania.
+            Wybierz „Tak” lub „Nie” przy każdym pytaniu. Wynik pokaże, od jakiego
+            mechanizmu automatyzacji warto zacząć.
           </p>
 
           <div className="mt-7 grid gap-3">
             {auditQuestions.map((question, index) => (
-              <button
+              <div
                 key={question}
-                type="button"
-                onClick={() => toggleAnswer(index)}
-                className={`flex min-h-14 items-center justify-between gap-4 rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition ${
-                  answers[index]
-                    ? "border-[#E8D7B9]/50 bg-[#F7F2E8] text-[#171717]"
-                    : "border-white/10 bg-[#171717]/45 text-[#D6D3D1] hover:border-[#E8D7B9]/35"
-                }`}
+                className="grid gap-3 rounded-2xl border border-white/10 bg-[#171717]/45 px-4 py-3 text-sm text-[#D6D3D1] transition hover:border-[#E8D7B9]/30 sm:grid-cols-[1fr_auto]"
               >
-                <span>{question}</span>
-                <span className={`shrink-0 rounded-full px-3 py-1 text-xs ${
-                  answers[index] ? "bg-[#0F8A6C] text-white" : "bg-white/[0.06] text-[#E8D7B9]"
-                }`}>
-                  {answers[index] ? "Tak" : "Nie"}
-                </span>
-              </button>
+                <p className="font-semibold leading-6">{question}</p>
+                <div className="grid grid-cols-2 gap-2 sm:w-36">
+                  {[true, false].map((value) => {
+                    const isSelected = answers[index] === value;
+
+                    return (
+                      <button
+                        key={String(value)}
+                        type="button"
+                        onClick={() => setAnswer(index, value)}
+                        className={`min-h-9 rounded-full border px-3 text-xs font-bold transition ${
+                          isSelected
+                            ? "border-[#E8D7B9]/55 bg-[#F7F2E8] text-[#171717]"
+                            : "border-white/10 bg-white/[0.045] text-[#E8D7B9] hover:border-[#E8D7B9]/45"
+                        }`}
+                      >
+                        {value ? "Tak" : "Nie"}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </div>
         </div>

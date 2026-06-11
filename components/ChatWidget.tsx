@@ -58,12 +58,15 @@ const emptyLeadForm: LeadFormData = {
   message: ""
 };
 
+const contactPrompt = "Chcę zostawić kontakt";
+const nextContactPrompt = "Zostaw kolejny kontakt";
+
 const startPromptSuggestions = [
   "Mam firmę usługową",
   "Mam salon beauty",
   "Mam warsztat samochodowy",
   "Mam komis samochodowy",
-  "Chcę zostawić kontakt"
+  contactPrompt
 ];
 
 const generalPromptSuggestions = [
@@ -303,35 +306,39 @@ function getSuggestedPrompts({
   messages,
   contactFormVisible,
   startPrompts,
-  usedPromptChips
+  usedPromptChips,
+  contactPromptLabel
 }: {
   industry: IndustryKey | null;
   messages: Message[];
   contactFormVisible: boolean;
   startPrompts: string[];
   usedPromptChips: string[];
+  contactPromptLabel: string;
 }) {
   if (contactFormVisible) {
     return [];
   }
 
   const hasUserMessage = messages.some((message) => message.role === "user");
+  const withContactPrompt = (prompts: string[]) => {
+    const contentPrompts = prompts
+      .filter((prompt) => prompt !== contactPrompt && prompt !== nextContactPrompt)
+      .filter((prompt) => !usedPromptChips.includes(prompt));
+
+    return [...contentPrompts, contactPromptLabel];
+  };
 
   if (!hasUserMessage) {
-    return (startPrompts.length > 0 ? startPrompts : startPromptSuggestions)
-      .filter((prompt) => !usedPromptChips.includes(prompt))
+    return withContactPrompt(startPrompts.length > 0 ? startPrompts : startPromptSuggestions)
       .slice(0, 5);
   }
 
   if (industry) {
-    return industryPromptSuggestions[industry]
-      .filter((prompt) => !usedPromptChips.includes(prompt))
-      .slice(0, 4);
+    return withContactPrompt(industryPromptSuggestions[industry]).slice(0, 5);
   }
 
-  return generalPromptSuggestions
-    .filter((prompt) => !usedPromptChips.includes(prompt))
-    .slice(0, 4);
+  return withContactPrompt(generalPromptSuggestions).slice(0, 5);
 }
 
 function getContactDraft(text: string): Partial<LeadFormData> {
@@ -369,12 +376,14 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
       .reverse()
       .map((message) => detectIndustry(message.content))
       .find((industry): industry is IndustryKey => industry !== null) ?? null;
+  const contactPromptLabel = leadSubmitted ? nextContactPrompt : contactPrompt;
   const suggestedPrompts = getSuggestedPrompts({
     industry: detectedIndustry,
     messages,
     contactFormVisible: isLeadFormVisible,
     startPrompts: suggestions,
-    usedPromptChips
+    usedPromptChips,
+    contactPromptLabel
   });
   const shouldShowSuggestions = suggestedPrompts.length > 0;
   const inputPlaceholder = isLeadFormVisible
@@ -612,6 +621,11 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
   }
 
   async function handlePromptClick(prompt: string) {
+    if (prompt === contactPrompt || prompt === nextContactPrompt) {
+      showLeadForm(messages);
+      return;
+    }
+
     setUsedPromptChips((current) => (
       current.includes(prompt) ? current : [...current, prompt]
     ));
@@ -803,22 +817,35 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
       </div>
 
       {shouldShowSuggestions ? (
-        <div className="flex-none border-t border-slate-200 bg-slate-50/90 px-4 py-3 sm:px-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-            {userMessages.length === 0 ? "Przykładowe prompty" : "Możesz zapytać też o:"}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {suggestedPrompts.map((suggestion) => (
-              <button
-                key={suggestion}
-                type="button"
-                onClick={() => handlePromptClick(suggestion)}
-                disabled={isLoading}
-                className="max-w-full rounded-full border border-[#E8D7B9]/70 bg-white px-3 py-1.5 text-xs font-medium leading-5 text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0F8A6C] hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-55"
-              >
-                {suggestion}
-              </button>
-            ))}
+        <div className="flex-none border-t border-[#E8D7B9]/65 bg-[#FFF7ED] px-4 py-3 sm:px-6">
+          <div className="rounded-2xl border border-[#E8D7B9]/70 bg-white/85 p-3 shadow-[0_12px_28px_rgba(14,42,36,0.08)]">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0F8A6C]">
+              Możesz zapytać
+            </p>
+            <p className="mt-1 text-xs leading-5 text-stone-600">
+              Wybierz temat albo wpisz własne pytanie.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {suggestedPrompts.map((suggestion) => {
+                const isContactChip = suggestion === contactPrompt || suggestion === nextContactPrompt;
+
+                return (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    onClick={() => handlePromptClick(suggestion)}
+                    disabled={isLoading}
+                    className={`max-w-full rounded-full px-3 py-1.5 text-xs font-bold leading-5 shadow-sm transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55 ${
+                      isContactChip
+                        ? "border border-[#0F8A6C]/30 bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] text-[#171717] hover:shadow-[0_10px_24px_rgba(15,138,108,0.2)]"
+                        : "border border-[#E8D7B9]/80 bg-[#FFF7ED] text-[#171717] hover:border-[#0F8A6C]/55 hover:bg-[#0F8A6C]/10 hover:text-[#0E2A24]"
+                    }`}
+                  >
+                    {suggestion}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : null}
