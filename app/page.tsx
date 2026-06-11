@@ -1,8 +1,9 @@
-import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
+﻿import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
 import { ChatModal } from "@/components/ChatModal";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { IndustryDemoSwitcher } from "@/components/IndustryDemoSwitcher";
+import { IndustriesSection } from "@/components/IndustriesSection";
 import { LeadMechanismsDemo } from "@/components/LeadMechanismsDemo";
 import { LiveLeadFlow } from "@/components/LiveLeadFlow";
 import { Navbar } from "@/components/Navbar";
@@ -13,73 +14,62 @@ import { ScrollToTopOnLoad } from "@/components/ScrollToTopOnLoad";
 const problems = [
   {
     title: "Pytania po godzinach",
-    description: "Klienci piszą wtedy, gdy zespół już nie pracuje."
+    description: "Klienci piszÄ… wtedy, gdy zespĂłĹ‚ juĹĽ nie pracuje."
   },
   {
-    title: "Rozproszone wiadomości",
-    description: "Mail, formularz i social media nie tworzą jednego widoku."
+    title: "Rozproszone wiadomoĹ›ci",
+    description: "Mail, formularz i social media nie tworzÄ… jednego widoku."
   },
   {
     title: "Utracone leady",
-    description: "Zbyt późna odpowiedź często oznacza utracony kontakt."
+    description: "Zbyt pĂłĹşna odpowiedĹş czÄ™sto oznacza utracony kontakt."
   },
   {
     title: "Brak jednego miejsca",
-    description: "Trudno szybko sprawdzić, komu trzeba oddzwonić."
+    description: "Trudno szybko sprawdziÄ‡, komu trzeba oddzwoniÄ‡."
   }
 ];
 
 const benefits = [
-  ["Odpowiedzi 24/7", "AI przejmuje pierwsze pytania o ofertę, terminy i proces."],
-  ["Zbieranie kontaktów", "Bot prosi o dane, które pomagają szybko wrócić do klienta."],
-  ["Lead w arkuszu", "Zapytanie może trafić do Google Sheets, CRM albo na email."],
-  ["Jasny priorytet", "Zespół widzi, które rozmowy wymagają kontaktu zwrotnego."]
+  ["Odpowiedzi 24/7", "AI przejmuje pierwsze pytania o ofertÄ™, terminy i proces."],
+  ["Zbieranie kontaktĂłw", "Bot prosi o dane, ktĂłre pomagajÄ… szybko wrĂłciÄ‡ do klienta."],
+  ["Lead w arkuszu", "Zapytanie moĹĽe trafiÄ‡ do Google Sheets, CRM albo na email."],
+  ["Jasny priorytet", "ZespĂłĹ‚ widzi, ktĂłre rozmowy wymagajÄ… kontaktu zwrotnego."]
 ];
 
 const suggestions = [
-  "Mam firmę usługową",
+  "Mam firmÄ™ usĹ‚ugowÄ…",
   "Mam salon beauty",
   "Mam warsztat samochodowy",
   "Mam komis samochodowy",
-  "Chcę zostawić kontakt"
-];
-
-const industries = [
-  ["Firmy usługowe", "kwalifikacja zapytań", "kontakt zwrotny"],
-  ["Salony beauty", "cennik i terminy", "zapisy"],
-  ["Warsztaty samochodowe", "dane auta", "wycena"],
-  ["Firmy remontowe", "zakres prac", "lokalizacja"],
-  ["Gabinety i kliniki", "pytania o usługi", "kontakt"],
-  ["Szkoły językowe", "poziom kursu", "grupy"],
-  ["Biura nieruchomości", "preferencje", "kontakt do agenta"],
-  ["Lokalne biznesy", "FAQ klientów", "leady"]
+  "ChcÄ™ zostawiÄ‡ kontakt"
 ];
 
 const included = [
-  "Chatbot AI na stronę firmy",
+  "Chatbot AI na stronÄ™ firmy",
   "Scenariusz rozmowy dopasowany do oferty",
-  "Zbieranie i kwalifikacja leadów",
+  "Zbieranie i kwalifikacja leadĂłw",
   "Integracja z Google Sheets",
   "Konfiguracja, testy i publikacja",
   "Opcjonalna opieka techniczna"
 ];
 
 const process = [
-  ["Audyt", "Sprawdzamy stronę, ofertę i typowe pytania klientów."],
-  ["Demo", "Pokazujemy, jak chatbot mógłby działać dla Twojej firmy."],
-  ["Konfiguracja", "Ustawiamy odpowiedzi, formularz leadowy i wygląd."],
-  ["Integracja", "Zapytania klientów mogą trafiać do jednego arkusza lub CRM."],
-  ["Optymalizacja", "Po wdrożeniu rozwijamy odpowiedzi i scenariusze."]
+  ["Audyt", "Sprawdzamy stronÄ™, ofertÄ™ i typowe pytania klientĂłw."],
+  ["Demo", "Pokazujemy, jak chatbot mĂłgĹ‚by dziaĹ‚aÄ‡ dla Twojej firmy."],
+  ["Konfiguracja", "Ustawiamy odpowiedzi, formularz leadowy i wyglÄ…d."],
+  ["Integracja", "Zapytania klientĂłw mogÄ… trafiaÄ‡ do jednego arkusza lub CRM."],
+  ["Optymalizacja", "Po wdroĹĽeniu rozwijamy odpowiedzi i scenariusze."]
 ];
 
 const productStackSteps = ["Chatbot odpowiada", "Kontakt zebrany", "Lead w arkuszu"];
 
 const faq = [
-  ["Czy muszę znać się na AI?", "Nie. Przygotowujemy konfigurację, scenariusz rozmowy i wdrożenie techniczne."],
-  ["Czy chatbot może działać w mojej branży?", "Tak, rozwiązanie można dopasować do wielu firm usługowych, lokalnych i B2B."],
-  ["Czy dane mogą trafiać do Google Sheets?", "Tak. Lead może zawierać imię, email, telefon, branżę i wiadomość klienta."],
-  ["Czy jest miesięczna opłata?", "Miesięczna opieka jest opcjonalna lub zależna od zakresu. Obejmuje wsparcie, poprawki i monitoring."],
-  ["Czy można najpierw zobaczyć demo?", "Tak. Najlepiej zacząć od krótkiego demo lub audytu, żeby zobaczyć, jak chatbot może działać dla konkretnej firmy."]
+  ["Czy muszÄ™ znaÄ‡ siÄ™ na AI?", "Nie. Przygotowujemy konfiguracjÄ™, scenariusz rozmowy i wdroĹĽenie techniczne."],
+  ["Czy chatbot moĹĽe dziaĹ‚aÄ‡ w mojej branĹĽy?", "Tak, rozwiÄ…zanie moĹĽna dopasowaÄ‡ do wielu firm usĹ‚ugowych, lokalnych i B2B."],
+  ["Czy dane mogÄ… trafiaÄ‡ do Google Sheets?", "Tak. Lead moĹĽe zawieraÄ‡ imiÄ™, email, telefon, branĹĽÄ™ i wiadomoĹ›Ä‡ klienta."],
+  ["Czy jest miesiÄ™czna opĹ‚ata?", "MiesiÄ™czna opieka jest opcjonalna lub zaleĹĽna od zakresu. Obejmuje wsparcie, poprawki i monitoring."],
+  ["Czy moĹĽna najpierw zobaczyÄ‡ demo?", "Tak. Najlepiej zaczÄ…Ä‡ od krĂłtkiego demo lub audytu, ĹĽeby zobaczyÄ‡, jak chatbot moĹĽe dziaĹ‚aÄ‡ dla konkretnej firmy."]
 ];
 
 function SectionHeader({
@@ -118,10 +108,10 @@ function IconMark() {
 
 function DemoConversation() {
   const messages = [
-    ["Klient", "Dzień dobry, czy mogę zapytać o dostępność usługi i orientacyjny termin?"],
-    ["Bot", "Jasne. Napisz proszę, jakiej usługi szukasz, w jakim mieście i jaki termin byłby wygodny."],
-    ["Klient", "Interesuje mnie usługa dla firmy. Mój email to kontakt@example.pl."],
-    ["Bot", "Dziękuję. Zapisałem zapytanie i przekażę je zespołowi. Firma może wrócić z konkretną odpowiedzią."]
+    ["Klient", "DzieĹ„ dobry, czy mogÄ™ zapytaÄ‡ o dostÄ™pnoĹ›Ä‡ usĹ‚ugi i orientacyjny termin?"],
+    ["Bot", "Jasne. Napisz proszÄ™, jakiej usĹ‚ugi szukasz, w jakim mieĹ›cie i jaki termin byĹ‚by wygodny."],
+    ["Klient", "Interesuje mnie usĹ‚uga dla firmy. MĂłj email to kontakt@example.pl."],
+    ["Bot", "DziÄ™kujÄ™. ZapisaĹ‚em zapytanie i przekaĹĽÄ™ je zespoĹ‚owi. Firma moĹĽe wrĂłciÄ‡ z konkretnÄ… odpowiedziÄ…."]
   ];
 
   return (
@@ -129,7 +119,7 @@ function DemoConversation() {
       <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
           <p className="text-sm font-semibold text-[#E8D7B9]">Demo rozmowy</p>
-          <p className="mt-1 text-xs text-slate-400">AI konsultant obsługi klienta</p>
+          <p className="mt-1 text-xs text-slate-400">AI konsultant obsĹ‚ugi klienta</p>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs font-semibold text-slate-200">
           <span className="h-2 w-2 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.75)]" />
@@ -151,22 +141,22 @@ function DemoConversation() {
         ))}
       </div>
       <div className="mt-5 rounded-2xl border border-white/10 bg-[#171717]/55 px-4 py-3 text-sm text-slate-400">
-        Bot może zakończyć rozmowę zebraniem kontaktu i przekazaniem leadu do arkusza.
+        Bot moĹĽe zakoĹ„czyÄ‡ rozmowÄ™ zebraniem kontaktu i przekazaniem leadu do arkusza.
       </div>
     </div>
   );
 }
 
 function SheetsMockup() {
-  const columns = ["Data", "Imię", "Email", "Branża", "Wiadomość", "Status"];
-  const row = ["08.06", "Anna", "kontakt@example.pl", "usługi", "prośba o kontakt", "Nowy"];
+  const columns = ["Data", "ImiÄ™", "Email", "BranĹĽa", "WiadomoĹ›Ä‡", "Status"];
+  const row = ["08.06", "Anna", "kontakt@example.pl", "usĹ‚ugi", "proĹ›ba o kontakt", "Nowy"];
 
   return (
     <div className="glass-card gradient-border rounded-3xl p-5 sm:p-6">
       <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
           <p className="text-sm font-semibold text-[#A7F3D0]">Efekt biznesowy</p>
-          <p className="mt-1 text-xs text-slate-400">Podgląd zapytania w arkuszu</p>
+          <p className="mt-1 text-xs text-slate-400">PodglÄ…d zapytania w arkuszu</p>
         </div>
         <span className="rounded-full border border-[#E8D7B9]/25 bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">
           Google Sheets
@@ -195,7 +185,7 @@ function SheetsMockup() {
         </div>
       </div>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        {["Nowy lead", "Kontakt zapisany", "Zespół oddzwania"].map((item) => (
+        {["Nowy lead", "Kontakt zapisany", "ZespĂłĹ‚ oddzwania"].map((item) => (
           <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-xs font-semibold text-slate-300">
             {item}
           </div>
@@ -236,13 +226,13 @@ function ProductStackVisual() {
           </div>
           <div className="mt-4 rounded-2xl bg-[#F7F2E8] p-4">
             <div className="grid grid-cols-[0.9fr_1fr_0.8fr] gap-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[#0E2A24]">
-              <span>Imię</span>
-              <span>Branża</span>
+              <span>ImiÄ™</span>
+              <span>BranĹĽa</span>
               <span>Status</span>
             </div>
             <div className="mt-3 grid grid-cols-[0.9fr_1fr_0.8fr] items-center gap-3 rounded-xl bg-white px-3 py-3 text-xs font-semibold text-slate-700 shadow-sm">
               <span className="truncate">Anna</span>
-              <span className="truncate">usługi</span>
+              <span className="truncate">usĹ‚ugi</span>
               <span className="rounded-full bg-[#0F8A6C]/10 px-2.5 py-1 text-center text-[11px] text-[#0F8A6C] ring-1 ring-[#0F8A6C]/15">
                 Nowy
               </span>
@@ -266,13 +256,13 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="animate-fade-up">
             <div className="inline-flex rounded-full border border-[#E8D7B9]/25 bg-white/[0.07] px-4 py-2 text-sm font-semibold text-[#E8D7B9] shadow-[0_0_28px_rgba(232,215,185,0.14)] backdrop-blur">
-              Chatbot AI dla firm, które obsługują zapytania klientów
+              Chatbot AI dla firm, ktĂłre obsĹ‚ugujÄ… zapytania klientĂłw
             </div>
             <h1 className="mt-9 max-w-4xl text-4xl font-semibold tracking-normal text-white sm:text-5xl lg:text-6xl">
-              Chatbot AI, który odpowiada klientom i zbiera leady za Ciebie
+              Chatbot AI, ktĂłry odpowiada klientom i zbiera leady za Ciebie
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300">
-              Demo automatyzacji AI dla małych i średnich firm. Bot odpowiada
+              Demo automatyzacji AI dla maĹ‚ych i Ĺ›rednich firm. Bot odpowiada
               klientom 24/7, zbiera dane kontaktowe i zapisuje zapytania w
               Google Sheets.
             </p>
@@ -284,7 +274,7 @@ export default function Home() {
                 Zobacz demo
               </a>
               <a href="#kontakt" className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#E8D7B9]/22 bg-white/[0.045] px-7 py-3 text-sm font-semibold text-[#F7F2E8] backdrop-blur transition hover:border-[#E8D7B9]/45 hover:bg-white/[0.08]">
-                Zamów darmowy audyt
+                ZamĂłw darmowy audyt
               </a>
             </div>
           </div>
@@ -297,8 +287,8 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Problem"
-            title="Firmy tracą zapytania, bo odpowiadają za wolno"
-            description="Klient oczekuje szybkiej odpowiedzi. Chatbot pomaga uporządkować pierwszą rozmowę, zanim zespół wróci do pracy."
+            title="Firmy tracÄ… zapytania, bo odpowiadajÄ… za wolno"
+            description="Klient oczekuje szybkiej odpowiedzi. Chatbot pomaga uporzÄ…dkowaÄ‡ pierwszÄ… rozmowÄ™, zanim zespĂłĹ‚ wrĂłci do pracy."
             tone="light"
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -317,14 +307,14 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="animate-fade-up">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0F8A6C]">
-              Rozwiązanie
+              RozwiÄ…zanie
             </p>
             <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#171717] sm:text-4xl">
-              Chatbot AI porządkuje obsługę zapytań
+              Chatbot AI porzÄ…dkuje obsĹ‚ugÄ™ zapytaĹ„
             </h2>
             <p className="mt-5 leading-7 text-[#7FA99B]">
-              Nie musisz budować platformy ani uczyć się technicznej konfiguracji.
-              Przygotowujemy chatbota, który odpowiada na typowe pytania i
+              Nie musisz budowaÄ‡ platformy ani uczyÄ‡ siÄ™ technicznej konfiguracji.
+              Przygotowujemy chatbota, ktĂłry odpowiada na typowe pytania i
               zbiera dane potrzebne do kontaktu.
             </p>
           </div>
@@ -346,9 +336,9 @@ export default function Home() {
         <div className="absolute inset-x-0 top-24 -z-10 h-72 bg-[radial-gradient(circle,rgba(15,138,108,0.12),transparent_36rem)]" />
         <div className="mx-auto max-w-7xl">
           <SectionHeader
-            eyebrow="Demo działania"
-            title="Zobacz, jak działa chatbot AI"
-            description="Poniżej masz przykład rozmowy, wizualny zapis zapytania w arkuszu oraz kafelek, który otwiera działające demo chatu."
+            eyebrow="Demo dziaĹ‚ania"
+            title="Zobacz, jak dziaĹ‚a chatbot AI"
+            description="PoniĹĽej masz przykĹ‚ad rozmowy, wizualny zapis zapytania w arkuszu oraz kafelek, ktĂłry otwiera dziaĹ‚ajÄ…ce demo chatu."
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
             <DemoConversation />
@@ -359,8 +349,8 @@ export default function Home() {
             <aside className="glass-card gradient-border rounded-3xl p-6 sm:p-8">
               <p className="text-base font-semibold text-[#E8D7B9]">Co testujesz?</p>
               <div className="mt-6 space-y-4 text-sm leading-6 text-slate-300">
-                <p>Wpisz, jaką prowadzisz firmę. Bot odpowie po polsku, podpowie zastosowania AI i może zachęcić do zostawienia kontaktu.</p>
-                <p>W realnym wdrożeniu podobne zapytania mogą trafiać do Google Sheets, Make, Zapier albo CRM.</p>
+                <p>Wpisz, jakÄ… prowadzisz firmÄ™. Bot odpowie po polsku, podpowie zastosowania AI i moĹĽe zachÄ™ciÄ‡ do zostawienia kontaktu.</p>
+                <p>W realnym wdroĹĽeniu podobne zapytania mogÄ… trafiaÄ‡ do Google Sheets, Make, Zapier albo CRM.</p>
                 <p>To demo pokazuje kierunek rozmowy, nie wymaga logowania ani panelu klienta.</p>
               </div>
             </aside>
@@ -375,39 +365,20 @@ export default function Home() {
 
       <IndustryDemoSwitcher />
 
-      <section id="branze" className="bg-[#F7F2E8] px-5 py-14 text-[#171717] sm:px-8 lg:px-12 lg:py-16">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader
-            eyebrow="Branże"
-            title="Dla jakich firm sprawdzi się chatbot AI?"
-            description="Rozwiązanie można dopasować do firm usługowych, lokalnych, internetowych i B2B."
-            tone="light"
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {industries.map(([name, first, second]) => (
-              <article key={name} className="group min-h-40 rounded-2xl border border-[#E8D7B9]/70 bg-white p-5 shadow-[0_16px_40px_rgba(14,42,36,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#0F8A6C]/40">
-                <div className="h-1 w-12 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#C9A86A] transition group-hover:w-16" />
-                <h3 className="mt-5 text-base font-semibold text-[#171717]">{name}</h3>
-                <p className="mt-4 text-sm leading-6 text-[#7FA99B]">{first}</p>
-                <p className="mt-1 text-sm leading-6 text-slate-500">{second}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <IndustriesSection />
 
       <section id="wdrozenie" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
-              Wdrożenie
+              WdroĹĽenie
             </p>
             <h2 className="mt-4 text-3xl font-semibold tracking-normal text-white sm:text-4xl">
-              Co otrzymujesz we wdrożeniu?
+              Co otrzymujesz we wdroĹĽeniu?
             </h2>
             <p className="mt-5 leading-7 text-slate-300">
-              Nie musisz znać się na AI ani technicznej konfiguracji.
-              Przygotowujemy rozwiązanie, testujemy je i pomagamy w dalszym
+              Nie musisz znaÄ‡ siÄ™ na AI ani technicznej konfiguracji.
+              Przygotowujemy rozwiÄ…zanie, testujemy je i pomagamy w dalszym
               utrzymaniu.
             </p>
           </div>
@@ -428,8 +399,8 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Proces"
-            title="Jak wygląda wdrożenie?"
-            description="Prosty proces od audytu do działającego chatbota i uporządkowanych zapytań."
+            title="Jak wyglÄ…da wdroĹĽenie?"
+            description="Prosty proces od audytu do dziaĹ‚ajÄ…cego chatbota i uporzÄ…dkowanych zapytaĹ„."
           />
           <div className="mt-10 grid gap-4 lg:grid-cols-5">
             {process.map(([title, description], index) => (
@@ -455,14 +426,14 @@ export default function Home() {
               Darmowy audyt
             </p>
             <h2 className="mt-4 text-3xl font-semibold tracking-normal text-white sm:text-4xl">
-              Zamów darmowy audyt AI
+              ZamĂłw darmowy audyt AI
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-slate-300">
-              Zostaw kontakt, a przygotujemy krótką propozycję, jak chatbot AI
-              może działać w Twojej firmie.
+              Zostaw kontakt, a przygotujemy krĂłtkÄ… propozycjÄ™, jak chatbot AI
+              moĹĽe dziaĹ‚aÄ‡ w Twojej firmie.
             </p>
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">
-              Nie musisz znać szczegółów — wystarczy krótki opis firmy albo link do strony/Instagrama.
+              Nie musisz znaÄ‡ szczegĂłĹ‚Ăłw â€” wystarczy krĂłtki opis firmy albo link do strony/Instagrama.
             </p>
           </div>
 
@@ -474,8 +445,8 @@ export default function Home() {
         <div className="mx-auto max-w-5xl">
           <SectionHeader
             eyebrow="FAQ"
-            title="Najczęstsze pytania"
-            description="Krótko i konkretnie, bez technicznego żargonu."
+            title="NajczÄ™stsze pytania"
+            description="KrĂłtko i konkretnie, bez technicznego ĹĽargonu."
           />
           <div className="mt-10 space-y-4">
             {faq.map(([question, answer]) => (
@@ -495,3 +466,4 @@ export default function Home() {
     </>
   );
 }
+
