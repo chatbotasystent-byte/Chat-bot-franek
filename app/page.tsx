@@ -32,6 +32,13 @@ const included = [
 
 const productStackSteps = ["Chatbot odpowiada", "Kontakt zebrany", "Lead w arkuszu"];
 
+const systemStatus = [
+  "AI online",
+  "Webhook active",
+  "Sheets synced",
+  "Email ready"
+];
+
 const faq = [
   ["Czy muszę znać się na AI?", "Nie. Przygotowujemy konfigurację, scenariusz rozmowy i wdrożenie techniczne."],
   ["Czy chatbot może działać w mojej branży?", "Tak, rozwiązanie można dopasować do wielu firm usługowych, lokalnych i B2B."],
@@ -70,14 +77,14 @@ function ProductStackVisual() {
     <div className="relative rounded-3xl">
       <div className="animate-soft-pulse pointer-events-none absolute inset-8 rounded-full bg-[#0F8A6C]/14 blur-3xl" />
       <div className="relative grid gap-5">
-        <div className="glass-card gradient-border rounded-3xl p-5 shadow-[0_28px_80px_rgba(15,138,108,0.16)] sm:p-6">
+        <div className="glass-card gradient-border premium-lift rounded-3xl p-5 shadow-[0_28px_80px_rgba(15,138,108,0.16)] sm:p-6">
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm font-semibold text-white">Panel automatyzacji</p>
             <span className="rounded-full bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">live</span>
           </div>
           <div className="mt-5 grid gap-3">
             {productStackSteps.map((item, index) => (
-              <div key={item} className="flex min-h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
+              <div key={item} className="flex min-h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 transition duration-300 hover:border-[#E8D7B9]/24 hover:bg-white/[0.065]">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#0F8A6C]/16 text-xs font-bold text-[#A7F3D0]">
                   {index + 1}
                 </span>
@@ -87,7 +94,7 @@ function ProductStackVisual() {
           </div>
         </div>
 
-        <div className="glass-card rounded-3xl p-5 shadow-[0_28px_80px_rgba(201,168,106,0.16)] sm:p-6">
+        <div className="glass-card premium-lift rounded-3xl p-5 shadow-[0_28px_80px_rgba(201,168,106,0.16)] sm:p-6">
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm font-semibold text-[#E8D7B9]">Google Sheets</p>
             <span className="rounded-full border border-[#E8D7B9]/20 bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">
@@ -118,20 +125,25 @@ export default function Home() {
   return (
     <>
       <ScrollToTopOnLoad />
-      <main className="min-h-screen overflow-hidden bg-[#171717] text-white">
+      <main className="relative min-h-screen overflow-hidden bg-[#171717] text-white">
         <Navbar />
 
       <section className="relative px-5 pb-14 pt-16 sm:px-8 sm:pt-20 lg:px-12 lg:pb-20 lg:pt-24">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(15,138,108,0.22),transparent_30rem),radial-gradient(circle_at_84%_16%,rgba(201,168,106,0.16),transparent_34rem),radial-gradient(circle_at_50%_100%,rgba(14,42,36,0.28),transparent_30rem)]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(15,138,108,0.30),transparent_32rem),radial-gradient(circle_at_84%_16%,rgba(232,215,185,0.17),transparent_34rem),radial-gradient(circle_at_50%_100%,rgba(14,42,36,0.32),transparent_30rem)]" />
+        <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-full opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
+        <div className="pointer-events-none absolute left-[6%] top-28 hidden h-28 w-px bg-gradient-to-b from-transparent via-[#E8D7B9]/35 to-transparent lg:block" />
+        <div className="pointer-events-none absolute right-[10%] top-40 hidden h-px w-44 bg-gradient-to-r from-transparent via-[#0F8A6C]/45 to-transparent lg:block" />
+        <span className="data-dot pointer-events-none absolute left-[9%] top-40 hidden h-2 w-2 rounded-full bg-[#E8D7B9] shadow-[0_0_24px_rgba(232,215,185,0.65)] lg:block" />
+        <span className="data-dot pointer-events-none absolute right-[18%] top-32 hidden h-2 w-2 rounded-full bg-[#0F8A6C] shadow-[0_0_24px_rgba(15,138,108,0.65)] lg:block" />
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="animate-fade-up">
             <div className="inline-flex rounded-full border border-[#E8D7B9]/25 bg-white/[0.07] px-4 py-2 text-sm font-semibold text-[#E8D7B9] shadow-[0_0_28px_rgba(232,215,185,0.14)] backdrop-blur">
               Chatbot AI dla firm, które obsługują zapytania klientów
             </div>
-            <h1 className="mt-9 max-w-4xl text-4xl font-semibold tracking-normal text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-9 max-w-4xl text-4xl font-extrabold tracking-normal text-[#F7F2E8] sm:text-5xl lg:text-6xl">
               Chatbot AI, który odpowiada klientom i zbiera leady za Ciebie
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300">
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#D6D3D1]">
               Demo automatyzacji AI dla małych i średnich firm. Bot odpowiada
               klientom 24/7, zbiera dane kontaktowe i zapisuje zapytania w
               Google Sheets.
@@ -140,12 +152,24 @@ export default function Home() {
               Bez wiedzy technicznej po stronie firmy
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="#control-room" className="cta-shine inline-flex min-h-12 items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-7 py-3 text-sm font-semibold text-[#171717] shadow-[0_0_36px_rgba(15,138,108,0.28)] transition hover:scale-[1.02] hover:shadow-[0_0_46px_rgba(201,168,106,0.24)]">
+              <a href="#demo" className="cta-primary cta-shine rounded-full px-7 py-3 text-sm">
                 Zobacz demo
               </a>
-              <a href="#kontakt" className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#E8D7B9]/22 bg-white/[0.045] px-7 py-3 text-sm font-semibold text-[#F7F2E8] backdrop-blur transition hover:border-[#E8D7B9]/45 hover:bg-white/[0.08]">
+              <a href="#kontakt" className="cta-secondary rounded-full px-7 py-3 text-sm">
                 Zamów darmowy audyt
               </a>
+            </div>
+
+            <div className="mt-8 grid max-w-2xl grid-cols-2 gap-2 rounded-3xl border border-[#E8D7B9]/14 bg-[#171717]/52 p-3 shadow-[0_22px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:grid-cols-4">
+              {systemStatus.map((item) => (
+                <span
+                  key={item}
+                  className="flex items-center gap-2 rounded-2xl border border-[#E8D7B9]/12 bg-white/[0.045] px-3 py-2 text-xs font-bold text-[#D6D3D1]"
+                >
+                  <span className="h-2 w-2 rounded-full bg-[#0F8A6C] shadow-[0_0_14px_rgba(15,138,108,0.9)] animate-pulse" />
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -164,7 +188,8 @@ export default function Home() {
 
       <IndustrySimulator />
 
-      <section id="wdrozenie" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
+      <section id="wdrozenie" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 bg-[radial-gradient(circle_at_20%_20%,rgba(232,215,185,0.09),transparent_32rem),radial-gradient(circle_at_78%_20%,rgba(15,138,108,0.13),transparent_34rem)]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
@@ -181,7 +206,7 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div className="grid gap-3">
               {included.map((item) => (
-                <div key={item} className="glass-card rounded-2xl px-4 py-4 text-sm font-medium text-slate-200 transition duration-300 hover:-translate-y-1 hover:border-[#E8D7B9]/30">
+                <div key={item} className="glass-card premium-lift rounded-2xl px-4 py-4 text-sm font-medium text-[#D6D3D1]">
                   {item}
                 </div>
               ))}
@@ -200,11 +225,11 @@ export default function Home() {
           />
           <div className="mt-10 space-y-4">
             {faq.map(([question, answer]) => (
-              <details key={question} className="glass-card rounded-2xl p-5 transition open:border-[#E8D7B9]/35">
+              <details key={question} className="glass-card premium-lift rounded-2xl p-5 open:border-[#E8D7B9]/35">
                 <summary className="cursor-pointer text-base font-semibold text-white">
                   {question}
                 </summary>
-                <p className="mt-4 text-sm leading-6 text-slate-300">{answer}</p>
+                <p className="mt-4 text-sm leading-6 text-[#D6D3D1]">{answer}</p>
               </details>
             ))}
           </div>
@@ -212,8 +237,9 @@ export default function Home() {
       </section>
 
       <section id="kontakt" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-96 bg-[radial-gradient(circle_at_28%_55%,rgba(15,138,108,0.16),transparent_34rem),radial-gradient(circle_at_82%_45%,rgba(232,215,185,0.12),transparent_32rem)]" />
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div className="glass-card gradient-border rounded-3xl p-6 sm:p-8">
+          <div className="glass-card gradient-border premium-lift rounded-3xl p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
               Darmowy audyt
             </p>

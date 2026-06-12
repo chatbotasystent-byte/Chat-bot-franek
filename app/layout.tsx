@@ -9,7 +9,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "AI Automatyzacja — Chatbot AI dla firm",
+  title: "AI Automatyzacja | Chatbot AI dla firm",
   description:
     "Demo chatbota AI, który odpowiada klientom, zbiera leady i zapisuje zapytania do Google Sheets.",
   icons: {
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={manrope.className}>{children}</body>
+      <body className={`${manrope.className} ${manrope.variable} antialiased`}>{children}</body>
     </html>
   );
 }

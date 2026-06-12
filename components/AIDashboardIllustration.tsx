@@ -3,12 +3,13 @@ export function AIDashboardIllustration() {
     <div className="animate-fade-up animation-delay-450 relative">
       <div className="animate-soft-pulse absolute -inset-8 rounded-[2.4rem] bg-[radial-gradient(circle_at_28%_34%,rgba(15,138,108,0.24),transparent_44%),radial-gradient(circle_at_76%_18%,rgba(232,215,185,0.16),transparent_40%),radial-gradient(circle_at_78%_82%,rgba(201,168,106,0.12),transparent_38%)] blur-2xl" />
       <div className="glass-card relative overflow-hidden rounded-[2rem] p-4 shadow-2xl shadow-emerald-950/30 sm:p-6">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(232,215,185,0.12),transparent_18rem),radial-gradient(circle_at_82%_24%,rgba(15,138,108,0.18),transparent_20rem)]" />
         <svg
-          className="h-auto w-full"
+          className="relative h-auto w-full"
           viewBox="0 0 620 460"
           fill="none"
           role="img"
-          aria-label="Mockup produktu: chatbot AI, panel leadow i Google Sheets"
+          aria-label="Mockup produktu: chatbot AI, panel leadów i Google Sheets"
         >
           <defs>
             <linearGradient id="heroShell" x1="40" y1="28" x2="582" y2="430">
@@ -36,6 +37,13 @@ export function AIDashboardIllustration() {
           <rect x="38" y="28" width="544" height="404" rx="34" fill="url(#heroShell)" stroke="#E8D7B9" strokeOpacity="0.12" />
           <rect x="38" y="28" width="544" height="404" rx="34" fill="url(#heroGrid)" opacity="0.75" />
           <rect x="76" y="68" width="468" height="326" rx="30" fill="url(#heroPanel)" stroke="url(#heroAccent)" strokeOpacity="0.36" filter="url(#heroGlow)" />
+
+          <path d="M308 170V148M308 170H334M308 250H334M308 250V286" stroke="#E8D7B9" strokeOpacity="0.16" strokeWidth="1.4" strokeLinecap="round" />
+          <circle cx="308" cy="170" r="3.5" fill="#E8D7B9" fillOpacity="0.76" />
+          <circle cx="308" cy="250" r="3.5" fill="#0F8A6C" fillOpacity="0.86" />
+          <circle cx="532" cy="82" r="3" fill="#E8D7B9" fillOpacity="0.7" />
+          <circle cx="548" cy="108" r="2.5" fill="#0F8A6C" fillOpacity="0.9" />
+          <circle cx="86" cy="342" r="2.8" fill="#C9A86A" fillOpacity="0.82" />
 
           <circle cx="112" cy="104" r="6.5" fill="#E8D7B9" />
           <circle cx="136" cy="104" r="6.5" fill="#C9A86A" />

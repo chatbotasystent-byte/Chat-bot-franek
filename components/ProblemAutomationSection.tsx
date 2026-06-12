@@ -66,7 +66,7 @@ export function ProblemAutomationSection() {
   const activeProblem = problemAutomations[activeIndex];
 
   return (
-    <section className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
+    <section id="problem" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
       <div className="absolute inset-x-0 top-20 -z-10 h-96 bg-[radial-gradient(circle,rgba(201,168,106,0.12),transparent_38rem)]" />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">

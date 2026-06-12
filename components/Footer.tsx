@@ -1,4 +1,4 @@
-export function Footer() {
+﻿export function Footer() {
   return (
     <footer className="border-t border-[#E8D7B9]/12 bg-[#171717] px-5 py-10 sm:px-8 lg:px-12">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -16,7 +16,7 @@ export function Footer() {
           <a href="#problem" className="transition hover:text-[#E8D7B9]">Problem</a>
           <a href="#demo" className="transition hover:text-[#E8D7B9]">Demo</a>
           <a href="#kontakt" className="transition hover:text-[#E8D7B9]">Kontakt</a>
-          <span>Polityka prywatności</span>
+          <a href="/polityka-prywatnosci" className="transition hover:text-[#E8D7B9]">Polityka prywatności</a>
         </div>
       </div>
     </footer>

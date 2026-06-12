@@ -202,7 +202,7 @@ export function AutomationControlRoom() {
       : industry.leadSummary;
 
   return (
-    <section id="control-room" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
+    <section id="demo" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_14%,rgba(15,138,108,0.24),transparent_34rem),radial-gradient(circle_at_82%_24%,rgba(201,168,106,0.16),transparent_36rem),linear-gradient(180deg,#171717_0%,#0E2A24_52%,#171717_100%)]" />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">

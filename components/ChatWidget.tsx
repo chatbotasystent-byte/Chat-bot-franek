@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
@@ -370,6 +370,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
   const [usedPromptChips, setUsedPromptChips] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const leadFormStartedAtRef = useRef(Date.now());
   const userMessages = messages.filter((message) => message.role === "user");
   const detectedIndustry =
     [...userMessages]
@@ -404,6 +405,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
       setLeadFormMessage("");
       setShowOptionalLeadFields(false);
       setUsedPromptChips([]);
+      leadFormStartedAtRef.current = Date.now();
       inputRef.current?.focus();
     }
   }));
@@ -424,6 +426,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
   function showLeadForm(nextMessages: Message[], draft: Partial<LeadFormData> = {}) {
     setIsLeadFormVisible(true);
     setShowOptionalLeadFields(false);
+    setLeadSubmitted(false);
     setLeadForm({
       ...emptyLeadForm,
       ...Object.fromEntries(
@@ -432,6 +435,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
     });
     setLeadFormState("idle");
     setLeadFormMessage("");
+    leadFormStartedAtRef.current = Date.now();
     setMessages([
       ...nextMessages,
       {
@@ -474,6 +478,28 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
       return;
     }
 
+    const formData = new FormData(event.currentTarget);
+    const honeypot = String(formData.get("companyWebsiteConfirm") ?? "").trim();
+
+    if (honeypot) {
+      setIsLeadFormVisible(false);
+      setLeadSubmitted(true);
+      setLeadForm(emptyLeadForm);
+      setShowOptionalLeadFields(false);
+      setLeadFormState("idle");
+      setMessages((current) => [
+        ...current,
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content:
+            "Dziękuję! Zapisałem kontakt i przekazałem go do automatyzacji. Odezwiemy się z propozycją wdrożenia AI."
+        }
+      ]);
+      leadFormStartedAtRef.current = Date.now();
+      return;
+    }
+
     const payload = {
       name: leadForm.name.trim(),
       email: leadForm.email.trim(),
@@ -482,7 +508,8 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
       companyName: leadForm.companyName.trim(),
       industry: leadForm.industry.trim(),
       message: leadForm.message.trim(),
-      source: "chatbot-form"
+      source: "chatbot-form",
+      elapsedMs: Date.now() - leadFormStartedAtRef.current
     };
 
     if (!payload.name) {
@@ -521,6 +548,12 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
         body: JSON.stringify(payload)
       });
 
+      if (response.status === 429) {
+        setLeadFormState("error");
+        setLeadFormMessage("Wysłano już zgłoszenie. Spróbuj ponownie za chwilę.");
+        return;
+      }
+
       if (!response.ok) {
         throw new Error("Lead request failed");
       }
@@ -530,6 +563,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
       setLeadForm(emptyLeadForm);
       setShowOptionalLeadFields(false);
       setLeadFormState("idle");
+      leadFormStartedAtRef.current = Date.now();
       setMessages((current) => [
         ...current,
         {
@@ -694,6 +728,16 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
               noValidate
               className="w-full max-w-[420px] rounded-2xl border border-[#E8D7B9]/80 bg-[#FFF7ED] p-3 text-[#171717] shadow-[0_14px_34px_rgba(14,42,36,0.12)] sm:p-4"
             >
+              <label className="sr-only" aria-hidden="true">
+                Potwierdź stronę firmy
+                <input
+                  name="companyWebsiteConfirm"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                />
+              </label>
+
               <div className="mb-3">
                 <p className="text-sm font-bold text-[#171717]">Zostaw kontakt</p>
                 <p className="mt-1 text-xs leading-5 text-stone-600">

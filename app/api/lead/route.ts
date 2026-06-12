@@ -9,28 +9,87 @@ type LeadPayload = {
   industry?: string;
   message?: string;
   source?: string;
+  companyWebsiteConfirm?: string;
+  elapsedMs?: number;
 };
+
+const RATE_LIMIT_MS = 90_000;
+const MIN_FORM_TIME_MS = 3_000;
+const lastLeadByIp = new Map<string, number>();
+
+function clean(value: unknown, maxLength: number) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function getClientIp(request: Request) {
+  const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  const realIp = request.headers.get("x-real-ip")?.trim();
+
+  return forwardedFor || realIp || "unknown";
+}
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as LeadPayload;
-    const createdAt = new Date().toISOString();
 
+    if (clean(body.companyWebsiteConfirm, 200)) {
+      return NextResponse.json({ success: true });
+    }
+
+    if (typeof body.elapsedMs === "number" && body.elapsedMs < MIN_FORM_TIME_MS) {
+      return NextResponse.json(
+        { error: "Formularz został wysłany zbyt szybko. Spróbuj ponownie." },
+        { status: 400 }
+      );
+    }
+
+    const ip = getClientIp(request);
+    const now = Date.now();
+    const lastLeadAt = lastLeadByIp.get(ip) ?? 0;
+
+    if (now - lastLeadAt < RATE_LIMIT_MS) {
+      return NextResponse.json(
+        { error: "Zbyt wiele zgłoszeń. Spróbuj ponownie za chwilę." },
+        { status: 429 }
+      );
+    }
+
+    const createdAt = new Date().toISOString();
     const lead = {
       createdAt,
-      name: body.name?.trim() ?? "",
-      email: body.email?.trim() ?? "",
-      phone: body.phone?.trim() ?? "",
-      website: body.website?.trim() ?? "",
-      companyName: body.companyName?.trim() ?? "",
-      industry: body.industry?.trim() ?? "",
-      message: body.message?.trim().slice(0, 1000) ?? "",
-      source: body.source?.trim() ?? ""
+      name: clean(body.name, 120),
+      email: clean(body.email, 160),
+      phone: clean(body.phone, 40),
+      website: clean(body.website, 200),
+      companyName: clean(body.companyName, 160),
+      industry: clean(body.industry, 120),
+      message: clean(body.message, 1000),
+      source: clean(body.source, 80)
     };
 
-    if (!lead.email && !lead.phone) {
+    if (!lead.name) {
+      return NextResponse.json({ error: "Podaj imię i nazwisko." }, { status: 400 });
+    }
+
+    if (!lead.email) {
+      return NextResponse.json({ error: "Podaj adres email." }, { status: 400 });
+    }
+
+    if (!isValidEmail(lead.email)) {
+      return NextResponse.json({ error: "Podaj poprawny adres email." }, { status: 400 });
+    }
+
+    if (!lead.website) {
+      return NextResponse.json({ error: "Podaj stronę firmy lub Instagram." }, { status: 400 });
+    }
+
+    if (!lead.message) {
       return NextResponse.json(
-        { error: "Email albo telefon jest wymagany" },
+        { error: "Napisz krótko, czego dotyczy zgłoszenie." },
         { status: 400 }
       );
     }
@@ -69,6 +128,8 @@ export async function POST(request: Request) {
         { status: 502 }
       );
     }
+
+    lastLeadByIp.set(ip, now);
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -10,6 +10,7 @@ const fieldClass =
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
+  const formStartedAtRef = useRef(Date.now());
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,6 +21,16 @@ export function ContactForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const honeypot = String(formData.get("companyWebsiteConfirm") ?? "").trim();
+
+    if (honeypot) {
+      form.reset();
+      setState("success");
+      setMessage("Dziękujemy! Odezwiemy się z propozycją automatyzacji AI.");
+      formStartedAtRef.current = Date.now();
+      return;
+    }
+
     const payload = {
       name: String(formData.get("name") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
@@ -28,7 +39,8 @@ export function ContactForm() {
       companyName: String(formData.get("companyName") ?? "").trim(),
       industry: String(formData.get("industry") ?? "").trim(),
       message: String(formData.get("message") ?? "").trim(),
-      source: "contact-form"
+      source: "contact-form",
+      elapsedMs: Date.now() - formStartedAtRef.current
     };
 
     if (!payload.name) {
@@ -67,6 +79,12 @@ export function ContactForm() {
         body: JSON.stringify(payload)
       });
 
+      if (response.status === 429) {
+        setState("error");
+        setMessage("Wysłano już zgłoszenie. Spróbuj ponownie za chwilę.");
+        return;
+      }
+
       if (!response.ok) {
         throw new Error("Lead request failed");
       }
@@ -74,6 +92,7 @@ export function ContactForm() {
       form.reset();
       setState("success");
       setMessage("Dziękujemy! Odezwiemy się z propozycją automatyzacji AI.");
+      formStartedAtRef.current = Date.now();
     } catch {
       setState("error");
       setMessage("Nie udało się wysłać formularza. Spróbuj ponownie lub skontaktuj się mailowo.");
@@ -86,6 +105,16 @@ export function ContactForm() {
       noValidate
       className="rounded-3xl border border-[#E8D7B9]/70 bg-white p-6 text-[#171717] shadow-2xl shadow-emerald-950/15 sm:p-8"
     >
+      <label className="sr-only" aria-hidden="true">
+        Potwierdź stronę firmy
+        <input
+          name="companyWebsiteConfirm"
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden"
+        />
+      </label>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-[#171717]">
           Imię i nazwisko *
@@ -160,7 +189,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="mt-6 min-h-12 w-full rounded-xl bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-semibold text-[#171717] shadow-sm transition hover:shadow-[0_12px_30px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-70"
+        className="cta-primary cta-shine mt-6 min-h-12 w-full rounded-xl px-5 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-70"
       >
         {state === "loading" ? "Wysyłanie..." : "Wyślij zgłoszenie"}
       </button>
