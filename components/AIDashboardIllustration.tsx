@@ -1,98 +1,102 @@
+const stats = [
+  ["12", "nowych zapytań dzisiaj"],
+  ["98%", "wysłanych na e-mail"],
+  ["ON", "Google Sheets połączono"],
+  ["312", "leadów w tym miesiącu"]
+] as const;
+
+const leadRows = [
+  ["Nowe", "10.06.2026 15:25", "Klimatyzacja", "Marek", "marek@example.com", "Wycena montażu"],
+  ["Nowe", "10.06.2026 16:10", "Beauty / zdrowie", "Anna", "123 456 789", "Termin na manicure"],
+  ["Wysłane", "10.06.2026 16:42", "Fotowoltaika", "Piotr", "piotr@mail.pl", "Ile kosztuje instalacja"],
+  ["Wysłane", "10.06.2026 17:03", "Usługi dla firm", "Katarzyna", "katarzyna@firma.pl", "Prośba o ofertę"]
+] as const;
+
 export function AIDashboardIllustration() {
   return (
     <div className="animate-fade-up animation-delay-450 relative">
-      <div className="animate-soft-pulse absolute -inset-8 rounded-[2.4rem] bg-[radial-gradient(circle_at_28%_34%,rgba(15,138,108,0.24),transparent_44%),radial-gradient(circle_at_76%_18%,rgba(232,215,185,0.16),transparent_40%),radial-gradient(circle_at_78%_82%,rgba(201,168,106,0.12),transparent_38%)] blur-2xl" />
-      <div className="glass-card relative overflow-hidden rounded-[2rem] p-4 shadow-2xl shadow-emerald-950/30 sm:p-6">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(232,215,185,0.12),transparent_18rem),radial-gradient(circle_at_82%_24%,rgba(15,138,108,0.18),transparent_20rem)]" />
-        <svg
-          className="relative h-auto w-full"
-          viewBox="0 0 620 460"
-          fill="none"
-          role="img"
-          aria-label="Mockup produktu: chatbot AI, panel leadów i Google Sheets"
-        >
-          <defs>
-            <linearGradient id="heroShell" x1="40" y1="28" x2="582" y2="430">
-              <stop stopColor="#0E2A24" />
-              <stop offset="0.55" stopColor="#1C1917" />
-              <stop offset="1" stopColor="#171717" />
-            </linearGradient>
-            <linearGradient id="heroPanel" x1="78" y1="70" x2="546" y2="402">
-              <stop stopColor="#0E2A24" />
-              <stop offset="1" stopColor="#171717" />
-            </linearGradient>
-            <linearGradient id="heroAccent" x1="90" y1="78" x2="532" y2="392">
-              <stop stopColor="#E8D7B9" />
-              <stop offset="0.5" stopColor="#0F8A6C" />
-              <stop offset="1" stopColor="#C9A86A" />
-            </linearGradient>
-            <filter id="heroGlow" x="-18%" y="-18%" width="136%" height="136%">
-              <feDropShadow dx="0" dy="22" stdDeviation="20" floodColor="#0F8A6C" floodOpacity="0.18" />
-            </filter>
-            <pattern id="heroGrid" width="24" height="24" patternUnits="userSpaceOnUse">
-              <path d="M24 0H0V24" stroke="#E8D7B9" strokeOpacity="0.045" />
-            </pattern>
-          </defs>
+      <div className="absolute -inset-5 rounded-[2.4rem] bg-[#22C55E]/10 blur-2xl" />
 
-          <rect x="38" y="28" width="544" height="404" rx="34" fill="url(#heroShell)" stroke="#E8D7B9" strokeOpacity="0.12" />
-          <rect x="38" y="28" width="544" height="404" rx="34" fill="url(#heroGrid)" opacity="0.75" />
-          <rect x="76" y="68" width="468" height="326" rx="30" fill="url(#heroPanel)" stroke="url(#heroAccent)" strokeOpacity="0.36" filter="url(#heroGlow)" />
+      <div className="relative overflow-hidden rounded-[2rem] border border-[#22C55E]/18 bg-[#070A08]/92 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.34)] backdrop-blur sm:p-5 lg:p-6">
+        <div className="tech-grid pointer-events-none absolute inset-0 opacity-18" />
+        <div className="relative rounded-[1.6rem] border border-white/10 bg-[#050706]/82 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-5">
+          <div className="flex flex-col gap-4 border-b border-white/10 pb-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#86EFAC]">
+                Symulacja - leady na żywo
+              </p>
+              <h2 className="mt-2 text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">
+                Nowe zapytania w jednym miejscu
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-6 text-[#7FA99B]">
+                Po wysłaniu demo nowy lead pojawi się tutaj bez odświeżania strony.
+              </p>
+            </div>
+            <span className="flex w-fit items-center gap-2 rounded-full border border-[#22C55E]/28 bg-[#22C55E]/10 px-3 py-1.5 text-xs font-bold text-[#86EFAC]">
+              <span className="h-2 w-2 rounded-full bg-[#22C55E] animate-pulse" />
+              system online
+            </span>
+          </div>
 
-          <path d="M308 170V148M308 170H334M308 250H334M308 250V286" stroke="#E8D7B9" strokeOpacity="0.16" strokeWidth="1.4" strokeLinecap="round" />
-          <circle cx="308" cy="170" r="3.5" fill="#E8D7B9" fillOpacity="0.76" />
-          <circle cx="308" cy="250" r="3.5" fill="#0F8A6C" fillOpacity="0.86" />
-          <circle cx="532" cy="82" r="3" fill="#E8D7B9" fillOpacity="0.7" />
-          <circle cx="548" cy="108" r="2.5" fill="#0F8A6C" fillOpacity="0.9" />
-          <circle cx="86" cy="342" r="2.8" fill="#C9A86A" fillOpacity="0.82" />
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {stats.map(([value, label]) => (
+              <article
+                key={label}
+                className="rounded-3xl border border-white/10 bg-[#0B1F18]/[0.045] p-4 shadow-[0_12px_34px_rgba(0,0,0,0.18)]"
+              >
+                <p className="text-2xl font-black tracking-[-0.04em] text-white">{value}</p>
+                <p className="mt-2 text-xs font-bold uppercase tracking-[0.12em] text-[#7FA99B]">
+                  {label}
+                </p>
+              </article>
+            ))}
+          </div>
 
-          <circle cx="112" cy="104" r="6.5" fill="#E8D7B9" />
-          <circle cx="136" cy="104" r="6.5" fill="#C9A86A" />
-          <circle cx="160" cy="104" r="6.5" fill="#0F8A6C" />
-          <text x="310" y="112" textAnchor="middle" fill="#F7F2E8" fontSize="21" fontWeight="700">System obsługi zapytań</text>
-          <text x="310" y="138" textAnchor="middle" fill="#7FA99B" fontSize="12.5">Chat, kwalifikacja i arkusz w jednym przepływie</text>
+          <div className="mt-5 overflow-hidden rounded-3xl border border-white/10 bg-[#0E2A24]/38">
+            <div className="grid grid-cols-[0.75fr_1.15fr_1fr_0.85fr_1.25fr_1.35fr] gap-3 border-b border-white/10 bg-[#0B1F18]/[0.045] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-[#86EFAC]">
+              <span>Status</span>
+              <span>Data</span>
+              <span>Branża</span>
+              <span>Imię</span>
+              <span>Kontakt</span>
+              <span>Wiadomość</span>
+            </div>
+            <div className="divide-y divide-white/8">
+              {leadRows.map(([status, date, industry, name, contact, message]) => (
+                <div
+                  key={`${date}-${name}`}
+                  className="grid grid-cols-[0.75fr_1.15fr_1fr_0.85fr_1.25fr_1.35fr] items-center gap-3 px-4 py-3 text-xs font-semibold text-[#D6D3D1]"
+                >
+                  <span
+                    className={`w-fit rounded-full px-2.5 py-1 text-[10px] font-black ${
+                      status === "Nowe"
+                        ? "bg-[#22C55E]/14 text-[#86EFAC] ring-1 ring-[#22C55E]/22"
+                        : "bg-[#0B1F18]/[0.07] text-[#7FA99B] ring-1 ring-white/10"
+                    }`}
+                  >
+                    {status}
+                  </span>
+                  <span className="truncate text-[#7FA99B]">{date}</span>
+                  <span className="truncate">{industry}</span>
+                  <span className="truncate text-white">{name}</span>
+                  <span className="truncate text-[#86EFAC]">{contact}</span>
+                  <span className="truncate">{message}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <g className="animate-float-slow">
-            <rect x="104" y="160" width="204" height="174" rx="24" fill="#0F8A6C" fillOpacity="0.09" stroke="#E8D7B9" strokeOpacity="0.24" />
-            <rect x="122" y="180" width="154" height="24" rx="12" fill="#0F8A6C" fillOpacity="0.2" />
-            <circle cx="136" cy="192" r="4" fill="#E8D7B9" />
-            <text x="150" y="196" fill="#E8D7B9" fontSize="11.5" fontWeight="700">AI konsultant online</text>
-
-            <rect x="122" y="220" width="156" height="40" rx="14" fill="#171717" fillOpacity="0.72" stroke="#0F8A6C" strokeOpacity="0.22" />
-            <text x="138" y="237" fill="#F7F2E8" fontSize="10.8">Dzień dobry, czy są</text>
-            <text x="138" y="251" fill="#D6D3D1" fontSize="10.8">wolne terminy?</text>
-
-            <rect x="144" y="278" width="146" height="46" rx="16" fill="#E8D7B9" fillOpacity="0.96" />
-            <text x="160" y="298" fill="#171717" fontSize="10.8" fontWeight="700">Mogę zebrać dane</text>
-            <text x="160" y="313" fill="#171717" fontSize="10.8" fontWeight="700">i przekazać lead.</text>
-          </g>
-
-          <g className="animate-float-delay">
-            <rect x="334" y="160" width="178" height="98" rx="22" fill="#0E2A24" fillOpacity="0.72" stroke="#C9A86A" strokeOpacity="0.3" />
-            <text x="354" y="190" fill="#F7F2E8" fontSize="13.5" fontWeight="700">Nowe zapytanie</text>
-            <rect x="354" y="208" width="56" height="8" rx="4" fill="#0F8A6C" fillOpacity="0.88" />
-            <rect x="354" y="228" width="104" height="8" rx="4" fill="#7FA99B" fillOpacity="0.42" />
-            <rect x="354" y="246" width="78" height="8" rx="4" fill="#C9A86A" fillOpacity="0.52" />
-            <circle cx="488" cy="192" r="14.5" fill="#E8D7B9" fillOpacity="0.16" />
-            <path d="M481 192h14M488 185v14" stroke="#E8D7B9" strokeWidth="2.8" strokeLinecap="round" />
-          </g>
-
-          <g className="animate-float-subtle">
-            <rect x="334" y="276" width="178" height="56" rx="18" fill="#F7F2E8" fillOpacity="0.96" />
-            <text x="354" y="300" fill="#0E2A24" fontSize="11.5" fontWeight="800">Google Sheets / CRM</text>
-            <rect x="354" y="316" width="38" height="6" rx="3" fill="#0F8A6C" fillOpacity="0.95" />
-            <rect x="402" y="316" width="52" height="6" rx="3" fill="#7FA99B" fillOpacity="0.55" />
-            <rect x="464" y="316" width="30" height="6" rx="3" fill="#C9A86A" fillOpacity="0.9" />
-          </g>
-
-          <rect x="104" y="350" width="412" height="36" rx="18" fill="#171717" fillOpacity="0.5" stroke="#E8D7B9" strokeOpacity="0.1" />
-          <circle cx="132" cy="368" r="3.2" fill="#E8D7B9" />
-          <text x="146" y="373" fill="#D6D3D1" fontSize="10.5">klient pyta</text>
-          <circle cx="266" cy="368" r="3.2" fill="#C9A86A" />
-          <text x="280" y="373" fill="#D6D3D1" fontSize="10.5">AI kwalifikuje</text>
-          <circle cx="406" cy="368" r="3.2" fill="#0F8A6C" />
-          <text x="420" y="373" fill="#D6D3D1" fontSize="10.5">zespół oddzwania</text>
-        </svg>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-[#0B1F18]/[0.045] px-4 py-3 text-xs font-bold text-[#7FA99B]">
+              Dane przesyłane są bezpiecznie i poufnie (SSL)
+            </div>
+            <div className="rounded-2xl border border-[#22C55E]/18 bg-[#22C55E]/10 px-4 py-3 text-xs font-bold text-[#86EFAC]">
+              Integracje: Google Sheets, E-mail, CRM
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+

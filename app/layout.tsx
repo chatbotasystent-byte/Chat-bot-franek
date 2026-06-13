@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const manrope = Manrope({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-manrope"
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-space-grotesk"
 });
 
 export const metadata: Metadata = {
@@ -28,7 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={`${manrope.className} ${manrope.variable} antialiased`}>{children}</body>
+      <body className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
+

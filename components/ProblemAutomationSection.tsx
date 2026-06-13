@@ -67,13 +67,13 @@ export function ProblemAutomationSection() {
 
   return (
     <section id="problem" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-      <div className="absolute inset-x-0 top-20 -z-10 h-96 bg-[radial-gradient(circle,rgba(201,168,106,0.12),transparent_38rem)]" />
+      <div className="absolute inset-x-0 top-20 -z-10 h-96 bg-[radial-gradient(circle,rgba(34,197,94,0.12),transparent_38rem)]" />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
             PROBLEM → AUTOMATYZACJA
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F7F2E8] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F4FFF9] sm:text-4xl">
             Z jakim problemem ma pomóc AI?
           </h2>
           <p className="mt-4 leading-7 text-[#D6D3D1]">
@@ -82,7 +82,7 @@ export function ProblemAutomationSection() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:p-5">
+          <div className="rounded-3xl border border-white/10 bg-[#0B1F18]/[0.045] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:p-5">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
               {problemAutomations.map((item, index) => {
                 const isActive = activeIndex === index;
@@ -91,18 +91,19 @@ export function ProblemAutomationSection() {
                   <button
                     key={item.title}
                     type="button"
+                    aria-pressed={isActive}
                     onClick={() => setActiveIndex(index)}
-                    className={`group flex min-h-16 items-center gap-3 rounded-2xl border px-4 py-3 text-left transition ${
+                    className={`group flex min-h-16 items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all duration-300 hover:-translate-y-1 ${
                       isActive
-                        ? "border-[#E8D7B9]/55 bg-[#F7F2E8] text-[#171717] shadow-[0_18px_50px_rgba(15,138,108,0.2)]"
-                        : "border-white/10 bg-[#171717]/45 text-[#D6D3D1] hover:border-[#E8D7B9]/35 hover:bg-white/[0.07]"
+                        ? "border-[#86EFAC]/55 bg-[#0B1F18] text-[#F4FFF9] shadow-[0_18px_50px_rgba(15,138,108,0.2)]"
+                        : "border-white/10 bg-[#030705]/45 text-[#D6D3D1] hover:border-[#86EFAC]/35 hover:bg-[#0B1F18]/[0.07]"
                     }`}
                   >
                     <span
                       className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-bold ${
                         isActive
                           ? "bg-[#0F8A6C] text-white"
-                          : "bg-[#E8D7B9]/10 text-[#E8D7B9] group-hover:bg-[#E8D7B9]/15"
+                          : "bg-[#86EFAC]/10 text-[#86EFAC] group-hover:bg-[#86EFAC]/15"
                       }`}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -114,7 +115,7 @@ export function ProblemAutomationSection() {
             </div>
           </div>
 
-          <article className="rounded-3xl border border-[#E8D7B9]/22 bg-[#F7F2E8] p-5 text-[#171717] shadow-[0_28px_80px_rgba(0,0,0,0.2)] sm:p-6 lg:p-8">
+          <article className="rounded-3xl border border-[#86EFAC]/22 bg-[#0B1F18] p-5 text-[#F4FFF9] shadow-[0_28px_80px_rgba(0,0,0,0.2)] sm:p-6 lg:p-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0F8A6C]">
@@ -133,12 +134,12 @@ export function ProblemAutomationSection() {
               {resultRows.map(([label, key]) => (
                 <div
                   key={label}
-                  className="rounded-2xl border border-[#E8D7B9]/70 bg-white px-4 py-4 shadow-[0_14px_34px_rgba(14,42,36,0.06)]"
+                  className="rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] px-4 py-4 shadow-[0_14px_34px_rgba(14,42,36,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0F8A6C]/28"
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0F8A6C]">
                     {label}
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-[#0E2A24]/78">
+                  <p className="mt-2 text-sm leading-6 text-[#B7CFC3]">
                     {activeProblem[key]}
                   </p>
                 </div>
@@ -148,7 +149,7 @@ export function ProblemAutomationSection() {
             <button
               type="button"
               onClick={scrollToContact}
-              className="mt-7 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-6 py-3 text-sm font-bold text-[#171717] shadow-[0_16px_38px_rgba(15,138,108,0.18)] transition hover:scale-[1.01] sm:w-auto"
+              className="cta-primary cta-shine mt-7 w-full rounded-full px-6 py-3 text-sm sm:w-auto"
             >
               Zamów darmowy audyt
             </button>
@@ -158,3 +159,4 @@ export function ProblemAutomationSection() {
     </section>
   );
 }
+

@@ -90,14 +90,14 @@ export function LiveWebsiteSimulation() {
   const isComplete = simulationStep === simulationSteps.length - 1 && !isRunning;
 
   return (
-    <section className="relative overflow-hidden bg-[#F7F2E8] px-5 py-14 text-[#171717] sm:px-8 lg:px-12 lg:py-16">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(15,138,108,0.13),transparent_32rem),radial-gradient(circle_at_82%_20%,rgba(201,168,106,0.18),transparent_34rem)]" />
+    <section className="relative overflow-hidden bg-[#0B1F18] px-5 py-14 text-[#F4FFF9] sm:px-8 lg:px-12 lg:py-16">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,197,94,0.16),transparent_32rem),linear-gradient(180deg,#06110D_0%,#0B1F18_100%)]" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0F8A6C]">
             LIVE DEMO
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#171717] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F4FFF9] sm:text-4xl">
             Przetestuj mechanizmy na przykładowej stronie
           </h2>
           <p className="mt-4 leading-7 text-[#7FA99B]">
@@ -106,7 +106,7 @@ export function LiveWebsiteSimulation() {
           </p>
         </div>
 
-        <div className="mt-10 rounded-3xl border border-[#E8D7B9]/80 bg-white/78 p-4 shadow-[0_28px_80px_rgba(14,42,36,0.12)] backdrop-blur sm:p-6">
+        <div className="mt-10 rounded-3xl border border-[#86EFAC]/80 bg-[#0B1F18] p-4 shadow-[0_22px_60px_rgba(14,42,36,0.10)] sm:p-6">
           <div className="grid gap-3 md:grid-cols-4">
             {mechanisms.map((item) => {
               const isActive = activeMechanism === item.key;
@@ -120,14 +120,14 @@ export function LiveWebsiteSimulation() {
                     setActiveMechanism(item.key);
                     resetSimulation();
                   }}
-                  className={`rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 ${
+                  className={`min-h-24 rounded-2xl border p-4 text-left transition-all duration-300 hover:-translate-y-1 ${
                     isActive
                       ? "border-[#0F8A6C]/45 bg-[#0F8A6C] text-white shadow-[0_18px_40px_rgba(15,138,108,0.22)]"
-                      : "border-[#E8D7B9]/80 bg-[#FFF7ED] text-[#171717] hover:border-[#0F8A6C]/35"
+                      : "border-[#86EFAC]/80 bg-[#071B14] text-[#F4FFF9] hover:border-[#0F8A6C]/35 hover:shadow-[0_14px_34px_rgba(14,42,36,0.1)]"
                   }`}
                 >
                   <span className="text-sm font-bold">{item.label}</span>
-                  <span className={`mt-2 block text-xs leading-5 ${isActive ? "text-white/78" : "text-[#0E2A24]/65"}`}>
+                  <span className={`mt-2 block text-xs leading-5 ${isActive ? "text-white/78" : "text-[#B7CFC3]"}`}>
                     {item.description}
                   </span>
                 </button>
@@ -147,7 +147,7 @@ export function LiveWebsiteSimulation() {
             />
           </div>
 
-          <div className="mt-6 rounded-3xl border border-[#E8D7B9]/70 bg-[#171717] p-5 text-white sm:flex sm:items-center sm:justify-between sm:gap-6">
+          <div className="mt-6 rounded-3xl border border-[#86EFAC]/70 bg-[#030705] p-5 text-white sm:flex sm:items-center sm:justify-between sm:gap-6">
             <p className="text-sm leading-6 text-[#D6D3D1]">
               Takie mechanizmy można wdrożyć na realnej stronie i połączyć z
               Google Sheets, emailem albo CRM.
@@ -156,14 +156,14 @@ export function LiveWebsiteSimulation() {
               <button
                 type="button"
                 onClick={scrollToContact}
-                className="min-h-11 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-2 text-sm font-bold text-[#171717] transition hover:scale-[1.01]"
+                className="cta-primary cta-shine min-h-11 rounded-full px-5 py-2 text-sm"
               >
                 Zamów darmowy audyt
               </button>
               <button
                 type="button"
                 onClick={openChatModal}
-                className="min-h-11 rounded-full border border-[#E8D7B9]/30 bg-white/[0.06] px-5 py-2 text-sm font-bold text-[#F7F2E8] transition hover:border-[#E8D7B9]/55"
+                className="cta-secondary min-h-11 rounded-full px-5 py-2 text-sm"
               >
                 Otwórz chatbota
               </button>
@@ -183,17 +183,17 @@ function BrowserMockup({
   source: string;
 }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-[#0E2A24]/10 bg-[#171717] shadow-[0_24px_70px_rgba(14,42,36,0.16)]">
-      <div className="flex items-center gap-3 border-b border-white/10 bg-[#0E2A24] px-4 py-3">
-        <span className="h-3 w-3 rounded-full bg-[#E8D7B9]" />
-        <span className="h-3 w-3 rounded-full bg-[#C9A86A]" />
+    <div className="overflow-hidden rounded-3xl border border-[#34D399]/10 bg-[#0B1F18] shadow-[0_20px_55px_rgba(14,42,36,0.12)]">
+      <div className="flex items-center gap-3 border-b border-[#86EFAC]/70 bg-[#071B14] px-4 py-3">
+        <span className="h-3 w-3 rounded-full bg-[#86EFAC]" />
+        <span className="h-3 w-3 rounded-full bg-[#22C55E]" />
         <span className="h-3 w-3 rounded-full bg-[#0F8A6C]" />
-        <div className="ml-2 min-w-0 flex-1 rounded-full border border-white/10 bg-white/[0.06] px-4 py-1 text-xs font-semibold text-[#D6D3D1]">
+        <div className="ml-2 min-w-0 flex-1 rounded-full border border-[#86EFAC]/80 bg-[#0B1F18] px-4 py-1 text-xs font-semibold text-[#B7CFC3]">
           twojafirma.pl
         </div>
       </div>
 
-      <div className="relative min-h-[540px] overflow-hidden bg-[#F7F2E8] p-4 text-[#171717] sm:p-6">
+      <div className="relative min-h-[540px] overflow-hidden bg-[#0B1F18] p-4 text-[#F4FFF9] sm:p-6">
         {activeMechanism === "banner" ? <BannerOverlay /> : null}
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-bold">Twoja Firma</p>
@@ -204,19 +204,19 @@ function BrowserMockup({
           </div>
         </div>
 
-        <div className="mt-8 rounded-3xl border border-[#E8D7B9]/80 bg-white p-5 shadow-[0_18px_45px_rgba(14,42,36,0.08)]">
+        <div className="mt-8 rounded-3xl border border-[#86EFAC]/80 bg-[#0B1F18] p-5 shadow-[0_12px_34px_rgba(14,42,36,0.07)]">
           <span className="rounded-full border border-[#0F8A6C]/20 bg-[#0F8A6C]/10 px-3 py-1 text-xs font-bold text-[#0F8A6C]">
             Firma usługowa
           </span>
           <h3 className="mt-4 max-w-lg text-3xl font-semibold tracking-normal">
             Nowoczesna firma usługowa
           </h3>
-          <p className="mt-3 max-w-xl text-sm leading-6 text-[#0E2A24]/70">
+          <p className="mt-3 max-w-xl text-sm leading-6 text-[#B7CFC3]">
             Szybkie odpowiedzi, wyceny i kontakt w jednym miejscu.
           </p>
           <button
             type="button"
-            className="mt-5 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-2 text-sm font-bold text-[#171717]"
+            className="mt-5 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-5 py-2 text-sm font-bold text-[#F4FFF9]"
           >
             Zapytaj o wycenę
           </button>
@@ -224,7 +224,7 @@ function BrowserMockup({
 
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {["Wyceny", "Terminy", "Kontakt"].map((item) => (
-            <div key={item} className="rounded-2xl border border-[#E8D7B9]/70 bg-white px-4 py-4 text-sm font-bold">
+            <div key={item} className="rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] px-4 py-4 text-sm font-bold">
               {item}
               <p className="mt-2 text-xs font-medium leading-5 text-[#7FA99B]">
                 Krótki opis usługi i szybkie zgłoszenie.
@@ -244,15 +244,15 @@ function BrowserMockup({
 
 function ChatbotOverlay({ source }: { source: string }) {
   return (
-    <div className="absolute bottom-5 right-5 w-[min(310px,calc(100%-40px))] rounded-3xl border border-[#0F8A6C]/25 bg-white p-4 shadow-[0_22px_60px_rgba(14,42,36,0.22)] transition">
+    <div className="absolute bottom-5 right-5 w-[min(310px,calc(100%-40px))] rounded-3xl border border-[#0F8A6C]/25 bg-[#0B1F18] p-4 shadow-[0_18px_45px_rgba(14,42,36,0.18)] transition">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0F8A6C]">
         AI Chat
       </p>
       <div className="mt-3 space-y-2">
-        <p className="ml-auto max-w-[82%] rounded-2xl bg-[#171717] px-3 py-2 text-xs leading-5 text-white">
+        <p className="ml-auto max-w-[82%] rounded-2xl bg-[#030705] px-3 py-2 text-xs leading-5 text-white">
           Chcę zapytać o wycenę
         </p>
-        <p className="max-w-[88%] rounded-2xl border border-[#E8D7B9]/70 bg-[#FFF7ED] px-3 py-2 text-xs leading-5 text-[#171717]">
+        <p className="max-w-[88%] rounded-2xl border border-[#86EFAC]/70 bg-[#071B14] px-3 py-2 text-xs leading-5 text-[#F4FFF9]">
           Jasne - zostaw kontakt, a firma wróci z propozycją.
         </p>
       </div>
@@ -263,13 +263,13 @@ function ChatbotOverlay({ source }: { source: string }) {
 
 function PopupOverlay({ source }: { source: string }) {
   return (
-    <div className="absolute right-5 top-24 w-[min(300px,calc(100%-40px))] rounded-3xl border border-[#E8D7B9]/80 bg-[#171717] p-4 text-white shadow-[0_22px_70px_rgba(0,0,0,0.28)]">
-      <p className="text-sm font-bold text-[#E8D7B9]">
+    <div className="absolute right-5 top-24 w-[min(300px,calc(100%-40px))] rounded-3xl border border-[#86EFAC]/80 bg-[#030705] p-4 text-white shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
+      <p className="text-sm font-bold text-[#86EFAC]">
         Zostaw kontakt - przygotujemy propozycję automatyzacji
       </p>
       <div className="mt-4 grid gap-2">
-        <div className="h-10 rounded-xl bg-white text-xs font-semibold text-[#7FA99B] px-3 py-3">Imię</div>
-        <div className="h-10 rounded-xl bg-white text-xs font-semibold text-[#7FA99B] px-3 py-3">Email</div>
+        <div className="h-10 rounded-xl bg-[#0B1F18] text-xs font-semibold text-[#7FA99B] px-3 py-3">Imię</div>
+        <div className="h-10 rounded-xl bg-[#0B1F18] text-xs font-semibold text-[#7FA99B] px-3 py-3">Email</div>
       </div>
       <SourceBadge source={source} />
     </div>
@@ -278,13 +278,13 @@ function PopupOverlay({ source }: { source: string }) {
 
 function InlineContactForm({ active }: { active: boolean }) {
   return (
-    <div className={`mt-4 rounded-3xl border bg-white p-4 shadow-sm transition ${
-      active ? "border-[#0F8A6C]/45 ring-4 ring-[#0F8A6C]/10" : "border-[#E8D7B9]/70"
+    <div className={`mt-4 rounded-3xl border bg-[#0B1F18] p-4 shadow-sm transition ${
+      active ? "border-[#0F8A6C]/45 ring-4 ring-[#0F8A6C]/10" : "border-[#86EFAC]/70"
     }`}>
-      <p className="text-sm font-bold text-[#171717]">Formularz zgłoszeniowy</p>
+      <p className="text-sm font-bold text-[#F4FFF9]">Formularz zgłoszeniowy</p>
       <div className="mt-3 grid gap-2 sm:grid-cols-3">
         {["Imię", "Email", "Wiadomość"].map((item) => (
-          <div key={item} className="h-10 rounded-xl border border-[#E8D7B9]/70 bg-[#FFF7ED] px-3 py-3 text-xs font-semibold text-[#7FA99B]">
+          <div key={item} className="h-10 rounded-xl border border-[#86EFAC]/70 bg-[#071B14] px-3 py-3 text-xs font-semibold text-[#7FA99B]">
             {item}
           </div>
         ))}
@@ -296,11 +296,11 @@ function InlineContactForm({ active }: { active: boolean }) {
 
 function BannerOverlay() {
   return (
-    <div className="absolute inset-x-4 bottom-5 z-10 rounded-2xl border border-[#E8D7B9]/70 bg-[#171717] p-4 text-white shadow-[0_18px_55px_rgba(0,0,0,0.28)] sm:flex sm:items-center sm:justify-between sm:gap-4">
+    <div className="absolute inset-x-4 bottom-5 z-10 rounded-2xl border border-[#86EFAC]/70 bg-[#030705] p-4 text-white shadow-[0_18px_55px_rgba(0,0,0,0.28)] sm:flex sm:items-center sm:justify-between sm:gap-4">
       <p className="text-sm font-semibold">
         Masz pytanie? AI może zebrać zgłoszenie w 30 sekund.
       </p>
-      <button type="button" className="mt-3 rounded-full bg-[#E8D7B9] px-4 py-2 text-xs font-bold text-[#171717] sm:mt-0">
+      <button type="button" className="mt-3 rounded-full bg-[#86EFAC] px-4 py-2 text-xs font-bold text-[#F4FFF9] sm:mt-0">
         Zostaw kontakt
       </button>
       <div className="mt-3 sm:mt-0">
@@ -334,8 +334,8 @@ function LeadStatusPanel({
   onReset: () => void;
 }) {
   return (
-    <aside className="rounded-3xl border border-[#E8D7B9]/80 bg-[#171717] p-5 text-white shadow-[0_24px_70px_rgba(0,0,0,0.2)]">
-      <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#E8D7B9]">
+    <aside className="rounded-3xl border border-[#86EFAC]/80 bg-[#030705] p-5 text-white shadow-[0_24px_70px_rgba(0,0,0,0.2)]">
+      <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#86EFAC]">
         Co dzieje się z leadem?
       </p>
       <div className="mt-5 grid gap-2">
@@ -348,9 +348,9 @@ function LeadStatusPanel({
           ["Zapis", "Google Sheets"],
           ["Powiadomienie", "Email do firmy"]
         ].map(([label, value]) => (
-          <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3">
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#E8D7B9]">{label}</p>
-            <p className="mt-1 text-sm font-semibold text-[#F7F2E8]">{value}</p>
+          <div key={label} className="rounded-2xl border border-white/10 bg-[#0B1F18]/[0.05] px-4 py-3">
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#86EFAC]">{label}</p>
+            <p className="mt-1 text-sm font-semibold text-[#F4FFF9]">{value}</p>
           </div>
         ))}
       </div>
@@ -365,7 +365,7 @@ function LeadStatusPanel({
               className={`rounded-2xl border px-3 py-3 text-xs font-bold transition ${
                 active
                   ? "border-[#0F8A6C]/40 bg-[#0F8A6C]/12 text-[#A7F3D0]"
-                  : "border-white/10 bg-white/[0.035] text-[#D6D3D1]/60"
+                  : "border-white/10 bg-[#0B1F18]/[0.035] text-[#D6D3D1]/60"
               }`}
             >
               {item}
@@ -374,8 +374,8 @@ function LeadStatusPanel({
         })}
       </div>
 
-      <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.045] p-4">
-        <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#E8D7B9]">
+      <div className="mt-5 rounded-2xl border border-white/10 bg-[#0B1F18]/[0.045] p-4">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#86EFAC]">
           Symulacja zapisu
         </p>
         <div className="mt-3 grid gap-2">
@@ -384,7 +384,7 @@ function LeadStatusPanel({
 
             return (
               <div key={item} className={`rounded-xl px-3 py-2 text-xs font-semibold transition ${
-                active ? "bg-[#E8D7B9] text-[#171717]" : "bg-white/[0.06] text-[#D6D3D1]/62"
+                active ? "bg-[#86EFAC] text-[#F4FFF9]" : "bg-[#0B1F18]/[0.06] text-[#D6D3D1]/62"
               }`}>
                 {item}
               </div>
@@ -404,14 +404,14 @@ function LeadStatusPanel({
           type="button"
           onClick={onStart}
           disabled={isRunning}
-          className="min-h-11 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-4 py-2 text-sm font-bold text-[#171717] transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-65"
+          className="min-h-11 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-4 py-2 text-sm font-bold text-[#F4FFF9] transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-65"
         >
           {isRunning ? "Symulacja trwa..." : "Symuluj zapis leada"}
         </button>
         <button
           type="button"
           onClick={onReset}
-          className="min-h-11 rounded-full border border-[#E8D7B9]/25 bg-white/[0.06] px-4 py-2 text-sm font-bold text-[#F7F2E8] transition hover:border-[#E8D7B9]/50"
+          className="min-h-11 rounded-full border border-[#86EFAC]/25 bg-[#0B1F18]/[0.06] px-4 py-2 text-sm font-bold text-[#F4FFF9] transition hover:border-[#86EFAC]/50"
         >
           Reset
         </button>
@@ -419,3 +419,4 @@ function LeadStatusPanel({
     </aside>
   );
 }
+

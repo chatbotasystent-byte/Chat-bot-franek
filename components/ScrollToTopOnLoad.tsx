@@ -13,3 +13,4 @@ export function ScrollToTopOnLoad() {
 
   return null;
 }
+

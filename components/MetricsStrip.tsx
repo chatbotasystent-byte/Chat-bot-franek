@@ -7,13 +7,13 @@ const metrics = [
 
 export function MetricsStrip() {
   return (
-    <section className="border-y border-white/10 bg-white/[0.04] px-5 py-8 backdrop-blur sm:px-8 lg:px-12">
+    <section className="border-y border-white/10 bg-[#0B1F18]/[0.04] px-5 py-8 backdrop-blur sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-4 md:grid-cols-4">
           {metrics.map((metric) => (
             <div
               key={metric.label}
-              className="rounded-2xl border border-white/10 bg-white/[0.05] p-5 shadow-lg shadow-slate-950/20"
+              className="rounded-2xl border border-white/10 bg-[#0B1F18]/[0.05] p-5 shadow-lg shadow-slate-950/20"
             >
               <p className="text-3xl font-semibold text-white">{metric.value}</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">{metric.label}</p>
@@ -27,3 +27,4 @@ export function MetricsStrip() {
     </section>
   );
 }
+

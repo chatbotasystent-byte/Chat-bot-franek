@@ -203,13 +203,13 @@ export function AutomationControlRoom() {
 
   return (
     <section id="demo" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_14%,rgba(15,138,108,0.24),transparent_34rem),radial-gradient(circle_at_82%_24%,rgba(201,168,106,0.16),transparent_36rem),linear-gradient(180deg,#171717_0%,#0E2A24_52%,#171717_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#171717_0%,#0E2A24_52%,#171717_100%)]" />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
             CONTROL ROOM
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F7F2E8] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F4FFF9] sm:text-4xl">
             Zobacz automatyzację AI w akcji
           </h2>
           <p className="mt-4 leading-7 text-[#D6D3D1]">
@@ -218,14 +218,14 @@ export function AutomationControlRoom() {
           </p>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-3xl border border-[#E8D7B9]/16 bg-white/[0.045] p-4 shadow-[0_30px_100px_rgba(0,0,0,0.28)] backdrop-blur sm:p-6 lg:p-7">
+        <div className="mt-10 overflow-hidden rounded-3xl border border-[#86EFAC]/16 bg-[#0B1F18]/[0.04] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur sm:p-6 lg:p-7">
           <div className="grid gap-6 xl:grid-cols-[0.78fr_1.18fr_0.9fr]">
-            <aside className="rounded-3xl border border-white/10 bg-[#171717]/55 p-4 sm:p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#E8D7B9]">
+            <aside className="rounded-3xl border border-white/10 bg-[#030705]/55 p-4 sm:p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#86EFAC]">
                 Konfiguracja
               </p>
               <div className="mt-5">
-                <p className="text-sm font-bold text-[#F7F2E8]">Branża</p>
+                <p className="text-sm font-bold text-[#F4FFF9]">Branża</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {industries.map((item) => (
                     <button
@@ -233,10 +233,10 @@ export function AutomationControlRoom() {
                       type="button"
                       aria-pressed={industryKey === item.key}
                       onClick={() => setIndustryKey(item.key)}
-                      className={`rounded-full border px-3 py-2 text-xs font-bold transition ${
+                      className={`min-h-10 rounded-full border px-3.5 py-2 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5 ${
                         industryKey === item.key
-                          ? "border-[#E8D7B9]/55 bg-[#E8D7B9] text-[#171717]"
-                          : "border-white/10 bg-white/[0.05] text-[#D6D3D1] hover:border-[#E8D7B9]/35"
+                          ? "border-[#86EFAC]/65 bg-[#86EFAC] text-[#F4FFF9] shadow-[0_12px_28px_rgba(34,197,94,0.16)]"
+                          : "border-white/10 bg-[#0B1F18]/[0.05] text-[#D6D3D1] hover:border-[#86EFAC]/35 hover:bg-[#0B1F18]/[0.075]"
                       }`}
                     >
                       {item.label}
@@ -246,7 +246,7 @@ export function AutomationControlRoom() {
               </div>
 
               <div className="mt-6">
-                <p className="text-sm font-bold text-[#F7F2E8]">Cel automatyzacji</p>
+                <p className="text-sm font-bold text-[#F4FFF9]">Cel automatyzacji</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {goals.map((item) => (
                     <button
@@ -254,10 +254,10 @@ export function AutomationControlRoom() {
                       type="button"
                       aria-pressed={goalKey === item.key}
                       onClick={() => setGoalKey(item.key)}
-                      className={`rounded-full border px-3 py-2 text-xs font-bold transition ${
+                      className={`min-h-10 rounded-full border px-3.5 py-2 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5 ${
                         goalKey === item.key
-                          ? "border-[#0F8A6C]/55 bg-[#0F8A6C] text-white shadow-[0_10px_24px_rgba(15,138,108,0.25)]"
-                          : "border-white/10 bg-white/[0.05] text-[#D6D3D1] hover:border-[#0F8A6C]/45"
+                          ? "border-[#86EFAC]/45 bg-[#0F8A6C] text-white shadow-[0_12px_28px_rgba(15,138,108,0.26)]"
+                          : "border-white/10 bg-[#0B1F18]/[0.05] text-[#D6D3D1] hover:border-[#0F8A6C]/45 hover:bg-[#0B1F18]/[0.075]"
                       }`}
                     >
                       {item.label}
@@ -271,23 +271,23 @@ export function AutomationControlRoom() {
                   type="button"
                   onClick={startSimulation}
                   disabled={isRunning}
-                  className="min-h-12 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-bold text-[#171717] transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-65"
+                  className="cta-primary cta-shine min-h-12 rounded-full px-5 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   {isRunning ? "Symulacja trwa..." : "Uruchom symulację"}
                 </button>
                 <button
                   type="button"
                   onClick={resetSimulation}
-                  className="min-h-11 rounded-full border border-[#E8D7B9]/22 bg-white/[0.045] px-5 py-2 text-sm font-bold text-[#F7F2E8] transition hover:border-[#E8D7B9]/45 hover:bg-white/[0.08]"
+                  className="cta-secondary min-h-11 rounded-full px-5 py-2 text-sm"
                 >
                   Reset
                 </button>
               </div>
             </aside>
 
-            <div className="rounded-3xl border border-white/10 bg-[#0E2A24]/64 p-4 sm:p-5">
+            <div className="rounded-3xl border border-white/10 bg-[#0E2A24]/52 p-4 sm:p-5">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#E8D7B9]">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#86EFAC]">
                   Automatyzacja
                 </p>
                 <span className="rounded-full border border-[#0F8A6C]/30 bg-[#0F8A6C]/12 px-3 py-1 text-xs font-bold text-[#A7F3D0]">
@@ -306,10 +306,10 @@ export function AutomationControlRoom() {
                       <article
                         className={`min-h-32 rounded-2xl border p-4 transition duration-300 ${
                           isActive
-                            ? "scale-[1.01] border-[#E8D7B9]/65 bg-[#F7F2E8] text-[#171717] shadow-[0_0_42px_rgba(15,138,108,0.28)]"
+                            ? "scale-[1.01] border-[#86EFAC]/65 bg-[#0B1F18] text-[#F4FFF9] shadow-[0_16px_42px_rgba(0,0,0,0.18)]"
                             : isVisible
-                              ? "border-[#0F8A6C]/35 bg-[#0F8A6C]/12 text-[#F7F2E8]"
-                              : "border-white/10 bg-[#171717]/42 text-[#D6D3D1]"
+                              ? "border-[#0F8A6C]/35 bg-[#0F8A6C]/12 text-[#F4FFF9]"
+                              : "border-white/10 bg-[#030705]/42 text-[#D6D3D1]"
                         }`}
                       >
                         <div className="flex items-start justify-between gap-3">
@@ -317,17 +317,17 @@ export function AutomationControlRoom() {
                             className={`flex h-9 w-9 items-center justify-center rounded-xl text-xs font-bold ${
                               isActive
                                 ? "bg-[#0F8A6C] text-white"
-                                : "bg-[#E8D7B9]/10 text-[#E8D7B9]"
+                                : "bg-[#86EFAC]/10 text-[#86EFAC]"
                             }`}
                           >
                             {isDone ? "✓" : number}
                           </span>
                           {isActive ? (
-                            <span className="h-2.5 w-2.5 rounded-full bg-[#0F8A6C] shadow-[0_0_20px_rgba(15,138,108,0.9)] animate-pulse" />
+                            <span className="h-2.5 w-2.5 rounded-full bg-[#0F8A6C] animate-pulse" />
                           ) : null}
                         </div>
                         <h3 className="mt-4 text-sm font-bold">{title}</h3>
-                        <p className={`mt-2 text-xs leading-5 ${isActive ? "text-[#0E2A24]/75" : "text-current opacity-75"}`}>
+                        <p className={`mt-2 text-xs leading-5 ${isActive ? "text-[#B7CFC3]" : "text-current opacity-75"}`}>
                           {description}
                         </p>
                       </article>
@@ -336,25 +336,25 @@ export function AutomationControlRoom() {
                 })}
               </div>
 
-              <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-[#171717]/45 p-3">
+              <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-[#030705]/45 p-3">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#E8D7B9]">
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#86EFAC]">
                     Data packet
                   </span>
                   <span className="text-xs font-semibold text-[#D6D3D1]">
                     lead data
                   </span>
                 </div>
-                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/[0.06]">
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#0B1F18]/[0.06]">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[#0F8A6C] via-[#E8D7B9] to-[#C9A86A] transition-all duration-500"
+                    className="h-full rounded-full bg-[#0F8A6C] transition-all duration-500"
                     style={{ width: `${activeStep < 0 ? 0 : ((activeStep + 1) / modules.length) * 100}%` }}
                   />
                 </div>
               </div>
             </div>
 
-            <aside className="rounded-3xl border border-[#E8D7B9]/18 bg-[#F7F2E8] p-4 text-[#171717] shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:p-5">
+            <aside className="rounded-3xl border border-[#86EFAC]/18 bg-[#0B1F18] p-4 text-[#F4FFF9] shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:p-5">
               <LivePreview
                 activeStep={activeStep}
                 industryLabel={industry.label}
@@ -367,8 +367,8 @@ export function AutomationControlRoom() {
             </aside>
           </div>
 
-          <div className="mt-6 rounded-3xl border border-white/10 bg-[#171717]/45 p-4 sm:p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#E8D7B9]">
+          <div className="mt-6 rounded-3xl border border-white/10 bg-[#030705]/45 p-4 sm:p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#86EFAC]">
               Timeline zdarzeń
             </p>
             <div className="mt-4 grid gap-2 md:grid-cols-7">
@@ -381,10 +381,10 @@ export function AutomationControlRoom() {
                     key={event}
                     className={`rounded-2xl border px-3 py-3 text-xs leading-5 transition ${
                       isActive
-                        ? "border-[#E8D7B9]/65 bg-[#E8D7B9]/12 text-[#F7F2E8]"
+                        ? "border-[#86EFAC]/65 bg-[#86EFAC]/12 text-[#F4FFF9]"
                         : isDone
                           ? "border-[#0F8A6C]/35 bg-[#0F8A6C]/10 text-[#A7F3D0]"
-                          : "border-white/10 bg-white/[0.035] text-[#D6D3D1]/55"
+                          : "border-white/10 bg-[#0B1F18]/[0.035] text-[#D6D3D1]/55"
                     }`}
                   >
                     {event}
@@ -395,10 +395,10 @@ export function AutomationControlRoom() {
           </div>
 
           {isComplete ? (
-            <div className="mt-6 rounded-3xl border border-[#E8D7B9]/28 bg-[#F7F2E8] p-5 text-[#171717] shadow-[0_24px_70px_rgba(201,168,106,0.12)] sm:flex sm:items-center sm:justify-between sm:gap-6">
+            <div className="mt-6 rounded-3xl border border-[#86EFAC]/28 bg-[#0B1F18] p-5 text-[#F4FFF9] shadow-[0_24px_70px_rgba(34,197,94,0.12)] sm:flex sm:items-center sm:justify-between sm:gap-6">
               <div>
                 <p className="text-lg font-semibold">Chcesz taki system na swojej stronie?</p>
-                <p className="mt-2 text-sm leading-6 text-[#0E2A24]/70">
+                <p className="mt-2 text-sm leading-6 text-[#B7CFC3]">
                   Gotowe - lead został zapisany i firma dostała powiadomienie.
                 </p>
               </div>
@@ -406,14 +406,14 @@ export function AutomationControlRoom() {
                 <button
                   type="button"
                   onClick={scrollToContact}
-                  className="min-h-11 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-2 text-sm font-bold text-[#171717] transition hover:scale-[1.01]"
+                  className="min-h-11 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-5 py-2 text-sm font-bold text-[#F4FFF9] transition hover:scale-[1.01]"
                 >
                   Zamów darmowy audyt
                 </button>
                 <button
                   type="button"
                   onClick={openChatModal}
-                  className="min-h-11 rounded-full border border-[#0F8A6C]/25 bg-white px-5 py-2 text-sm font-bold text-[#0F8A6C] transition hover:border-[#0F8A6C]/45 hover:bg-[#0F8A6C]/10"
+                  className="min-h-11 rounded-full border border-[#0F8A6C]/25 bg-[#0B1F18] px-5 py-2 text-sm font-bold text-[#0F8A6C] transition hover:border-[#0F8A6C]/45 hover:bg-[#0F8A6C]/10"
                 >
                   Otwórz chatbota
                 </button>
@@ -450,11 +450,11 @@ function LivePreview({
           Live preview
         </p>
         <h3 className="mt-3 text-2xl font-semibold">Gotowy do symulacji</h3>
-        <p className="mt-4 text-sm leading-6 text-[#0E2A24]/72">
+        <p className="mt-4 text-sm leading-6 text-[#B7CFC3]">
           Wybierz branżę i cel, a potem uruchom symulację. Podgląd pokaże dane,
           które przechodzą przez system.
         </p>
-        <p className="mt-4 rounded-2xl border border-[#E8D7B9]/70 bg-white px-4 py-3 text-sm font-semibold text-[#0F8A6C]">
+        <p className="mt-4 rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] px-4 py-3 text-sm font-semibold text-[#0F8A6C]">
           {goalFocus}
         </p>
       </div>
@@ -491,9 +491,9 @@ function LivePreview({
             ["Branża", industryLabel],
             ["Wiadomość", leadMessage]
           ].map(([label, value]) => (
-            <div key={label} className="rounded-2xl border border-[#E8D7B9]/70 bg-white px-3 py-2">
+            <div key={label} className="rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] px-3 py-2">
               <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#0F8A6C]">{label}</p>
-              <p className="mt-1 text-sm font-semibold text-[#171717]">{value}</p>
+              <p className="mt-1 text-sm font-semibold text-[#F4FFF9]">{value}</p>
             </div>
           ))}
         </div>
@@ -505,14 +505,14 @@ function LivePreview({
     return (
       <div>
         <PreviewHeader title="Nowy wiersz w arkuszu" />
-        <div className="mt-4 overflow-hidden rounded-2xl border border-[#E8D7B9]/70 bg-white">
-          <div className="grid grid-cols-4 bg-[#0F8A6C]/10 px-3 py-2 text-xs font-bold text-[#0E2A24]">
+        <div className="mt-4 overflow-hidden rounded-2xl border border-[#86EFAC]/24 bg-[#071B14]">
+          <div className="grid grid-cols-4 bg-[#0F8A6C]/10 px-3 py-2 text-xs font-bold text-[#F4FFF9]">
             <span>Data</span>
             <span>Imię</span>
             <span>Branża</span>
             <span>Status</span>
           </div>
-          <div className="grid grid-cols-4 items-center px-3 py-3 text-xs font-semibold text-[#171717]">
+          <div className="grid grid-cols-4 items-center px-3 py-3 text-xs font-semibold text-[#F4FFF9]">
             <span>Dzisiaj</span>
             <span>Jan</span>
             <span className="truncate">{industryLabel}</span>
@@ -527,12 +527,12 @@ function LivePreview({
     return (
       <div>
         <PreviewHeader title="Email do firmy" />
-        <div className="mt-4 rounded-2xl border border-[#E8D7B9]/70 bg-white p-4">
-          <p className="text-sm font-bold text-[#171717]">Nowy lead z AI Automatyzacja</p>
-          <p className="mt-3 text-sm leading-6 text-[#0E2A24]/72">
+        <div className="mt-4 rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] p-4">
+          <p className="text-sm font-bold text-[#F4FFF9]">Nowy lead z AI Automatyzacja</p>
+          <p className="mt-3 text-sm leading-6 text-[#B7CFC3]">
             Klient zostawił kontakt i wiadomość.
           </p>
-          <p className="mt-3 rounded-xl bg-[#F7F2E8] px-3 py-2 text-xs font-bold text-[#0F8A6C]">
+          <p className="mt-3 rounded-xl bg-[#0B1F18] px-3 py-2 text-xs font-bold text-[#0F8A6C]">
             Źródło: chatbot / formularz
           </p>
         </div>
@@ -569,7 +569,7 @@ function PreviewText({ title, value, meta }: { title: string; value: string; met
   return (
     <div>
       <PreviewHeader title={title} />
-      <p className="mt-4 rounded-2xl border border-[#E8D7B9]/70 bg-white px-4 py-4 text-sm leading-6 text-[#0E2A24]/78">
+      <p className="mt-4 rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] px-4 py-4 text-sm leading-6 text-[#B7CFC3]">
         {value}
       </p>
       <p className="mt-3 rounded-2xl bg-[#0F8A6C]/10 px-4 py-3 text-xs font-bold text-[#0F8A6C]">
@@ -578,3 +578,4 @@ function PreviewText({ title, value, meta }: { title: string; value: string; met
     </div>
   );
 }
+

@@ -147,7 +147,7 @@ export function ScenarioGenerator() {
   }, [goal, industry]);
 
   return (
-    <section className="bg-[#F7F2E8] px-5 py-14 text-[#171717] sm:px-8 lg:px-12 lg:py-16">
+    <section className="bg-[#0B1F18] px-5 py-14 text-[#F4FFF9] sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0F8A6C]">
@@ -163,19 +163,20 @@ export function ScenarioGenerator() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="grid gap-5 rounded-3xl border border-[#E8D7B9]/70 bg-white p-5 shadow-[0_18px_50px_rgba(14,42,36,0.08)] sm:p-6">
+          <div className="grid gap-5 rounded-3xl border border-[#86EFAC]/70 bg-[#0B1F18] p-5 shadow-[0_18px_50px_rgba(14,42,36,0.08)] sm:p-6">
             <div>
-              <p className="text-sm font-bold text-[#171717]">1. Wybierz branżę</p>
+              <p className="text-sm font-bold text-[#F4FFF9]">1. Wybierz branżę</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {industries.map((item) => (
                   <button
                     key={item}
                     type="button"
+                    aria-pressed={industry === item}
                     onClick={() => setIndustry(item)}
-                    className={`rounded-full border px-3 py-2 text-xs font-bold transition ${
+                    className={`min-h-10 rounded-full border px-3.5 py-2 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5 ${
                       industry === item
                         ? "border-[#0F8A6C]/35 bg-[#0F8A6C] text-white shadow-[0_10px_24px_rgba(15,138,108,0.2)]"
-                        : "border-[#E8D7B9]/80 bg-[#FFF7ED] text-[#171717] hover:border-[#0F8A6C]/45"
+                        : "border-[#86EFAC]/80 bg-[#071B14] text-[#F4FFF9] hover:border-[#0F8A6C]/45 hover:shadow-[0_10px_24px_rgba(14,42,36,0.08)]"
                     }`}
                   >
                     {item}
@@ -185,17 +186,18 @@ export function ScenarioGenerator() {
             </div>
 
             <div>
-              <p className="text-sm font-bold text-[#171717]">2. Wybierz cel</p>
+              <p className="text-sm font-bold text-[#F4FFF9]">2. Wybierz cel</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {goals.map((item) => (
                   <button
                     key={item}
                     type="button"
+                    aria-pressed={goal === item}
                     onClick={() => setGoal(item)}
-                    className={`rounded-full border px-3 py-2 text-xs font-bold transition ${
+                    className={`min-h-10 rounded-full border px-3.5 py-2 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5 ${
                       goal === item
-                        ? "border-[#C9A86A]/45 bg-[#E8D7B9] text-[#171717]"
-                        : "border-[#E8D7B9]/80 bg-[#FFF7ED] text-[#171717] hover:border-[#C9A86A]/60"
+                        ? "border-[#22C55E]/45 bg-[#86EFAC] text-[#F4FFF9] shadow-[0_10px_24px_rgba(34,197,94,0.16)]"
+                        : "border-[#86EFAC]/80 bg-[#071B14] text-[#F4FFF9] hover:border-[#22C55E]/60 hover:shadow-[0_10px_24px_rgba(14,42,36,0.08)]"
                     }`}
                   >
                     {item}
@@ -207,21 +209,21 @@ export function ScenarioGenerator() {
             <button
               type="button"
               onClick={scrollToContact}
-              className="mt-2 w-full rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-bold text-[#171717] transition hover:scale-[1.01]"
+              className="cta-primary cta-shine mt-2 w-full rounded-full px-5 py-3 text-sm"
             >
               Zamów taki scenariusz dla swojej firmy
             </button>
           </div>
 
-          <div className="rounded-3xl border border-[#0F8A6C]/20 bg-[#171717] p-5 text-white shadow-[0_24px_70px_rgba(14,42,36,0.18)] sm:p-6">
+          <div className="rounded-3xl border border-[#0F8A6C]/20 bg-[#030705] p-5 text-white shadow-[0_24px_70px_rgba(14,42,36,0.18)] sm:p-6">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm font-semibold text-[#E8D7B9]">Scenariusz automatyzacji</p>
-                <h3 className="mt-2 text-2xl font-semibold text-[#F7F2E8]">
+                <p className="text-sm font-semibold text-[#86EFAC]">Scenariusz automatyzacji</p>
+                <h3 className="mt-2 text-2xl font-semibold text-[#F4FFF9]">
                   {industry} - {goal}
                 </h3>
               </div>
-              <span className="w-fit rounded-full border border-[#E8D7B9]/25 bg-[#E8D7B9]/10 px-3 py-1 text-xs font-bold text-[#E8D7B9]">
+              <span className="w-fit rounded-full border border-[#86EFAC]/25 bg-[#86EFAC]/10 px-3 py-1 text-xs font-bold text-[#86EFAC]">
                 Scenariusz demo
               </span>
             </div>
@@ -236,11 +238,11 @@ export function ScenarioGenerator() {
               ].map(([label, value], index) => (
                 <div
                   key={label}
-                  className={`rounded-2xl border border-white/10 bg-white/[0.055] p-4 ${
+                  className={`rounded-2xl border border-white/10 bg-[#0B1F18]/[0.055] p-4 ${
                     index === 4 ? "sm:col-span-2" : ""
                   }`}
                 >
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#E8D7B9]">{label}</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#86EFAC]">{label}</p>
                   <p className="mt-2 text-sm leading-6 text-[#D6D3D1]">{value}</p>
                 </div>
               ))}
@@ -251,3 +253,4 @@ export function ScenarioGenerator() {
     </section>
   );
 }
+

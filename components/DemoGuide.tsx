@@ -37,12 +37,12 @@ export function DemoGuide() {
 
   return (
     <aside
-      className="gradient-border animate-fade-up fixed bottom-6 left-6 z-50 hidden w-[22rem] rounded-3xl bg-[#171717]/92 p-6 shadow-[0_24px_80px_rgba(14,42,36,0.36)] ring-1 ring-[#E8D7B9]/12 backdrop-blur-xl md:block lg:w-[23.5rem]"
+      className="gradient-border animate-fade-up fixed bottom-6 left-6 z-50 hidden w-[22rem] rounded-3xl bg-[#030705]/92 p-6 shadow-[0_24px_80px_rgba(14,42,36,0.36)] ring-1 ring-[#86EFAC]/12 backdrop-blur-xl md:block lg:w-[23.5rem]"
       aria-label="Jak przetestować demo chatbota"
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-base font-semibold text-[#F7F2E8]">
+          <p className="text-base font-semibold text-[#F4FFF9]">
             Jak przetestować demo?
           </p>
           <p className="mt-1 text-sm leading-5 text-slate-400">
@@ -52,7 +52,7 @@ export function DemoGuide() {
         <button
           type="button"
           onClick={closeGuide}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-sm font-semibold text-white transition hover:border-[#E8D7B9]/45 hover:bg-white/[0.1]"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[#0B1F18]/[0.06] text-sm font-semibold text-white transition hover:border-[#86EFAC]/45 hover:bg-[#0B1F18]/[0.1]"
           aria-label="Zamknij Demo Guide"
         >
           X
@@ -62,7 +62,7 @@ export function DemoGuide() {
       <ol className="mt-5 space-y-3.5">
         {steps.map((step, index) => (
           <li key={step} className="flex gap-3 text-sm leading-5 text-slate-200">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0F8A6C]/18 text-xs font-bold text-[#E8D7B9] ring-1 ring-[#E8D7B9]/25">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0F8A6C]/18 text-xs font-bold text-[#86EFAC] ring-1 ring-[#86EFAC]/25">
               {index + 1}
             </span>
             <span>{step}</span>
@@ -73,10 +73,11 @@ export function DemoGuide() {
       <button
         type="button"
         onClick={openChat}
-        className="cta-shine mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-semibold text-[#171717] shadow-[0_0_28px_rgba(15,138,108,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(201,168,106,0.28)]"
+        className="cta-shine mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-5 py-3 text-sm font-semibold text-[#F4FFF9] shadow-[0_0_28px_rgba(15,138,108,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(34,197,94,0.28)]"
       >
         Otwórz chat
       </button>
     </aside>
   );
 }
+

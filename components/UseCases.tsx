@@ -23,7 +23,7 @@ const useCases = [
 
 export function UseCases() {
   return (
-    <section className="border-y border-white/70 bg-white/70 px-5 py-16 backdrop-blur sm:px-8 lg:px-12">
+    <section className="border-y border-white/70 bg-[#0B1F18]/70 px-5 py-16 backdrop-blur sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">
@@ -32,7 +32,7 @@ export function UseCases() {
           <h2 className="mt-3 text-3xl font-semibold text-ink">
             Use cases dla małych firm
           </h2>
-          <p className="mt-3 text-slate-700">
+          <p className="mt-3 text-[#B7CFC3]">
             Demo można szybko dopasować do branży, pytań klientów i sposobu
             zbierania zapytań.
           </p>
@@ -42,7 +42,7 @@ export function UseCases() {
           {useCases.map((item) => (
             <article
               key={item.title}
-              className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+              className="rounded-lg border border-[#34D399]/18 bg-[#0B1F18] p-6 shadow-sm"
             >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-ink text-white">
                 <svg
@@ -63,7 +63,7 @@ export function UseCases() {
               <h3 className="text-lg font-semibold text-ink">{item.title}</h3>
               <ul className="mt-4 space-y-2">
                 {item.examples.map((example) => (
-                  <li key={example} className="flex gap-2 text-sm text-slate-600">
+                  <li key={example} className="flex gap-2 text-sm text-[#9BB7AA]">
                     <span className="mt-2 h-1.5 w-1.5 rounded-full bg-teal-500" />
                     <span>{example}</span>
                   </li>
@@ -76,3 +76,4 @@ export function UseCases() {
     </section>
   );
 }
+

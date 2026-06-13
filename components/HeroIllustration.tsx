@@ -1,8 +1,8 @@
 export function HeroIllustration() {
   return (
     <div className="relative mx-auto w-full max-w-[520px]">
-      <div className="absolute -inset-6 -z-10 rounded-[32px] bg-gradient-to-br from-teal-200/45 via-white/30 to-rose-200/45 blur-2xl" />
-      <div className="rounded-2xl border border-white/80 bg-white/82 p-4 shadow-soft backdrop-blur">
+      <div className="absolute -inset-6 -z-10 rounded-[32px] bg-gradient-to-br from-teal-200/45 via-[#06110D]/30 to-rose-200/45 blur-2xl" />
+      <div className="rounded-2xl border border-white/80 bg-[#0B1F18]/82 p-4 shadow-soft backdrop-blur">
         <svg
           className="h-auto w-full"
           viewBox="0 0 520 430"
@@ -140,3 +140,4 @@ export function HeroIllustration() {
     </div>
   );
 }
+

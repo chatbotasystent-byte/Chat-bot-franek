@@ -74,19 +74,19 @@ export function AIAuditScore() {
 
   return (
     <section className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-      <div className="absolute inset-x-0 top-20 -z-10 h-80 bg-[radial-gradient(circle,rgba(201,168,106,0.13),transparent_38rem)]" />
+      <div className="absolute inset-x-0 top-20 -z-10 h-80 bg-[radial-gradient(circle,rgba(34,197,94,0.13),transparent_38rem)]" />
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:p-8">
+        <div className="rounded-3xl border border-white/10 bg-[#0B1F18]/[0.045] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
                 AI AUDIT SCORE
               </p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F7F2E8] sm:text-4xl">
+              <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F4FFF9] sm:text-4xl">
                 Sprawdź potencjał automatyzacji swojej strony
               </h2>
             </div>
-            <span className="w-fit rounded-full border border-[#E8D7B9]/25 bg-[#E8D7B9]/10 px-4 py-2 text-sm font-bold text-[#E8D7B9]">
+            <span className="w-fit rounded-full border border-[#86EFAC]/25 bg-[#86EFAC]/10 px-4 py-2 text-sm font-bold text-[#86EFAC]">
               Odpowiedziano: {answeredCount}/{auditQuestions.length}
             </span>
           </div>
@@ -99,7 +99,7 @@ export function AIAuditScore() {
             {auditQuestions.map((question, index) => (
               <div
                 key={question}
-                className="grid gap-3 rounded-2xl border border-white/10 bg-[#171717]/45 px-4 py-3 text-sm text-[#D6D3D1] transition hover:border-[#E8D7B9]/30 sm:grid-cols-[1fr_auto]"
+                className="grid gap-3 rounded-2xl border border-white/10 bg-[#030705]/45 px-4 py-3 text-sm text-[#D6D3D1] transition hover:border-[#86EFAC]/30 sm:grid-cols-[1fr_auto]"
               >
                 <p className="font-semibold leading-6">{question}</p>
                 <div className="grid grid-cols-2 gap-2 sm:w-36">
@@ -113,8 +113,8 @@ export function AIAuditScore() {
                         onClick={() => setAnswer(index, value)}
                         className={`min-h-9 rounded-full border px-3 text-xs font-bold transition ${
                           isSelected
-                            ? "border-[#E8D7B9]/55 bg-[#F7F2E8] text-[#171717]"
-                            : "border-white/10 bg-white/[0.045] text-[#E8D7B9] hover:border-[#E8D7B9]/45"
+                            ? "border-[#86EFAC]/55 bg-[#0B1F18] text-[#F4FFF9]"
+                            : "border-white/10 bg-[#0B1F18]/[0.045] text-[#86EFAC] hover:border-[#86EFAC]/45"
                         }`}
                       >
                         {value ? "Tak" : "Nie"}
@@ -127,7 +127,7 @@ export function AIAuditScore() {
           </div>
         </div>
 
-        <aside className="sticky top-24 rounded-3xl border border-[#E8D7B9]/20 bg-[#F7F2E8] p-5 text-[#171717] shadow-[0_24px_70px_rgba(0,0,0,0.18)] sm:p-6">
+        <aside className="sticky top-24 rounded-3xl border border-[#86EFAC]/20 bg-[#0B1F18] p-5 text-[#F4FFF9] shadow-[0_24px_70px_rgba(0,0,0,0.18)] sm:p-6">
           <p className="text-sm font-bold text-[#0F8A6C]">Wynik audytu</p>
           <div className="mt-4 flex items-end gap-2">
             <span className="text-5xl font-semibold">{score}</span>
@@ -135,12 +135,12 @@ export function AIAuditScore() {
           </div>
           <div className="mt-5 h-3 overflow-hidden rounded-full bg-[#0E2A24]/10">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#C9A86A] transition-all duration-300"
+              className="h-full rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#22C55E] transition-all duration-300"
               style={{ width: `${score}%` }}
             />
           </div>
           <h3 className="mt-6 text-xl font-semibold">{result.title}</h3>
-          <p className="mt-3 text-sm leading-6 text-[#0E2A24]/72">{result.description}</p>
+          <p className="mt-3 text-sm leading-6 text-[#B7CFC3]">{result.description}</p>
           <div className="mt-5 flex flex-wrap gap-2">
             {result.mechanisms.map((item) => (
               <span key={item} className="rounded-full border border-[#0F8A6C]/15 bg-[#0F8A6C]/10 px-3 py-1 text-xs font-bold text-[#0F8A6C]">
@@ -151,7 +151,7 @@ export function AIAuditScore() {
           <button
             type="button"
             onClick={scrollToContact}
-            className="mt-7 w-full rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-3 text-sm font-bold text-[#171717] transition hover:scale-[1.01]"
+            className="mt-7 w-full rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-5 py-3 text-sm font-bold text-[#F4FFF9] transition hover:scale-[1.01]"
           >
             Zamów darmowy audyt
           </button>
@@ -160,3 +160,4 @@ export function AIAuditScore() {
     </section>
   );
 }
+

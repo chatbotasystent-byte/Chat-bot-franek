@@ -36,7 +36,7 @@ export function LeadPreview() {
     <section id="lead-preview" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
         <div className="max-w-xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
             AI Automatyzacja
           </p>
           <h2 className="mt-4 text-3xl font-semibold tracking-normal text-white sm:text-4xl">
@@ -55,13 +55,13 @@ export function LeadPreview() {
             <button
               type="button"
               onClick={openChatModal}
-              className="cta-shine inline-flex min-h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-2.5 text-sm font-semibold text-[#171717] shadow-[0_0_26px_rgba(15,138,108,0.24)] transition hover:-translate-y-0.5"
+              className="cta-shine inline-flex min-h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-5 py-2.5 text-sm font-semibold text-[#F4FFF9] shadow-[0_0_26px_rgba(15,138,108,0.24)] transition hover:-translate-y-0.5"
             >
               Otwórz demo chatu
             </button>
             <a
               href="#kontakt"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#E8D7B9]/18 bg-white/[0.05] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-[#E8D7B9]/40 hover:bg-white/[0.08]"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#86EFAC]/18 bg-[#0B1F18]/[0.05] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-[#86EFAC]/40 hover:bg-[#0B1F18]/[0.08]"
             >
               Zamów audyt
             </a>
@@ -74,12 +74,12 @@ export function LeadPreview() {
               <p className="text-lg font-semibold text-white">Przykładowe dane leada</p>
               <p className="mt-1 text-sm text-slate-400">Statyczny podgląd arkusza.</p>
             </div>
-            <span className="inline-flex w-fit rounded-full border border-[#E8D7B9]/25 bg-[#E8D7B9]/10 px-3 py-1 text-xs font-semibold text-[#E8D7B9]">
+            <span className="inline-flex w-fit rounded-full border border-[#86EFAC]/25 bg-[#86EFAC]/10 px-3 py-1 text-xs font-semibold text-[#86EFAC]">
               Demo arkusza
             </span>
           </div>
 
-          <div className="mt-6 hidden overflow-hidden rounded-2xl border border-white/10 bg-[#171717]/42 text-sm lg:block">
+          <div className="mt-6 hidden overflow-hidden rounded-2xl border border-white/10 bg-[#030705]/42 text-sm lg:block">
             <div className="grid grid-cols-[0.7fr_1fr_1.45fr_1.2fr_1.55fr_0.8fr] bg-[#0F8A6C]/14 text-[#A7F3D0]">
               {["Data", "Imię", "Email", "Branża", "Wiadomość", "Status"].map((column) => (
                 <div key={column} className={`border-b border-white/10 px-3 py-3 font-semibold ${column === "Status" ? "text-center" : ""}`}>
@@ -109,7 +109,7 @@ export function LeadPreview() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-white/10 bg-[#171717]/42 p-4 lg:hidden">
+          <div className="mt-6 rounded-2xl border border-white/10 bg-[#030705]/42 p-4 lg:hidden">
             <div className="grid gap-3">
               {previewFields.map(([label, value]) => (
                 <div key={label} className="grid gap-1 border-b border-white/5 pb-3 last:border-b-0 last:pb-0">
@@ -137,3 +137,4 @@ export function LeadPreview() {
     </section>
   );
 }
+

@@ -1,11 +1,11 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useRef, useState } from "react";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "mt-2 min-h-12 w-full rounded-xl border border-[#E8D7B9]/80 bg-[#FFF7ED] px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:bg-white focus:ring-2 focus:ring-[#0F8A6C]/20";
+  "mt-2 min-h-12 w-full rounded-xl border border-[#86EFAC]/18 bg-[#050706]/74 px-4 py-3 text-sm text-[#F4FFF9] outline-none transition placeholder:text-[#7FA99B] focus:border-[#22C55E]/70 focus:bg-[#07110D] focus:ring-2 focus:ring-[#22C55E]/18";
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
@@ -103,7 +103,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-3xl border border-[#E8D7B9]/70 bg-white p-6 text-[#171717] shadow-2xl shadow-emerald-950/15 sm:p-8"
+      className="rounded-3xl border border-[#22C55E]/16 bg-[#050706]/82 p-6 text-[#F4FFF9] shadow-[0_28px_90px_rgba(0,0,0,0.28)] backdrop-blur sm:p-8"
     >
       <label className="sr-only" aria-hidden="true">
         Potwierdź stronę firmy
@@ -116,7 +116,7 @@ export function ContactForm() {
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-[#171717]">
+        <label className="block text-sm font-medium text-[#F4FFF9]">
           Imię i nazwisko *
           <input
             name="name"
@@ -124,7 +124,7 @@ export function ContactForm() {
             className={fieldClass}
           />
         </label>
-        <label className="block text-sm font-medium text-[#171717]">
+        <label className="block text-sm font-medium text-[#F4FFF9]">
           Email *
           <input
             name="email"
@@ -136,7 +136,7 @@ export function ContactForm() {
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-[#171717]">
+        <label className="block text-sm font-medium text-[#F4FFF9]">
           Telefon (opcjonalnie)
           <input
             name="phone"
@@ -145,7 +145,7 @@ export function ContactForm() {
             className={fieldClass}
           />
         </label>
-        <label className="block text-sm font-medium text-[#171717]">
+        <label className="block text-sm font-medium text-[#F4FFF9]">
           Nazwa firmy (opcjonalnie)
           <input
             name="companyName"
@@ -156,7 +156,7 @@ export function ContactForm() {
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-[#171717]">
+        <label className="block text-sm font-medium text-[#F4FFF9]">
           Strona firmy lub Instagram *
           <input
             name="website"
@@ -166,7 +166,7 @@ export function ContactForm() {
             placeholder="twojafirma.pl lub @profil"
           />
         </label>
-        <label className="block text-sm font-medium text-[#171717]">
+        <label className="block text-sm font-medium text-[#F4FFF9]">
           Branża (opcjonalnie)
           <input
             name="industry"
@@ -175,7 +175,7 @@ export function ContactForm() {
         </label>
       </div>
 
-      <label className="mt-4 block text-sm font-medium text-[#171717]">
+      <label className="mt-4 block text-sm font-medium text-[#F4FFF9]">
         Wiadomość *
         <textarea
           name="message"
@@ -197,7 +197,7 @@ export function ContactForm() {
       {message ? (
         <p
           className={`mt-4 text-sm ${
-            state === "error" ? "text-red-600" : "text-[#0F8A6C]"
+            state === "error" ? "text-red-300" : "text-[#86EFAC]"
           }`}
         >
           {message}
@@ -206,3 +206,4 @@ export function ContactForm() {
     </form>
   );
 }
+

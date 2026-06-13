@@ -94,14 +94,14 @@ export function IndustriesSection() {
   const activeIndustry = industries[activeIndex];
 
   return (
-    <section id="branze" className="relative bg-[#F7F2E8] px-5 py-14 text-[#171717] sm:px-8 lg:px-12 lg:py-16">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(15,138,108,0.11),transparent_30rem),radial-gradient(circle_at_86%_34%,rgba(201,168,106,0.16),transparent_32rem)]" />
+    <section id="branze" className="relative bg-[#0B1F18] px-5 py-14 text-[#F4FFF9] sm:px-8 lg:px-12 lg:py-16">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(15,138,108,0.11),transparent_30rem),radial-gradient(circle_at_86%_34%,rgba(34,197,94,0.16),transparent_32rem)]" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#0F8A6C]">
             BRANŻE
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#171717] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F4FFF9] sm:text-4xl">
             Dla jakich firm sprawdzi się automatyzacja AI?
           </h2>
           <p className="mt-4 leading-7 text-[#7FA99B]">
@@ -121,32 +121,32 @@ export function IndustriesSection() {
                 onClick={() => setActiveIndex(index)}
                 className={`group flex min-h-[250px] flex-col rounded-3xl border p-5 text-left shadow-[0_18px_45px_rgba(14,42,36,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#0F8A6C]/45 hover:shadow-[0_24px_60px_rgba(14,42,36,0.13)] ${
                   isActive
-                    ? "border-[#0F8A6C]/45 bg-white shadow-[0_26px_70px_rgba(15,138,108,0.16)] ring-2 ring-[#0F8A6C]/10"
-                    : "border-[#E8D7B9]/80 bg-white/82"
+                    ? "border-[#0F8A6C]/45 bg-[#0B1F18] shadow-[0_26px_70px_rgba(15,138,108,0.16)] ring-2 ring-[#0F8A6C]/10"
+                    : "border-[#86EFAC]/80 bg-[#0B1F18]/82"
                 }`}
               >
-                <div className="h-1 w-14 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#C9A86A] transition group-hover:w-20" />
+                <div className="h-1 w-14 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#22C55E] transition group-hover:w-20" />
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <span
                     className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-xs font-bold ${
                       isActive
                         ? "bg-[#0F8A6C] text-white"
-                        : "bg-[#E8D7B9]/35 text-[#0E2A24]"
+                        : "bg-[#86EFAC]/35 text-[#F4FFF9]"
                     }`}
                   >
                     {industry.number}
                   </span>
-                  <span className="rounded-full border border-[#E8D7B9]/70 bg-[#FFF7ED] px-2.5 py-1 text-[11px] font-bold text-[#7FA99B]">
+                  <span className="rounded-full border border-[#86EFAC]/70 bg-[#071B14] px-2.5 py-1 text-[11px] font-bold text-[#7FA99B]">
                     demo
                   </span>
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-[#171717]">{industry.name}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#0E2A24]/70">{industry.description}</p>
+                <h3 className="mt-5 text-lg font-semibold text-[#F4FFF9]">{industry.name}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#B7CFC3]">{industry.description}</p>
                 <div className="mt-auto flex flex-wrap gap-2 pt-5">
                   {industry.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-[#E8D7B9]/70 bg-[#FFF7ED] px-3 py-1 text-xs font-bold text-[#0F8A6C]"
+                      className="rounded-full border border-[#86EFAC]/70 bg-[#071B14] px-3 py-1 text-xs font-bold text-[#0F8A6C]"
                     >
                       {tag}
                     </span>
@@ -157,33 +157,33 @@ export function IndustriesSection() {
           })}
         </div>
 
-        <div className="mt-7 rounded-3xl border border-[#E8D7B9]/80 bg-white p-5 shadow-[0_24px_70px_rgba(14,42,36,0.1)] sm:p-6 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:p-8">
+        <div className="mt-7 rounded-3xl border border-[#86EFAC]/80 bg-[#0B1F18] p-5 shadow-[0_24px_70px_rgba(14,42,36,0.1)] sm:p-6 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:p-8">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0F8A6C]">
               Przykład automatyzacji dla tej branży
             </p>
-            <h3 className="mt-3 text-2xl font-semibold tracking-normal text-[#171717]">
+            <h3 className="mt-3 text-2xl font-semibold tracking-normal text-[#F4FFF9]">
               {activeIndustry.exampleTitle}
             </h3>
-            <p className="mt-4 text-sm leading-7 text-[#0E2A24]/74">
+            <p className="mt-4 text-sm leading-7 text-[#B7CFC3]">
               {activeIndustry.example}
             </p>
             <button
               type="button"
               onClick={openChatModal}
-              className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-6 py-3 text-sm font-bold text-[#171717] shadow-[0_16px_38px_rgba(15,138,108,0.18)] transition hover:scale-[1.01] sm:w-auto"
+              className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-6 py-3 text-sm font-bold text-[#F4FFF9] shadow-[0_16px_38px_rgba(15,138,108,0.18)] transition hover:scale-[1.01] sm:w-auto"
             >
               Zobacz, jak działa chatbot
             </button>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-[#E8D7B9]/70 bg-[#FFF7ED] p-4 lg:mt-0">
-            <p className="text-sm font-bold text-[#171717]">Dane zbierane przez system</p>
+          <div className="mt-6 rounded-2xl border border-[#86EFAC]/70 bg-[#071B14] p-4 lg:mt-0">
+            <p className="text-sm font-bold text-[#F4FFF9]">Dane zbierane przez system</p>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
               {activeIndustry.data.map((item) => (
                 <span
                   key={item}
-                  className="rounded-2xl border border-[#E8D7B9]/70 bg-white px-3 py-2 text-sm font-semibold text-[#0E2A24]/76"
+                  className="rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] px-3 py-2 text-sm font-semibold text-[#B7CFC3]"
                 >
                   {item}
                 </span>
@@ -199,3 +199,4 @@ export function IndustriesSection() {
     </section>
   );
 }
+

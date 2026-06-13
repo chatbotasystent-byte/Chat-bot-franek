@@ -87,15 +87,16 @@ export function BenefitCards() {
       {benefits.map((benefit) => (
         <article
           key={benefit.title}
-          className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-teal-500/40 hover:shadow-soft"
+          className="rounded-lg border border-[#34D399]/18 bg-[#0B1F18] p-6 shadow-sm transition hover:-translate-y-1 hover:border-teal-500/40 hover:shadow-soft"
         >
           <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-br from-teal-50 to-rose-50 text-teal-700">
             <BenefitIcon name={benefit.icon} />
           </div>
           <h3 className="text-lg font-semibold text-ink">{benefit.title}</h3>
-          <p className="mt-3 leading-7 text-slate-600">{benefit.description}</p>
+          <p className="mt-3 leading-7 text-[#9BB7AA]">{benefit.description}</p>
         </article>
       ))}
     </div>
   );
 }
+

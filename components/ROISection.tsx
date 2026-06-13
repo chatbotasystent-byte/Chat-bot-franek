@@ -21,7 +21,7 @@ export function ROISection() {
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {roiItems.map((item) => (
-            <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.055] p-5 text-slate-200">
+            <div key={item} className="rounded-2xl border border-white/10 bg-[#0B1F18]/[0.055] p-5 text-slate-200">
               {item}
             </div>
           ))}
@@ -30,3 +30,4 @@ export function ROISection() {
     </section>
   );
 }
+

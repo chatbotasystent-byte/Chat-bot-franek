@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
@@ -134,7 +134,7 @@ const industryPromptSuggestions: Record<IndustryKey, string[]> = {
 };
 
 const leadInputClass =
-  "mt-1 h-9 w-full rounded-lg border border-[#E8D7B9]/70 bg-white px-2.5 py-1.5 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20";
+  "mt-1 h-9 w-full rounded-lg border border-[#86EFAC]/70 bg-[#0B1F18] px-2.5 py-1.5 text-sm text-[#F4FFF9] outline-none transition placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20";
 
 function isContactIntent(text: string) {
   const normalizedText = text.toLowerCase();
@@ -667,20 +667,20 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
   }
 
   return (
-    <section className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-[#E8D7B9]/80 bg-white shadow-[0_24px_80px_rgba(14,42,36,0.18)] ring-1 ring-[#E8D7B9]/60">
-      <div className="flex flex-none items-start justify-between gap-4 border-b border-[#E8D7B9]/60 bg-gradient-to-r from-white to-[#F7F2E8] px-5 py-4 sm:px-6">
+    <section className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-[#86EFAC]/80 bg-[#0B1F18] shadow-[0_24px_80px_rgba(14,42,36,0.18)] ring-1 ring-[#86EFAC]/60">
+      <div className="flex flex-none items-start justify-between gap-4 border-b border-[#86EFAC]/60 bg-gradient-to-r from-[#071B14] to-[#0B1F18] px-5 py-4 sm:px-6">
         <div>
           <p className="mb-2 inline-flex rounded-full bg-[#0F8A6C]/10 px-3 py-1 text-xs font-semibold text-[#0F8A6C] ring-1 ring-[#0F8A6C]/15">
             Demo AI konsultanta
           </p>
-          <h2 className="text-xl font-semibold text-[#171717]">
+          <h2 className="text-xl font-semibold text-[#F4FFF9]">
             Chat AI Automatyzacja
           </h2>
-          <p className="mt-1 text-sm leading-6 text-slate-600">
+          <p className="mt-1 text-sm leading-6 text-[#9BB7AA]">
             Demo konsultanta AI dla różnych branż
           </p>
         </div>
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#171717] text-white shadow-[0_12px_30px_rgba(14,42,36,0.18)]">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#030705] text-white shadow-[0_12px_30px_rgba(14,42,36,0.18)]">
           <svg
             aria-hidden="true"
             className="h-5 w-5"
@@ -700,7 +700,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
 
       <div
         ref={messagesContainerRef}
-        className="min-h-0 flex-1 space-y-4 overflow-y-auto bg-gradient-to-b from-[#F7F2E8] via-white to-[#F7F2E8]/70 px-4 py-5 sm:px-6"
+        className="min-h-0 flex-1 space-y-4 overflow-y-auto bg-gradient-to-b from-[#071B14] via-[#06110D] to-[#0B1F18]/70 px-4 py-5 sm:px-6"
       >
         {messages.map((message) => (
           <div
@@ -712,8 +712,8 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
             <div
               className={`max-w-[75%] break-words rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm [overflow-wrap:anywhere] sm:max-w-[520px] ${
                 message.role === "user"
-                  ? "bg-[#171717] text-white shadow-[0_10px_28px_rgba(14,42,36,0.18)]"
-                  : "border border-slate-200 bg-white text-[#171717]"
+                  ? "bg-[#030705] text-white shadow-[0_10px_28px_rgba(14,42,36,0.18)]"
+                  : "border border-[#34D399]/18 bg-[#0B1F18] text-[#F4FFF9]"
               }`}
             >
               {message.content}
@@ -726,7 +726,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
             <form
               onSubmit={handleLeadFormSubmit}
               noValidate
-              className="w-full max-w-[420px] rounded-2xl border border-[#E8D7B9]/80 bg-[#FFF7ED] p-3 text-[#171717] shadow-[0_14px_34px_rgba(14,42,36,0.12)] sm:p-4"
+              className="w-full max-w-[420px] rounded-2xl border border-[#86EFAC]/80 bg-[#071B14] p-3 text-[#F4FFF9] shadow-[0_14px_34px_rgba(14,42,36,0.12)] sm:p-4"
             >
               <label className="sr-only" aria-hidden="true">
                 Potwierdź stronę firmy
@@ -739,14 +739,14 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
               </label>
 
               <div className="mb-3">
-                <p className="text-sm font-bold text-[#171717]">Zostaw kontakt</p>
-                <p className="mt-1 text-xs leading-5 text-stone-600">
+                <p className="text-sm font-bold text-[#F4FFF9]">Zostaw kontakt</p>
+                <p className="mt-1 text-xs leading-5 text-[#9BB7AA]">
                   Uzupełnij krótkie dane — odezwiemy się z propozycją.
                 </p>
               </div>
 
               <div className="grid gap-2.5">
-                <label className="text-xs font-semibold text-[#171717]">
+                <label className="text-xs font-semibold text-[#F4FFF9]">
                   Imię i nazwisko *
                   <input
                     value={leadForm.name}
@@ -754,7 +754,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                     className={leadInputClass}
                   />
                 </label>
-                <label className="text-xs font-semibold text-[#171717]">
+                <label className="text-xs font-semibold text-[#F4FFF9]">
                   Email *
                   <input
                     value={leadForm.email}
@@ -763,7 +763,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                     type="email"
                   />
                 </label>
-                <label className="text-xs font-semibold text-[#171717]">
+                <label className="text-xs font-semibold text-[#F4FFF9]">
                   Strona / Instagram *
                   <input
                     value={leadForm.website}
@@ -773,7 +773,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                     placeholder="twojafirma.pl lub @profil"
                   />
                 </label>
-                <label className="text-xs font-semibold text-[#171717]">
+                <label className="text-xs font-semibold text-[#F4FFF9]">
                   Wiadomość *
                   <textarea
                     value={leadForm.message}
@@ -787,15 +787,15 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                 <button
                   type="button"
                   onClick={() => setShowOptionalLeadFields((current) => !current)}
-                  className="w-fit text-xs font-semibold text-[#0F8A6C] underline-offset-4 transition hover:text-[#0E2A24] hover:underline"
+                  className="w-fit text-xs font-semibold text-[#0F8A6C] underline-offset-4 transition hover:text-[#F4FFF9] hover:underline"
                   aria-expanded={showOptionalLeadFields}
                 >
                   {showOptionalLeadFields ? "Ukryj pola opcjonalne" : "Pokaż pola opcjonalne"}
                 </button>
 
                 {showOptionalLeadFields ? (
-                  <div className="grid gap-2.5 rounded-xl border border-[#E8D7B9]/55 bg-white/50 p-2.5">
-                    <label className="text-xs font-semibold text-[#171717]">
+                  <div className="grid gap-2.5 rounded-xl border border-[#86EFAC]/55 bg-[#0B1F18]/50 p-2.5">
+                    <label className="text-xs font-semibold text-[#F4FFF9]">
                       Telefon (opcjonalnie)
                       <input
                         value={leadForm.phone}
@@ -804,7 +804,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                         type="tel"
                       />
                     </label>
-                    <label className="text-xs font-semibold text-[#171717]">
+                    <label className="text-xs font-semibold text-[#F4FFF9]">
                       Nazwa firmy (opcjonalnie)
                       <input
                         value={leadForm.companyName}
@@ -812,7 +812,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                         className={leadInputClass}
                       />
                     </label>
-                    <label className="text-xs font-semibold text-[#171717]">
+                    <label className="text-xs font-semibold text-[#F4FFF9]">
                       Branża (opcjonalnie)
                       <input
                         value={leadForm.industry}
@@ -834,7 +834,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                 <button
                   type="submit"
                   disabled={leadFormState === "loading" || leadSubmitted}
-                  className="min-h-9 rounded-xl bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-3 py-2 text-xs font-bold text-[#171717] shadow-sm transition hover:shadow-[0_10px_24px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-65"
+                  className="min-h-9 rounded-xl bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-3 py-2 text-xs font-bold text-[#F4FFF9] shadow-sm transition hover:shadow-[0_10px_24px_rgba(15,138,108,0.22)] disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   {leadFormState === "loading" ? "Wysyłanie..." : "Wyślij kontakt"}
                 </button>
@@ -842,7 +842,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                   type="button"
                   onClick={continueWithoutForm}
                   disabled={leadFormState === "loading"}
-                  className="min-h-9 rounded-xl border border-[#E8D7B9]/70 bg-white px-3 py-2 text-xs font-bold text-[#171717] transition hover:border-[#0F8A6C]/50 hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-65"
+                  className="min-h-9 rounded-xl border border-[#86EFAC]/70 bg-[#0B1F18] px-3 py-2 text-xs font-bold text-[#F4FFF9] transition hover:border-[#0F8A6C]/50 hover:text-[#0F8A6C] disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   Kontynuuj bez formularza
                 </button>
@@ -853,7 +853,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
 
         {isLoading ? (
           <div className="flex justify-start">
-            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-[#171717] shadow-sm">
+            <div className="rounded-2xl border border-[#34D399]/18 bg-[#0B1F18] px-4 py-3 text-sm text-[#F4FFF9] shadow-sm">
               Piszę odpowiedź...
             </div>
           </div>
@@ -861,12 +861,12 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
       </div>
 
       {shouldShowSuggestions ? (
-        <div className="flex-none border-t border-[#E8D7B9]/65 bg-[#FFF7ED] px-4 py-3 sm:px-6">
-          <div className="rounded-2xl border border-[#E8D7B9]/70 bg-white/85 p-3 shadow-[0_12px_28px_rgba(14,42,36,0.08)]">
+        <div className="flex-none border-t border-[#86EFAC]/65 bg-[#071B14] px-4 py-3 sm:px-6">
+          <div className="rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18]/85 p-3 shadow-[0_12px_28px_rgba(14,42,36,0.08)]">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0F8A6C]">
               Możesz zapytać
             </p>
-            <p className="mt-1 text-xs leading-5 text-stone-600">
+            <p className="mt-1 text-xs leading-5 text-[#9BB7AA]">
               Wybierz temat albo wpisz własne pytanie.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -881,8 +881,8 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
                     disabled={isLoading}
                     className={`max-w-full rounded-full px-3 py-1.5 text-xs font-bold leading-5 shadow-sm transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55 ${
                       isContactChip
-                        ? "border border-[#0F8A6C]/30 bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] text-[#171717] hover:shadow-[0_10px_24px_rgba(15,138,108,0.2)]"
-                        : "border border-[#E8D7B9]/80 bg-[#FFF7ED] text-[#171717] hover:border-[#0F8A6C]/55 hover:bg-[#0F8A6C]/10 hover:text-[#0E2A24]"
+                        ? "border border-[#0F8A6C]/30 bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] text-[#F4FFF9] hover:shadow-[0_10px_24px_rgba(15,138,108,0.2)]"
+                        : "border border-[#86EFAC]/80 bg-[#071B14] text-[#F4FFF9] hover:border-[#0F8A6C]/55 hover:bg-[#0F8A6C]/10 hover:text-[#F4FFF9]"
                     }`}
                   >
                     {suggestion}
@@ -896,20 +896,20 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-none flex-col gap-3 border-t border-slate-200 bg-white p-4 sm:flex-row"
+        className="flex flex-none flex-col gap-3 border-t border-[#34D399]/18 bg-[#0B1F18] p-4 sm:flex-row"
       >
         <input
           ref={inputRef}
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder={inputPlaceholder}
-          className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#E8D7B9]/80 bg-white px-4 py-3 text-sm text-[#171717] outline-none transition placeholder:text-stone-500 focus:border-[#0F8A6C] focus:bg-white focus:ring-2 focus:ring-[#0F8A6C]/35"
+          className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#86EFAC]/80 bg-[#0B1F18] px-4 py-3 text-sm text-[#F4FFF9] outline-none transition placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:bg-[#0B1F18] focus:ring-2 focus:ring-[#0F8A6C]/35"
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="min-h-12 rounded-xl bg-[#171717] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(14,42,36,0.18)] transition hover:bg-[#0E2A24] disabled:cursor-not-allowed disabled:bg-slate-300 sm:w-auto"
+          className="min-h-12 rounded-xl bg-[#030705] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(14,42,36,0.18)] transition hover:bg-[#0E2A24] disabled:cursor-not-allowed disabled:bg-[#102E25] sm:w-auto"
         >
           Wyślij
         </button>
@@ -917,4 +917,5 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
     </section>
   );
 });
+
 

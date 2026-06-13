@@ -81,7 +81,7 @@ export function IndustryDemoSwitcher() {
     <section id="branzo-demo" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
             Branżowe demo
           </p>
           <h2 className="mt-4 text-3xl font-semibold tracking-normal text-white sm:text-4xl">
@@ -101,8 +101,8 @@ export function IndustryDemoSwitcher() {
               onClick={() => setActiveIndex(index)}
               className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
                 activeIndex === index
-                  ? "border-[#E8D7B9] bg-[#0F8A6C]/18 text-[#F7F2E8] shadow-[0_0_24px_rgba(15,138,108,0.22)]"
-                  : "border-white/10 bg-white/[0.045] text-slate-300 hover:border-[#E8D7B9]/35 hover:text-white"
+                  ? "border-[#86EFAC] bg-[#0F8A6C]/18 text-[#F4FFF9] shadow-[0_0_24px_rgba(15,138,108,0.22)]"
+                  : "border-white/10 bg-[#0B1F18]/[0.045] text-slate-300 hover:border-[#86EFAC]/35 hover:text-white"
               }`}
             >
               {demo.name}
@@ -112,7 +112,7 @@ export function IndustryDemoSwitcher() {
 
         <div className="glass-card gradient-border mt-8 grid gap-6 rounded-3xl p-5 sm:p-7 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E8D7B9]">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#86EFAC]">
               {active.name}
             </p>
             <h3 className="mt-4 text-2xl font-semibold text-white">
@@ -127,13 +127,13 @@ export function IndustryDemoSwitcher() {
               <button
                 type="button"
                 onClick={openChatModal}
-                className="cta-shine inline-flex min-h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-2.5 text-sm font-semibold text-[#171717] shadow-[0_0_26px_rgba(15,138,108,0.24)] transition hover:-translate-y-0.5"
+                className="cta-shine inline-flex min-h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#86EFAC] px-5 py-2.5 text-sm font-semibold text-[#F4FFF9] shadow-[0_0_26px_rgba(15,138,108,0.24)] transition hover:-translate-y-0.5"
               >
                 Otwórz demo chatu
               </button>
               <a
                 href="#kontakt"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#E8D7B9]/18 bg-white/[0.05] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-[#E8D7B9]/40 hover:bg-white/[0.08]"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#86EFAC]/18 bg-[#0B1F18]/[0.05] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-[#86EFAC]/40 hover:bg-[#0B1F18]/[0.08]"
               >
                 Zamów audyt
               </a>
@@ -141,19 +141,19 @@ export function IndustryDemoSwitcher() {
           </div>
 
           <div className="grid gap-4 lg:grid-cols-2">
-            <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
+            <div className="rounded-2xl border border-white/10 bg-[#030705]/42 p-5">
               <h4 className="text-sm font-semibold text-white">Pytanie klienta</h4>
               <p className="mt-4 text-sm leading-6 text-slate-300">
                 &ldquo;{active.question}&rdquo;
               </p>
             </div>
-            <div className="rounded-2xl border border-[#E8D7B9]/18 bg-[#E8D7B9]/[0.06] p-5">
+            <div className="rounded-2xl border border-[#86EFAC]/18 bg-[#86EFAC]/[0.06] p-5">
               <h4 className="text-sm font-semibold text-white">Odpowiedź AI</h4>
               <p key={active.name} className="animate-fade-up mt-4 text-sm leading-6 text-slate-200">
                 {active.answer}
               </p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
+            <div className="rounded-2xl border border-white/10 bg-[#030705]/42 p-5">
               <h4 className="text-sm font-semibold text-white">Dane do zebrania</h4>
               <div className="mt-4 flex flex-wrap gap-2">
                 {active.data.map((item) => (
@@ -163,10 +163,10 @@ export function IndustryDemoSwitcher() {
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-[#171717]/42 p-5">
+            <div className="rounded-2xl border border-white/10 bg-[#030705]/42 p-5">
               <h4 className="text-sm font-semibold text-white">Efekt końcowy</h4>
               <p className="mt-4 text-sm leading-6 text-slate-300">{active.result}</p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#E8D7B9]">
+              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#86EFAC]">
                 Google Sheets / CRM / email
               </p>
             </div>
@@ -176,3 +176,4 @@ export function IndustryDemoSwitcher() {
     </section>
   );
 }
+

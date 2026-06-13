@@ -110,13 +110,13 @@ export function IndustrySimulator() {
 
   return (
     <section id="branze" className="relative overflow-hidden px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(15,138,108,0.22),transparent_34rem),radial-gradient(circle_at_82%_36%,rgba(201,168,106,0.14),transparent_34rem),linear-gradient(180deg,#171717_0%,#0E2A24_48%,#171717_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(15,138,108,0.22),transparent_34rem),radial-gradient(circle_at_82%_36%,rgba(34,197,94,0.14),transparent_34rem),linear-gradient(180deg,#171717_0%,#0E2A24_48%,#171717_100%)]" />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
             INDUSTRY SIMULATOR
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F7F2E8] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-[#F4FFF9] sm:text-4xl">
             Zobacz, jak AI działa w różnych branżach
           </h2>
           <p className="mt-4 leading-7 text-[#D6D3D1]">
@@ -125,10 +125,10 @@ export function IndustrySimulator() {
           </p>
         </div>
 
-        <div className="mt-10 rounded-3xl border border-[#E8D7B9]/16 bg-white/[0.045] p-4 shadow-[0_30px_100px_rgba(0,0,0,0.28)] backdrop-blur sm:p-6">
+        <div className="mt-10 rounded-3xl border border-[#86EFAC]/16 bg-[#0B1F18]/[0.045] p-4 shadow-[0_30px_100px_rgba(0,0,0,0.28)] backdrop-blur sm:p-6">
           <div className="grid gap-6 xl:grid-cols-[0.72fr_1.16fr_0.92fr]">
-            <aside className="rounded-3xl border border-white/10 bg-[#171717]/55 p-4 sm:p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#E8D7B9]">
+            <aside className="rounded-3xl border border-white/10 bg-[#030705]/55 p-4 sm:p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#86EFAC]">
                 Wybierz branżę
               </p>
               <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-1">
@@ -141,14 +141,14 @@ export function IndustrySimulator() {
                       type="button"
                       aria-pressed={isActive}
                       onClick={() => setActiveIndex(index)}
-                      className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-bold transition hover:-translate-y-0.5 ${
+                      className={`flex min-h-14 items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-bold transition-all duration-300 hover:-translate-y-1 ${
                         isActive
-                          ? "border-[#E8D7B9]/60 bg-[#E8D7B9] text-[#171717] shadow-[0_16px_35px_rgba(201,168,106,0.16)]"
-                          : "border-white/10 bg-white/[0.045] text-[#D6D3D1] hover:border-[#E8D7B9]/35"
+                          ? "border-[#86EFAC]/60 bg-[#86EFAC] text-[#F4FFF9] shadow-[0_16px_35px_rgba(34,197,94,0.16)]"
+                          : "border-white/10 bg-[#0B1F18]/[0.045] text-[#D6D3D1] hover:border-[#86EFAC]/35 hover:bg-[#0B1F18]/[0.075]"
                       }`}
                     >
                       <span>{industry.name}</span>
-                      <span className={isActive ? "text-[#0F8A6C]" : "text-[#E8D7B9]/70"}>
+                      <span className={isActive ? "text-[#0F8A6C]" : "text-[#86EFAC]/70"}>
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </button>
@@ -160,10 +160,10 @@ export function IndustrySimulator() {
             <div className={`rounded-3xl border border-white/10 bg-[#0E2A24]/66 p-4 transition duration-300 sm:p-5 ${isChanging ? "scale-[0.99] opacity-80" : "scale-100 opacity-100"}`}>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#E8D7B9]">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#86EFAC]">
                     Scenariusz rozmowy
                   </p>
-                  <h3 className="mt-3 text-2xl font-semibold text-[#F7F2E8]">
+                  <h3 className="mt-3 text-2xl font-semibold text-[#F4FFF9]">
                     {activeIndustry.name}
                   </h3>
                 </div>
@@ -179,7 +179,7 @@ export function IndustrySimulator() {
                   value={activeIndustry.message}
                   tone="dark"
                 />
-                <div className="mx-auto h-8 w-px bg-gradient-to-b from-[#E8D7B9]/70 to-[#0F8A6C]/60" />
+                <div className="mx-auto h-8 w-px bg-gradient-to-b from-[#86EFAC]/70 to-[#0F8A6C]/60" />
                 <ScenarioCard
                   label="Odpowiedź AI"
                   title="AI"
@@ -201,7 +201,7 @@ export function IndustrySimulator() {
             </div>
 
             <aside className={`grid gap-4 transition duration-300 ${isChanging ? "opacity-80" : "opacity-100"}`}>
-              <div className="rounded-3xl border border-[#E8D7B9]/18 bg-[#F7F2E8] p-5 text-[#171717] shadow-[0_24px_70px_rgba(0,0,0,0.18)]">
+              <div className="rounded-3xl border border-[#86EFAC]/18 bg-[#0B1F18] p-5 text-[#F4FFF9] shadow-[0_24px_70px_rgba(0,0,0,0.18)]">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#0F8A6C]">
                     System zbiera
@@ -212,7 +212,7 @@ export function IndustrySimulator() {
                 </div>
                 <div className="mt-4 grid gap-2">
                   {activeIndustry.data.map((item) => (
-                    <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#E8D7B9]/70 bg-white px-3 py-2 text-sm font-semibold text-[#0E2A24]/78">
+                    <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#86EFAC]/70 bg-[#0B1F18] px-3 py-2 text-sm font-semibold text-[#B7CFC3]">
                       <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0F8A6C]/10 text-xs font-bold text-[#0F8A6C]">
                         ✓
                       </span>
@@ -222,16 +222,16 @@ export function IndustrySimulator() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-white/10 bg-[#171717]/70 p-5 text-white">
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#E8D7B9]">
+              <div className="rounded-3xl border border-white/10 bg-[#030705]/70 p-5 text-white">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#86EFAC]">
                   Efekt dla firmy
                 </p>
                 <p className="mt-3 text-sm leading-6 text-[#D6D3D1]">{activeIndustry.effect}</p>
-                <div className="mt-5 rounded-2xl border border-[#E8D7B9]/18 bg-white/[0.055] p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#E8D7B9]">
+                <div className="mt-5 rounded-2xl border border-[#86EFAC]/18 bg-[#0B1F18]/[0.055] p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#86EFAC]">
                     Rekomendowany zestaw automatyzacji
                   </p>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-[#F7F2E8]">
+                  <p className="mt-2 text-sm font-semibold leading-6 text-[#F4FFF9]">
                     {activeIndustry.system}
                   </p>
                 </div>
@@ -242,8 +242,8 @@ export function IndustrySimulator() {
             </aside>
           </div>
 
-          <div className="mt-6 rounded-3xl border border-[#E8D7B9]/18 bg-[#F7F2E8] p-5 text-[#171717] shadow-[0_24px_70px_rgba(201,168,106,0.12)] sm:flex sm:items-center sm:justify-between sm:gap-6">
-            <p className="text-sm leading-6 text-[#0E2A24]/76">
+          <div className="mt-6 rounded-3xl border border-[#86EFAC]/18 bg-[#0B1F18] p-5 text-[#F4FFF9] shadow-[0_24px_70px_rgba(34,197,94,0.12)] sm:flex sm:items-center sm:justify-between sm:gap-6">
+            <p className="text-sm leading-6 text-[#B7CFC3]">
               Nie widzisz swojej branży? Scenariusz można dopasować do praktycznie
               każdej firmy, która obsługuje zapytania klientów.
             </p>
@@ -251,14 +251,14 @@ export function IndustrySimulator() {
               <button
                 type="button"
                 onClick={scrollToContact}
-                className="min-h-11 rounded-full bg-gradient-to-r from-[#0F8A6C] to-[#E8D7B9] px-5 py-2 text-sm font-bold text-[#171717] transition hover:scale-[1.01]"
+                className="cta-primary cta-shine min-h-11 rounded-full px-5 py-2 text-sm"
               >
                 Zamów darmowy audyt
               </button>
               <button
                 type="button"
                 onClick={openChatModal}
-                className="min-h-11 rounded-full border border-[#0F8A6C]/25 bg-white px-5 py-2 text-sm font-bold text-[#0F8A6C] transition hover:border-[#0F8A6C]/45 hover:bg-[#0F8A6C]/10"
+                className="min-h-11 rounded-full border border-[#0F8A6C]/25 bg-[#0B1F18] px-5 py-2 text-sm font-bold text-[#0F8A6C] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0F8A6C]/45 hover:bg-[#0F8A6C]/10"
               >
                 Otwórz chatbota
               </button>
@@ -287,17 +287,18 @@ function ScenarioCard({
     <article
       className={`rounded-3xl border p-5 shadow-[0_18px_50px_rgba(0,0,0,0.16)] ${
         isLight
-          ? "border-[#E8D7B9]/60 bg-[#F7F2E8] text-[#171717]"
-          : "border-white/10 bg-[#171717]/58 text-[#F7F2E8]"
+          ? "border-[#86EFAC]/60 bg-[#0B1F18] text-[#F4FFF9]"
+          : "border-white/10 bg-[#030705]/58 text-[#F4FFF9]"
       }`}
     >
-      <p className={`text-xs font-bold uppercase tracking-[0.14em] ${isLight ? "text-[#0F8A6C]" : "text-[#E8D7B9]"}`}>
+      <p className={`text-xs font-bold uppercase tracking-[0.14em] ${isLight ? "text-[#0F8A6C]" : "text-[#86EFAC]"}`}>
         {label}
       </p>
       <h4 className="mt-3 text-lg font-semibold">{title}</h4>
-      <p className={`mt-3 text-sm leading-6 ${isLight ? "text-[#0E2A24]/74" : "text-[#D6D3D1]"}`}>
+      <p className={`mt-3 text-sm leading-6 ${isLight ? "text-[#B7CFC3]" : "text-[#D6D3D1]"}`}>
         {value}
       </p>
     </article>
   );
 }
+

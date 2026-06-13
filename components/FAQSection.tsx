@@ -12,7 +12,7 @@ export function FAQSection() {
   return (
     <section className="px-5 py-20 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-5xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#E8D7B9]">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
           FAQ
         </p>
         <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
@@ -20,7 +20,7 @@ export function FAQSection() {
         </h2>
         <div className="mt-10 space-y-4">
           {faqs.map(([question, answer]) => (
-            <details key={question} className="group rounded-2xl border border-[#E8D7B9]/14 bg-white/[0.055] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#E8D7B9]/32 hover:bg-white/[0.08]">
+            <details key={question} className="group rounded-2xl border border-[#86EFAC]/14 bg-[#0B1F18]/[0.055] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#86EFAC]/32 hover:bg-[#0B1F18]/[0.08]">
               <summary className="cursor-pointer list-none font-semibold text-white">
                 {question}
               </summary>
@@ -32,3 +32,4 @@ export function FAQSection() {
     </section>
   );
 }
+
