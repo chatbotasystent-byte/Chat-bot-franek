@@ -82,7 +82,7 @@ export function ChatModal({ suggestions }: ChatModalProps) {
       </button>
 
       <div
-        className={`fixed inset-x-3 bottom-3 top-3 z-50 flex flex-col transition duration-300 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:top-20 sm:w-[520px] ${
+        className={`fixed inset-x-3 bottom-3 top-3 z-50 flex max-h-[calc(100dvh-1.5rem)] flex-col transition duration-300 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:top-20 sm:max-h-[calc(100dvh-6.5rem)] sm:w-[520px] ${
           isOpen ? "pointer-events-auto translate-x-0 opacity-100" : "pointer-events-none translate-x-full opacity-0"
         }`}
         role="dialog"
@@ -93,12 +93,12 @@ export function ChatModal({ suggestions }: ChatModalProps) {
         <div
           className="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-3xl border border-[#86EFAC]/14 bg-[#030705] shadow-2xl shadow-emerald-950/36"
         >
-          <div className="flex flex-none items-start justify-between gap-4 border-b border-white/10 bg-[#0B1F18]/[0.06] px-5 py-4 sm:px-6">
+          <div className="flex flex-none items-start justify-between gap-3 border-b border-white/10 bg-[#0B1F18]/[0.06] px-4 py-3 sm:gap-4 sm:px-6 sm:py-4">
             <div>
               <h2 className="text-xl font-semibold text-white">
                 Demo chatbota AI
               </h2>
-              <p className="mt-1 text-sm leading-6 text-slate-300">
+              <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-300 sm:text-sm sm:leading-6">
                 Napisz, jaką prowadzisz firmę, a bot pokaże przykładowe zastosowania.
               </p>
             </div>

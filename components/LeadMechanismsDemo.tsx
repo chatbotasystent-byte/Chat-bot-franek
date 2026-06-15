@@ -261,7 +261,7 @@ export function LeadMechanismsDemo() {
 
       {showLeadSidePopup ? (
         <div
-          className="fixed inset-x-3 bottom-3 top-3 z-50 flex flex-col transition duration-300 sm:inset-x-auto sm:right-6 sm:top-24 sm:w-[420px]"
+          className="fixed inset-x-3 bottom-3 top-3 z-50 flex max-h-[calc(100dvh-1.5rem)] flex-col transition duration-300 sm:inset-x-auto sm:right-6 sm:top-24 sm:max-h-[calc(100dvh-7.5rem)] sm:w-[420px]"
           role="dialog"
           aria-modal="false"
           aria-label="Demo popupu leadowego"
@@ -294,12 +294,12 @@ export function LeadMechanismsDemo() {
                 <input
                   key={placeholder}
                   placeholder={placeholder}
-                  className="h-10 rounded-xl border border-[#86EFAC]/80 bg-[#0B1F18] px-3 text-sm text-[#F4FFF9] outline-none placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20"
+                  className="min-h-11 rounded-xl border border-[#86EFAC]/80 bg-[#0B1F18] px-3 text-base text-[#F4FFF9] outline-none placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20 sm:text-sm"
                 />
               ))}
               <textarea
                 placeholder="Wiadomość"
-                className="min-h-[76px] resize-none rounded-xl border border-[#86EFAC]/80 bg-[#0B1F18] px-3 py-2 text-sm text-[#F4FFF9] outline-none placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20"
+                className="min-h-[88px] resize-none rounded-xl border border-[#86EFAC]/80 bg-[#0B1F18] px-3 py-2 text-base text-[#F4FFF9] outline-none placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20 sm:min-h-[76px] sm:text-sm"
               />
               <button
                 type="button"
@@ -318,7 +318,7 @@ export function LeadMechanismsDemo() {
 
       {showExitPopup ? (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#030705]/72 px-4 py-6 backdrop-blur-xl"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#030705]/72 px-3 py-4 backdrop-blur-xl sm:px-4 sm:py-6"
           role="dialog"
           aria-modal="true"
           aria-label="Demo popupu przy wyjściu"
@@ -328,7 +328,7 @@ export function LeadMechanismsDemo() {
             }
           }}
         >
-          <div className="w-full max-w-lg rounded-3xl border border-[#86EFAC]/35 bg-[#030705] p-6 text-white shadow-2xl shadow-black/30">
+          <div className="max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-3xl border border-[#86EFAC]/35 bg-[#030705] p-5 text-white shadow-2xl shadow-black/30 sm:p-6">
             <div className="flex justify-end">
               <button
                 type="button"

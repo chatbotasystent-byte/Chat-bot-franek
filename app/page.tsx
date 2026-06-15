@@ -174,20 +174,20 @@ export default function Home() {
       <main className="relative min-h-screen overflow-hidden bg-[#030705] text-white">
         <Navbar />
 
-      <section className="relative px-5 pb-14 pt-16 sm:px-8 sm:pt-20 lg:px-12 lg:pb-20 lg:pt-24">
+      <section className="relative px-4 pb-14 pt-12 sm:px-8 sm:pt-20 lg:px-12 lg:pb-20 lg:pt-24">
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,#171717_0%,#0E2A24_56%,#171717_100%)]" />
         <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-full opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
         <div className="pointer-events-none absolute left-[6%] top-28 hidden h-28 w-px bg-gradient-to-b from-transparent via-[#86EFAC]/35 to-transparent lg:block" />
         <div className="pointer-events-none absolute right-[10%] top-40 hidden h-px w-44 bg-gradient-to-r from-transparent via-[#0F8A6C]/45 to-transparent lg:block" />
         <span className="data-dot pointer-events-none absolute left-[9%] top-40 hidden h-2 w-2 rounded-full bg-[#86EFAC] lg:block" />
         <span className="data-dot pointer-events-none absolute right-[18%] top-32 hidden h-2 w-2 rounded-full bg-[#0F8A6C] lg:block" />
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="animate-fade-up">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="min-w-0 animate-fade-up">
             <div className="inline-flex items-center gap-3 rounded-full border border-[#86EFAC]/18 bg-[#0B1F18]/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#B7CFC3] shadow-[0_0_28px_rgba(34,197,94,0.12)] backdrop-blur">
               <span className="h-2 w-2 rounded-full bg-[#22C55E] shadow-[0_0_14px_rgba(34,197,94,0.9)]" />
               Inteligentny asystent leadów AI
             </div>
-            <h1 className="mt-9 max-w-4xl text-5xl font-black tracking-[-0.055em] text-[#F4FFF9] sm:text-6xl lg:text-7xl">
+            <h1 className="mt-8 max-w-4xl text-[2.55rem] font-black leading-[1.04] tracking-[-0.045em] text-[#F4FFF9] min-[380px]:text-5xl sm:text-6xl lg:text-7xl">
               Asystent AI, który pomaga zbierać kontakty i leady{" "}
               <span className="bg-gradient-to-r from-[#86EFAC] via-[#22C55E] to-[#0F8A6C] bg-clip-text text-transparent">
                 od odwiedzających stronę
@@ -198,16 +198,16 @@ export default function Home() {
               zapytania do <span className="font-semibold text-[#22C55E]">Google Sheets</span> oraz
               na <span className="font-semibold text-[#22C55E]">e-mail</span>.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="#branze" className="cta-primary cta-shine rounded-2xl px-7 py-3 text-sm">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a href="#branze" className="cta-primary cta-shine w-full rounded-2xl px-5 py-3 text-center text-sm sm:w-auto sm:px-7">
                 Sprawdź demo dla swojej branży
               </a>
-              <a href="#lead-preview" className="cta-secondary rounded-2xl px-7 py-3 text-sm">
+              <a href="#lead-preview" className="cta-secondary w-full rounded-2xl px-5 py-3 text-center text-sm sm:w-auto sm:px-7">
                 Zobacz, jak wygląda lead
               </a>
             </div>
 
-            <div className="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
               {heroBenefits.map((benefit) => (
                 <span
                   key={benefit}
@@ -218,7 +218,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="mt-8 grid max-w-2xl grid-cols-2 gap-2 rounded-3xl border border-[#86EFAC]/14 bg-[#030705]/52 p-3 shadow-[0_22px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:grid-cols-4">
+            <div className="mt-6 grid max-w-2xl grid-cols-2 gap-2 rounded-3xl border border-[#86EFAC]/14 bg-[#030705]/52 p-3 shadow-[0_22px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:grid-cols-4">
               {systemStatus.map((item) => (
                 <span
                   key={item}

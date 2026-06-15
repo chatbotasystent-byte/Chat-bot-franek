@@ -90,7 +90,7 @@ export function LiveWebsiteSimulation() {
   const isComplete = simulationStep === simulationSteps.length - 1 && !isRunning;
 
   return (
-    <section className="relative overflow-hidden bg-[#0B1F18] px-5 py-14 text-[#F4FFF9] sm:px-8 lg:px-12 lg:py-16">
+    <section className="relative overflow-hidden bg-[#0B1F18] px-4 py-14 text-[#F4FFF9] sm:px-8 lg:px-12 lg:py-16">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,197,94,0.16),transparent_32rem),linear-gradient(180deg,#06110D_0%,#0B1F18_100%)]" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
@@ -106,7 +106,7 @@ export function LiveWebsiteSimulation() {
           </p>
         </div>
 
-        <div className="mt-10 rounded-3xl border border-[#86EFAC]/80 bg-[#0B1F18] p-4 shadow-[0_22px_60px_rgba(14,42,36,0.10)] sm:p-6">
+        <div className="mt-10 rounded-3xl border border-[#86EFAC]/80 bg-[#0B1F18] p-3 shadow-[0_22px_60px_rgba(14,42,36,0.10)] sm:p-6">
           <div className="grid gap-3 md:grid-cols-4">
             {mechanisms.map((item) => {
               const isActive = activeMechanism === item.key;
@@ -193,7 +193,7 @@ function BrowserMockup({
         </div>
       </div>
 
-      <div className="relative min-h-[540px] overflow-hidden bg-[#0B1F18] p-4 text-[#F4FFF9] sm:p-6">
+      <div className="relative min-h-[470px] overflow-hidden bg-[#0B1F18] p-3 text-[#F4FFF9] sm:min-h-[540px] sm:p-6">
         {activeMechanism === "banner" ? <BannerOverlay /> : null}
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-bold">Twoja Firma</p>
@@ -244,7 +244,7 @@ function BrowserMockup({
 
 function ChatbotOverlay({ source }: { source: string }) {
   return (
-    <div className="absolute bottom-5 right-5 w-[min(310px,calc(100%-40px))] rounded-3xl border border-[#0F8A6C]/25 bg-[#0B1F18] p-4 shadow-[0_18px_45px_rgba(14,42,36,0.18)] transition">
+    <div className="absolute inset-x-3 bottom-4 max-h-[82%] overflow-y-auto rounded-3xl border border-[#0F8A6C]/25 bg-[#0B1F18] p-4 shadow-[0_18px_45px_rgba(14,42,36,0.18)] transition sm:inset-x-auto sm:right-5 sm:w-[min(310px,calc(100%-40px))]">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0F8A6C]">
         AI Chat
       </p>
@@ -263,7 +263,7 @@ function ChatbotOverlay({ source }: { source: string }) {
 
 function PopupOverlay({ source }: { source: string }) {
   return (
-    <div className="absolute right-5 top-24 w-[min(300px,calc(100%-40px))] rounded-3xl border border-[#86EFAC]/80 bg-[#030705] p-4 text-white shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
+    <div className="absolute inset-x-3 top-20 max-h-[72%] overflow-y-auto rounded-3xl border border-[#86EFAC]/80 bg-[#030705] p-4 text-white shadow-[0_18px_48px_rgba(0,0,0,0.24)] sm:inset-x-auto sm:right-5 sm:w-[min(300px,calc(100%-40px))]">
       <p className="text-sm font-bold text-[#86EFAC]">
         Zostaw kontakt - przygotujemy propozycję automatyzacji
       </p>
@@ -296,7 +296,7 @@ function InlineContactForm({ active }: { active: boolean }) {
 
 function BannerOverlay() {
   return (
-    <div className="absolute inset-x-4 bottom-5 z-10 rounded-2xl border border-[#86EFAC]/70 bg-[#030705] p-4 text-white shadow-[0_18px_55px_rgba(0,0,0,0.28)] sm:flex sm:items-center sm:justify-between sm:gap-4">
+    <div className="absolute inset-x-3 bottom-4 z-10 max-h-[64%] overflow-y-auto rounded-2xl border border-[#86EFAC]/70 bg-[#030705] p-4 text-white shadow-[0_18px_55px_rgba(0,0,0,0.28)] sm:inset-x-4 sm:bottom-5 sm:flex sm:items-center sm:justify-between sm:gap-4">
       <p className="text-sm font-semibold">
         Masz pytanie? AI może zebrać zgłoszenie w 30 sekund.
       </p>

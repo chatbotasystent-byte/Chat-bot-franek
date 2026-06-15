@@ -14,12 +14,12 @@ const leadRows = [
 
 export function AIDashboardIllustration() {
   return (
-    <div className="animate-fade-up animation-delay-450 relative">
-      <div className="absolute -inset-5 rounded-[2.4rem] bg-[#22C55E]/10 blur-2xl" />
+    <div className="animate-fade-up animation-delay-450 relative min-w-0 max-w-full">
+      <div className="pointer-events-none absolute -inset-x-3 -inset-y-4 rounded-[2.4rem] bg-[#22C55E]/10 blur-2xl sm:-inset-5" />
 
-      <div className="relative overflow-hidden rounded-[2rem] border border-[#22C55E]/18 bg-[#070A08]/92 p-4 shadow-[0_30px_100px_rgba(0,0,0,0.34)] backdrop-blur sm:p-5 lg:p-6">
+      <div className="relative max-w-full overflow-hidden rounded-[1.6rem] border border-[#22C55E]/18 bg-[#070A08]/92 p-3 shadow-[0_30px_100px_rgba(0,0,0,0.34)] backdrop-blur sm:rounded-[2rem] sm:p-5 lg:p-6">
         <div className="tech-grid pointer-events-none absolute inset-0 opacity-18" />
-        <div className="relative rounded-[1.6rem] border border-white/10 bg-[#050706]/82 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-5">
+        <div className="relative min-w-0 rounded-[1.35rem] border border-white/10 bg-[#050706]/82 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:rounded-[1.6rem] sm:p-5">
           <div className="flex flex-col gap-4 border-b border-white/10 pb-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#86EFAC]">
@@ -52,7 +52,34 @@ export function AIDashboardIllustration() {
             ))}
           </div>
 
-          <div className="mt-5 overflow-hidden rounded-3xl border border-white/10 bg-[#0E2A24]/38">
+          <div className="mt-5 grid gap-3 md:hidden">
+            {leadRows.map(([status, date, industry, name, contact, message]) => (
+              <article
+                key={`${date}-${name}-mobile`}
+                className="rounded-2xl border border-white/10 bg-[#0E2A24]/42 p-3"
+              >
+                <div className="flex min-w-0 items-center justify-between gap-3">
+                  <span
+                    className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-black ${
+                      status === "Nowe"
+                        ? "bg-[#22C55E]/14 text-[#86EFAC] ring-1 ring-[#22C55E]/22"
+                        : "bg-[#0B1F18]/70 text-[#7FA99B] ring-1 ring-white/10"
+                    }`}
+                  >
+                    {status}
+                  </span>
+                  <span className="truncate text-xs font-semibold text-[#7FA99B]">{date}</span>
+                </div>
+                <div className="mt-3 grid gap-1.5 text-sm font-semibold text-[#D6D3D1]">
+                  <p className="truncate text-white">{name} · {industry}</p>
+                  <p className="truncate text-[#86EFAC]">{contact}</p>
+                  <p className="break-words text-xs leading-5 text-[#B7CFC3]">{message}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-5 hidden overflow-hidden rounded-3xl border border-white/10 bg-[#0E2A24]/38 md:block">
             <div className="grid grid-cols-[0.75fr_1.15fr_1fr_0.85fr_1.25fr_1.35fr] gap-3 border-b border-white/10 bg-[#0B1F18]/[0.045] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-[#86EFAC]">
               <span>Status</span>
               <span>Data</span>

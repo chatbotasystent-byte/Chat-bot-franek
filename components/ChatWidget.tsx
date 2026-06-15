@@ -134,7 +134,7 @@ const industryPromptSuggestions: Record<IndustryKey, string[]> = {
 };
 
 const leadInputClass =
-  "mt-1 h-9 w-full rounded-lg border border-[#86EFAC]/70 bg-[#0B1F18] px-2.5 py-1.5 text-sm text-[#F4FFF9] outline-none transition placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20";
+  "mt-1 min-h-11 w-full rounded-lg border border-[#86EFAC]/70 bg-[#0B1F18] px-3 py-2 text-base text-[#F4FFF9] outline-none transition placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:ring-2 focus:ring-[#0F8A6C]/20 sm:text-sm";
 
 function isContactIntent(text: string) {
   const normalizedText = text.toLowerCase();
@@ -726,7 +726,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
             <form
               onSubmit={handleLeadFormSubmit}
               noValidate
-              className="w-full max-w-[420px] rounded-2xl border border-[#86EFAC]/80 bg-[#071B14] p-3 text-[#F4FFF9] shadow-[0_14px_34px_rgba(14,42,36,0.12)] sm:p-4"
+              className="max-h-[64vh] w-full max-w-[420px] overflow-y-auto rounded-2xl border border-[#86EFAC]/80 bg-[#071B14] p-3 text-[#F4FFF9] shadow-[0_14px_34px_rgba(14,42,36,0.12)] sm:max-h-none sm:p-4"
             >
               <label className="sr-only" aria-hidden="true">
                 Potwierdź stronę firmy
@@ -903,7 +903,7 @@ export const ChatWidget = forwardRef<ChatWidgetHandle, ChatWidgetProps>(function
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder={inputPlaceholder}
-          className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#86EFAC]/80 bg-[#0B1F18] px-4 py-3 text-sm text-[#F4FFF9] outline-none transition placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:bg-[#0B1F18] focus:ring-2 focus:ring-[#0F8A6C]/35"
+          className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#86EFAC]/80 bg-[#0B1F18] px-4 py-3 text-base text-[#F4FFF9] outline-none transition placeholder:text-[#9BB7AA] focus:border-[#0F8A6C] focus:bg-[#0B1F18] focus:ring-2 focus:ring-[#0F8A6C]/35 sm:text-sm"
           disabled={isLoading}
         />
         <button

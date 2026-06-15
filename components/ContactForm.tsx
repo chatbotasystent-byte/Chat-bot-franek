@@ -5,7 +5,7 @@ import { FormEvent, useRef, useState } from "react";
 type FormState = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "mt-2 min-h-12 w-full rounded-xl border border-[#86EFAC]/18 bg-[#050706]/74 px-4 py-3 text-sm text-[#F4FFF9] outline-none transition placeholder:text-[#7FA99B] focus:border-[#22C55E]/70 focus:bg-[#07110D] focus:ring-2 focus:ring-[#22C55E]/18";
+  "mt-2 min-h-12 w-full rounded-xl border border-[#86EFAC]/18 bg-[#050706]/74 px-4 py-3 text-base text-[#F4FFF9] outline-none transition placeholder:text-[#7FA99B] focus:border-[#22C55E]/70 focus:bg-[#07110D] focus:ring-2 focus:ring-[#22C55E]/18 sm:text-sm";
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");

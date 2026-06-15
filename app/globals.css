@@ -18,10 +18,14 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
   font-family: var(--font-manrope), system-ui, sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   text-rendering: geometricPrecision;
@@ -39,6 +43,10 @@ button,
 input,
 textarea {
   font: inherit;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 h1,
