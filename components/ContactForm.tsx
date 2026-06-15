@@ -5,7 +5,7 @@ import { FormEvent, useRef, useState } from "react";
 type FormState = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "mt-2 min-h-12 w-full rounded-xl border border-[#86EFAC]/18 bg-[#050706]/74 px-4 py-3 text-base text-[#F4FFF9] outline-none transition placeholder:text-[#7FA99B] focus:border-[#22C55E]/70 focus:bg-[#07110D] focus:ring-2 focus:ring-[#22C55E]/18 sm:text-sm";
+  "mt-2 min-h-12 w-full rounded-xl border border-[#34D399]/18 bg-[#0B1F18]/88 px-4 py-3 text-base text-[#F4FFF9] outline-none transition placeholder:text-[#7FA99B] focus:border-[#22C55E]/70 focus:bg-[#0E2A24] focus:ring-2 focus:ring-[#22C55E]/18 sm:text-base";
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
@@ -103,7 +103,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-3xl border border-[#22C55E]/16 bg-[#050706]/82 p-6 text-[#F4FFF9] shadow-[0_28px_90px_rgba(0,0,0,0.28)] backdrop-blur sm:p-8"
+      className="dark-green-card rounded-3xl p-6 text-[#F4FFF9] sm:p-8"
     >
       <label className="sr-only" aria-hidden="true">
         Potwierdź stronę firmy

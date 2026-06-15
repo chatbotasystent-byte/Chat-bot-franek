@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Space_Grotesk } from "next/font/google";
+import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -8,10 +8,10 @@ const manrope = Manrope({
   variable: "--font-manrope"
 });
 
-const spaceGrotesk = Space_Grotesk({
+const sora = Sora({
   subsets: ["latin", "latin-ext"],
   display: "swap",
-  variable: "--font-space-grotesk"
+  variable: "--font-sora"
 });
 
 export const metadata: Metadata = {
@@ -19,9 +19,7 @@ export const metadata: Metadata = {
   description:
     "Demo chatbota AI, który odpowiada klientom, zbiera leady i zapisuje zapytania do Google Sheets.",
   icons: {
-    icon: [
-      { url: "/favicon.png?v=6", type: "image/png" }
-    ],
+    icon: [{ url: "/favicon.png?v=6", type: "image/png" }],
     shortcut: "/favicon.ico?v=6",
     apple: "/favicon.png?v=6"
   }
@@ -34,10 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={`${manrope.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${manrope.variable} ${sora.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
   );
 }
-

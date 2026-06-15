@@ -1,167 +1,271 @@
 import { AIDashboardIllustration } from "@/components/AIDashboardIllustration";
-import { AutomationControlRoom } from "@/components/AutomationControlRoom";
 import { ChatModal } from "@/components/ChatModal";
-import { LiveWebsiteSimulation } from "@/components/LiveWebsiteSimulation";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
-import { IndustrySimulator } from "@/components/IndustrySimulator";
-import { LeadMechanismsDemo } from "@/components/LeadMechanismsDemo";
+import { LeadMechanismsSection } from "@/components/LeadMechanismsSection";
 import { Navbar } from "@/components/Navbar";
-import { ProblemAutomationSection } from "@/components/ProblemAutomationSection";
 import { ScrollToTopOnLoad } from "@/components/ScrollToTopOnLoad";
-
 
 const suggestions = [
   "Mam firmę usługową",
   "Mam salon beauty",
   "Mam warsztat samochodowy",
   "Mam komis samochodowy",
-  "Chcę zostawić kontakt"
+  "Chcę zostawić kontakt",
+];
+
+const heroPills = [
+  "24/7 na stronie",
+  "Leady na maila",
+  "Google Sheets",
+  "Bez przebudowy strony",
+];
+
+const howItWorks = [
+  {
+    title: "Klient zadaje pytanie",
+    description: "Chatbot pojawia się na stronie i prowadzi rozmowę.",
+  },
+  {
+    title: "AI zbiera dane",
+    description: "System dopytuje o kontakt, usługę, termin lub szczegóły zapytania.",
+  },
+  {
+    title: "Lead trafia do firmy",
+    description: "Dane zapisują się w Google Sheets i trafiają na e-mail.",
+  },
+];
+
+const collectedData = [
+  ["Imię i kontakt", "Dane potrzebne do oddzwonienia lub odpowiedzi mailowej."],
+  ["Branża lub typ firmy", "Kontekst, który pomaga dopasować scenariusz rozmowy."],
+  ["Opis potrzeby", "Krótka wiadomość klienta i temat zapytania."],
+  ["Termin lub lokalizacja", "Miasto, preferowany termin albo miejsce realizacji."],
+  ["Strona / Instagram", "Źródło informacji o firmie albo profilu klienta."],
+  ["Źródło zgłoszenia", "Chatbot, formularz, popup, banner lub kampania."],
+];
+
+const industries = [
+  "Firmy usługowe",
+  "Salony beauty",
+  "Warsztaty samochodowe",
+  "Firmy remontowe",
+  "Kliniki i gabinety",
+  "Szkoły językowe",
+  "Biura nieruchomości",
+  "Lokalne biznesy",
 ];
 
 const included = [
   "Chatbot AI na stronę",
   "Mini formularz kontaktowy",
   "Scenariusz rozmowy pod branżę",
-  "Google Sheets z leadami",
-  "Email notification",
-  "Testy i instrukcja obsługi"
+  "Zapis leadów do Google Sheets",
+  "Powiadomienia email",
+  "Testy i instrukcja obsługi",
 ];
 
-
-const productStackSteps = ["Chatbot odpowiada", "Kontakt zebrany", "Lead w arkuszu"];
-
-const implementationSteps = [
-  "Analiza strony i zapytań klientów",
+const process = [
+  "Analiza strony i zapytań",
   "Scenariusz rozmowy AI",
   "Podłączenie formularzy i automatyzacji",
-  "Integracja z Google Sheets / email",
-  "Testy i przekazanie instrukcji"
-];
-
-const systemStatus = [
-  "AI online",
-  "Webhook active",
-  "Sheets synced",
-  "Email ready"
-];
-
-const heroBenefits = [
-  "24/7 na stronie",
-  "Leady na maila",
-  "Google Sheets / CRM",
-  "Bez przebudowy strony"
+  "Testy i publikacja",
 ];
 
 const faq = [
   ["Czy muszę znać się na AI?", "Nie. Przygotowujemy konfigurację, scenariusz rozmowy i wdrożenie techniczne."],
-  ["Czy chatbot może działać w mojej branży?", "Tak, rozwiązanie można dopasować do wielu firm usługowych, lokalnych i B2B."],
-  ["Czy dane mogą trafiać do Google Sheets?", "Tak. Lead może zawierać imię, email, telefon, branżę i wiadomość klienta."],
-  ["Czy jest miesięczna opłata?", "Miesięczna opieka jest opcjonalna lub zależna od zakresu. Obejmuje wsparcie, poprawki i monitoring."],
-  ["Czy można najpierw zobaczyć demo?", "Tak. Najlepiej zacząć od krótkiego demo lub audytu, żeby zobaczyć, jak chatbot może działać dla konkretnej firmy."]
+  ["Czy chatbot może działać w mojej branży?", "Tak. Scenariusz można dopasować do firm usługowych, lokalnych, internetowych i B2B."],
+  ["Czy dane mogą trafiać do Google Sheets?", "Tak. Lead może zawierać imię, email, telefon, stronę, branżę i wiadomość klienta."],
+  ["Czy jest miesięczna opłata?", "Opieka miesięczna jest opcjonalna i zależy od zakresu wsparcia po wdrożeniu."],
+  ["Czy można dodać popup albo formularz?", "Tak. Chatbot, popup, formularz i banner mogą działać razem jako jeden system lead capture."],
+  ["Ile trwa wdrożenie?", "Proste demo można przygotować szybko, a pełne wdrożenie zależy od zakresu automatyzacji."],
 ];
 
 function SectionHeader({
   eyebrow,
   title,
   description,
-  tone = "dark"
 }: {
   eyebrow: string;
   title: string;
   description: string;
-  tone?: "dark" | "light";
 }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <p className={`text-sm font-semibold uppercase tracking-[0.2em] ${tone === "light" ? "text-[#0F8A6C]" : "text-[#86EFAC]"}`}>
+      <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#86EFAC]">
         {eyebrow}
       </p>
-      <h2 className={`mt-4 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl ${tone === "light" ? "text-[#F4FFF9]" : "text-[#F4FFF9]"}`}>
+      <h2 className="mt-4 text-3xl font-black tracking-[-0.045em] text-[#F4FFF9] sm:text-5xl">
         {title}
       </h2>
-      <p className={`mt-4 leading-7 ${tone === "light" ? "text-[#7FA99B]" : "text-[#D6D3D1]"}`}>{description}</p>
+      <p className="mt-4 text-base leading-7 text-[#9BB7AA] sm:text-lg">
+        {description}
+      </p>
     </div>
   );
 }
 
-
-function ProductStackVisual() {
+function HowItWorksSection() {
   return (
-    <div className="relative rounded-3xl">
-      <div className="relative grid gap-5">
-        <div className="glass-card gradient-border premium-lift rounded-3xl p-5 shadow-[0_28px_80px_rgba(15,138,108,0.16)] sm:p-6">
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-sm font-semibold text-white">Panel automatyzacji</p>
-            <span className="rounded-full bg-[#86EFAC]/10 px-3 py-1 text-xs font-semibold text-[#86EFAC]">live</span>
-          </div>
-          <div className="mt-5 grid gap-3">
-            {productStackSteps.map((item, index) => (
-              <div key={item} className="flex min-h-14 items-center gap-3 rounded-2xl border border-white/10 bg-[#0B1F18]/[0.04] px-4 py-3 transition duration-300 hover:border-[#86EFAC]/24 hover:bg-[#0B1F18]/[0.065]">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#0F8A6C]/16 text-xs font-bold text-[#A7F3D0]">
-                  {index + 1}
-                </span>
-                <span className="min-w-0 text-sm font-medium leading-5 text-slate-200">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="glass-card premium-lift rounded-3xl p-5 shadow-[0_28px_80px_rgba(34,197,94,0.16)] sm:p-6">
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-sm font-semibold text-[#86EFAC]">Google Sheets</p>
-            <span className="rounded-full border border-[#86EFAC]/20 bg-[#86EFAC]/10 px-3 py-1 text-xs font-semibold text-[#86EFAC]">
-              zapis leada
-            </span>
-          </div>
-          <div className="mt-4 rounded-2xl bg-[#0B1F18] p-4">
-            <div className="grid grid-cols-[0.9fr_1fr_0.8fr] gap-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[#F4FFF9]">
-              <span>Imię</span>
-              <span>Branża</span>
-              <span>Status</span>
-            </div>
-            <div className="mt-3 grid grid-cols-[0.9fr_1fr_0.8fr] items-center gap-3 rounded-xl bg-[#0B1F18] px-3 py-3 text-xs font-semibold text-[#B7CFC3] shadow-sm">
-              <span className="truncate">Anna</span>
-              <span className="truncate">usługi</span>
-              <span className="rounded-full bg-[#0F8A6C]/10 px-2.5 py-1 text-center text-[11px] text-[#0F8A6C] ring-1 ring-[#0F8A6C]/15">
-                Nowy
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ImplementationProcess() {
-  return (
-    <section className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-[#86EFAC]/28 to-transparent" />
-      <div className="mx-auto max-w-7xl">
+    <section id="jak-dziala" className="relative px-4 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="dark-section-panel emerald-glow mx-auto max-w-7xl p-5 sm:p-8 lg:p-10">
         <SectionHeader
-          eyebrow="PROCES"
-          title="Jak wygląda wdrożenie?"
-          description="Krótki, uporządkowany proces: od analizy zapytań po gotowy system z arkuszem i powiadomieniami."
+          eyebrow="Jak działa"
+          title="Jak działa asystent AI?"
+          description="Trzy proste kroki: rozmowa, zebranie danych i przekazanie gotowego leada do firmy."
         />
-        <div className="mt-10 grid gap-3 md:grid-cols-5">
-          {implementationSteps.map((step, index) => (
-            <article
-              key={step}
-              className="glass-card premium-lift relative min-h-40 rounded-3xl p-5"
-            >
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[#86EFAC]/18 bg-[#0F8A6C]/16 text-xs font-bold text-[#A7F3D0]">
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {howItWorks.map((step, index) => (
+            <article key={step.title} className="glass-card premium-lift rounded-3xl p-6">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[#34D399]/18 bg-[#0F8A6C]/16 text-sm font-black text-[#86EFAC]">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-5 text-sm font-bold leading-5 text-[#F4FFF9]">
-                {step}
-              </h3>
-              {index < implementationSteps.length - 1 ? (
-                <span className="pointer-events-none absolute right-[-0.45rem] top-1/2 hidden h-px w-4 bg-gradient-to-r from-[#86EFAC]/45 to-[#0F8A6C]/45 md:block" />
-              ) : null}
+              <h3 className="mt-6 text-xl font-bold text-[#F4FFF9]">{step.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-[#9BB7AA]">{step.description}</p>
             </article>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function DataCollectionSection() {
+  return (
+    <section id="zakres" className="px-4 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="dark-section-panel emerald-glow mx-auto max-w-7xl p-5 sm:p-8 lg:p-10">
+        <SectionHeader
+          eyebrow="Zakres"
+          title="Jakie dane może zebrać AI?"
+          description="Chatbot porządkuje zapytania tak, żeby firma dostała komplet informacji do kontaktu."
+        />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {collectedData.map(([title, description]) => (
+            <article key={title} className="glass-card premium-lift rounded-3xl p-5">
+              <div className="h-1 w-12 rounded-full bg-gradient-to-r from-[#22C55E] to-[#86EFAC]" />
+              <h3 className="mt-5 text-lg font-bold text-[#F4FFF9]">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-[#9BB7AA]">{description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IndustriesSection() {
+  return (
+    <section id="branze" className="px-4 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="dark-section-panel emerald-glow mx-auto max-w-6xl p-5 sm:p-8 lg:p-10">
+        <SectionHeader
+          eyebrow="Dla kogo"
+          title="Dla jakich firm?"
+          description="Scenariusz rozmowy można dopasować do praktycznie każdej firmy, która obsługuje zapytania klientów."
+        />
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          {industries.map((industry) => (
+            <span
+              key={industry}
+              className="rounded-2xl border border-[#34D399]/16 bg-[#0B1F18]/74 px-4 py-3 text-sm font-bold text-[#DCEBE4] transition hover:-translate-y-0.5 hover:border-[#86EFAC]/38 hover:text-[#86EFAC]"
+            >
+              {industry}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IncludedSection() {
+  return (
+    <section id="wdrozenie" className="px-4 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="dark-section-panel emerald-glow mx-auto max-w-7xl p-5 sm:p-8 lg:p-10">
+        <SectionHeader
+          eyebrow="Wdrożenie"
+          title="Co dostajesz po wdrożeniu?"
+          description="Konkretny zestaw elementów potrzebnych do zbierania leadów ze strony."
+        />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {included.map((item) => (
+            <article key={item} className="glass-card premium-lift flex items-center gap-4 rounded-3xl p-5">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#22C55E]/14 text-sm font-black text-[#86EFAC] ring-1 ring-[#34D399]/18">
+                ✓
+              </span>
+              <h3 className="text-base font-bold leading-6 text-[#F4FFF9]">{item}</h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProcessSection() {
+  return (
+    <section className="px-4 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="dark-section-panel emerald-glow mx-auto max-w-7xl p-5 sm:p-8 lg:p-10">
+        <SectionHeader
+          eyebrow="Proces"
+          title="Wdrożenie bez komplikacji"
+          description="Krótko, technicznie po naszej stronie i z czytelnym efektem dla Twojej firmy."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-4">
+          {process.map((step, index) => (
+            <article key={step} className="glass-card premium-lift rounded-3xl p-5">
+              <span className="text-3xl font-black text-[#22C55E]">{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="mt-5 text-base font-bold leading-6 text-[#F4FFF9]">{step}</h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQSection() {
+  return (
+    <section id="faq" className="px-4 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="dark-section-panel emerald-glow mx-auto max-w-5xl p-5 sm:p-8 lg:p-10">
+        <SectionHeader
+          eyebrow="FAQ"
+          title="Najczęstsze pytania"
+          description="Krótko i konkretnie, bez technicznego żargonu."
+        />
+        <div className="mt-10 space-y-4">
+          {faq.map(([question, answer]) => (
+            <details key={question} className="dark-green-card premium-lift rounded-2xl p-5 open:border-[#86EFAC]/35">
+              <summary className="cursor-pointer text-base font-semibold text-white">
+                {question}
+              </summary>
+              <p className="mt-4 text-sm leading-6 text-[#D6D3D1]">{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
+  return (
+    <section id="kontakt" className="relative px-4 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-px bg-gradient-to-r from-transparent via-[#0F8A6C]/28 to-transparent" />
+      <div className="dark-section-panel emerald-glow mx-auto grid max-w-7xl gap-8 p-5 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:p-10">
+        <div className="dark-green-card gradient-border premium-lift rounded-3xl p-6 sm:p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#86EFAC]">
+            Darmowy audyt
+          </p>
+          <h2 className="mt-4 text-3xl font-black tracking-[-0.045em] text-white sm:text-5xl">
+            Zamów darmowy audyt AI
+          </h2>
+          <p className="mt-5 max-w-xl leading-7 text-[#B7CFC3]">
+            Napisz, jaką firmę prowadzisz. Przygotujemy propozycję automatyzacji
+            chatbota i zbierania leadów.
+          </p>
+        </div>
+
+        <ContactForm />
       </div>
     </section>
   );
@@ -171,161 +275,63 @@ export default function Home() {
   return (
     <>
       <ScrollToTopOnLoad />
-      <main className="relative min-h-screen overflow-hidden bg-[#030705] text-white">
+      <main className="relative min-h-screen overflow-hidden bg-[#020403] text-white">
         <Navbar />
 
-      <section className="relative px-4 pb-14 pt-12 sm:px-8 sm:pt-20 lg:px-12 lg:pb-20 lg:pt-24">
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,#171717_0%,#0E2A24_56%,#171717_100%)]" />
-        <div className="tech-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-full opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
-        <div className="pointer-events-none absolute left-[6%] top-28 hidden h-28 w-px bg-gradient-to-b from-transparent via-[#86EFAC]/35 to-transparent lg:block" />
-        <div className="pointer-events-none absolute right-[10%] top-40 hidden h-px w-44 bg-gradient-to-r from-transparent via-[#0F8A6C]/45 to-transparent lg:block" />
-        <span className="data-dot pointer-events-none absolute left-[9%] top-40 hidden h-2 w-2 rounded-full bg-[#86EFAC] lg:block" />
-        <span className="data-dot pointer-events-none absolute right-[18%] top-32 hidden h-2 w-2 rounded-full bg-[#0F8A6C] lg:block" />
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="min-w-0 animate-fade-up">
-            <div className="inline-flex items-center gap-3 rounded-full border border-[#86EFAC]/18 bg-[#0B1F18]/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#B7CFC3] shadow-[0_0_28px_rgba(34,197,94,0.12)] backdrop-blur">
-              <span className="h-2 w-2 rounded-full bg-[#22C55E] shadow-[0_0_14px_rgba(34,197,94,0.9)]" />
-              Inteligentny asystent leadów AI
-            </div>
-            <h1 className="mt-8 max-w-4xl text-[2.55rem] font-black leading-[1.04] tracking-[-0.045em] text-[#F4FFF9] min-[380px]:text-5xl sm:text-6xl lg:text-7xl">
-              Asystent AI, który pomaga zbierać kontakty i leady{" "}
-              <span className="bg-gradient-to-r from-[#86EFAC] via-[#22C55E] to-[#0F8A6C] bg-clip-text text-transparent">
-                od odwiedzających stronę
-              </span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#B7CFC3]">
-              Rozmawia z klientem, zbiera najważniejsze dane i wysyła gotowe
-              zapytania do <span className="font-semibold text-[#22C55E]">Google Sheets</span> oraz
-              na <span className="font-semibold text-[#22C55E]">e-mail</span>.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="#branze" className="cta-primary cta-shine w-full rounded-2xl px-5 py-3 text-center text-sm sm:w-auto sm:px-7">
-                Sprawdź demo dla swojej branży
-              </a>
-              <a href="#lead-preview" className="cta-secondary w-full rounded-2xl px-5 py-3 text-center text-sm sm:w-auto sm:px-7">
-                Zobacz, jak wygląda lead
-              </a>
-            </div>
-
-            <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
-              {heroBenefits.map((benefit) => (
-                <span
-                  key={benefit}
-                  className="rounded-2xl border border-[#34D399]/14 bg-[#0B1F18]/74 px-4 py-3 text-center text-xs font-bold text-[#D6D3D1] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-                >
-                  {benefit}
-                </span>
-              ))}
+        <section className="relative overflow-hidden px-4 pb-16 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pb-24 lg:pt-24">
+          <div className="tech-grid pointer-events-none absolute inset-0 opacity-45 [mask-image:linear-gradient(to_bottom,black,transparent_78%)]" />
+          <div className="pointer-events-none absolute left-1/2 top-16 h-[28rem] w-[min(44rem,90vw)] -translate-x-1/2 rounded-full bg-[#0F8A6C]/18 blur-3xl" />
+          <div className="dark-section-panel emerald-glow mx-auto max-w-7xl p-5 sm:p-8 lg:p-10">
+            <div className="mx-auto max-w-5xl text-center">
+              <p className="inline-flex items-center gap-3 rounded-full border border-[#34D399]/18 bg-[#0B1F18]/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-[#B7CFC3] backdrop-blur">
+                <span className="h-2 w-2 rounded-full bg-[#22C55E] shadow-[0_0_14px_rgba(34,197,94,0.9)]" />
+                Asystent leadowy AI
+              </p>
+              <h1 className="mt-8 text-[2.8rem] font-black leading-[1.02] tracking-[-0.06em] text-[#F4FFF9] min-[390px]:text-5xl sm:text-7xl lg:text-8xl">
+                Chatbot AI, który zbiera{" "}
+                <span className="bg-gradient-to-r from-[#86EFAC] via-[#22C55E] to-[#0F8A6C] bg-clip-text text-transparent">
+                  kontakty i leady
+                </span>{" "}
+                z Twojej strony
+              </h1>
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-[#B7CFC3] sm:text-lg">
+                Rozmawia z odwiedzającymi, zbiera najważniejsze dane i wysyła
+                gotowe zapytania do Google Sheets oraz na e-mail.
+              </p>
+              <div className="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row sm:justify-center">
+                <a href="#demo" className="cta-primary cta-shine w-full rounded-2xl px-6 py-3 text-center text-sm sm:w-auto">
+                  Zobacz demo
+                </a>
+                <a href="#kontakt" className="cta-secondary w-full rounded-2xl px-6 py-3 text-center text-sm sm:w-auto">
+                  Zamów darmowy audyt
+                </a>
+              </div>
+              <div className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+                {heroPills.map((pill) => (
+                  <span key={pill} className="rounded-2xl border border-[#34D399]/14 bg-[#0B1F18]/72 px-3 py-3 text-xs font-bold text-[#DCEBE4]">
+                    {pill}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-6 grid max-w-2xl grid-cols-2 gap-2 rounded-3xl border border-[#86EFAC]/14 bg-[#030705]/52 p-3 shadow-[0_22px_70px_rgba(0,0,0,0.18)] backdrop-blur sm:grid-cols-4">
-              {systemStatus.map((item) => (
-                <span
-                  key={item}
-                  className="flex items-center gap-2 rounded-2xl border border-[#86EFAC]/12 bg-[#0B1F18]/[0.045] px-3 py-2 text-xs font-bold text-[#D6D3D1]"
-                >
-                  <span className="h-2 w-2 rounded-full bg-[#0F8A6C] shadow-[0_0_14px_rgba(15,138,108,0.9)] animate-pulse" />
-                  {item}
-                </span>
-              ))}
+            <div className="mx-auto mt-12 max-w-6xl">
+              <AIDashboardIllustration />
             </div>
           </div>
+        </section>
 
-          <AIDashboardIllustration />
-        </div>
-      </section>
-
-      <ChatModal suggestions={suggestions} />
-
-      <AutomationControlRoom />
-      <LiveWebsiteSimulation />
-      <LeadMechanismsDemo />
-      <IndustrySimulator />
-      <ProblemAutomationSection />
-
-      <section id="wdrozenie" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-[#86EFAC]/24 to-transparent" />
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
-              Wdrożenie
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
-              Co dostajesz po wdrożeniu?
-            </h2>
-            <p className="mt-5 leading-7 text-slate-300">
-              Nie dostajesz tylko chatbota. Dostajesz prosty system do zbierania
-              i porządkowania zapytań klientów.
-            </p>
-          </div>
-          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="grid gap-3">
-              {included.map((item) => (
-                <div key={item} className="glass-card premium-lift rounded-2xl px-4 py-4 text-sm font-medium text-[#D6D3D1]">
-                  {item}
-                </div>
-              ))}
-            </div>
-            <ProductStackVisual />
-          </div>
-        </div>
-      </section>
-
-      <ImplementationProcess />
-
-      <section id="faq" className="px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-        <div className="mx-auto max-w-5xl">
-          <SectionHeader
-            eyebrow="FAQ"
-            title="Najczęstsze pytania"
-            description="Krótko i konkretnie, bez technicznego żargonu."
-          />
-          <div className="mt-10 space-y-4">
-            {faq.map(([question, answer]) => (
-              <details key={question} className="glass-card premium-lift rounded-2xl p-5 open:border-[#86EFAC]/35">
-                <summary className="cursor-pointer text-base font-semibold text-white">
-                  {question}
-                </summary>
-                <p className="mt-4 text-sm leading-6 text-[#D6D3D1]">{answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="kontakt" className="relative px-5 py-14 sm:px-8 lg:px-12 lg:py-16">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-px bg-gradient-to-r from-transparent via-[#0F8A6C]/28 to-transparent" />
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div className="glass-card gradient-border premium-lift rounded-3xl p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#86EFAC]">
-              Darmowy audyt
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
-              Zamów darmowy audyt AI
-            </h2>
-            <p className="mt-5 max-w-xl leading-7 text-slate-300">
-              Zostaw kontakt, a przygotujemy krótką propozycję, jak chatbot AI
-              może działać w Twojej firmie.
-            </p>
-            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">
-              Nie musisz znać szczegółów — wystarczy krótki opis firmy albo link do strony/Instagrama.
-            </p>
-          </div>
-
-          <ContactForm />
-        </div>
-      </section>
-
+        <HowItWorksSection />
+        <LeadMechanismsSection />
+        <DataCollectionSection />
+        <IndustriesSection />
+        <IncludedSection />
+        <ProcessSection />
+        <FAQSection />
+        <ContactSection />
         <Footer />
+        <ChatModal suggestions={suggestions} showIntro={false} />
       </main>
     </>
   );
 }
-
-
-
-
-
-
-
-

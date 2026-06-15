@@ -1,20 +1,21 @@
 const footerLinks = [
-  { label: "Jak działa", href: "#demo" },
-  { label: "Zakres", href: "#wdrozenie" },
+  { label: "Jak działa", href: "#jak-dziala" },
+  { label: "Zakres", href: "#zakres" },
+  { label: "Dla kogo", href: "#branze" },
   { label: "Kontakt", href: "#kontakt" },
-  { label: "Polityka prywatności", href: "/polityka-prywatnosci" },
+  { label: "Polityka prywatności", href: "/polityka-prywatnosci" }
 ];
 
 const footerStatuses = ["AI online", "Sheets synced", "Email ready"];
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-[#22C55E]/12 bg-[#050706] px-5 py-12 sm:px-8 lg:px-12">
+    <footer className="relative overflow-hidden border-t border-[#34D399]/14 bg-[#020403] px-5 py-12 sm:px-8 lg:px-12">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#86EFAC]/28 to-transparent" />
       <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#0F8A6C]/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid gap-8 rounded-3xl border border-[#22C55E]/12 bg-[#0B1F18]/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.22)] backdrop-blur md:grid-cols-[1.15fr_0.85fr] md:p-8">
+        <div className="dark-section-panel grid gap-8 p-6 md:grid-cols-[1.15fr_0.85fr] md:p-8">
           <div>
             <div className="flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#86EFAC]/28 bg-[#0F8A6C]/14 text-sm font-bold text-[#86EFAC] shadow-[0_0_24px_rgba(34,197,94,0.14)]">
@@ -65,4 +66,3 @@ export function Footer() {
     </footer>
   );
 }
-
